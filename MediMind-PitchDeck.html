@@ -1,0 +1,4355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MediMind — The AI-Native Hospital OS · Investor Pitch</title>
+  <meta name="description" content="MediMind — the AI-native operating system for the modern hospital. $200K pre-seed round.">
+  <meta name="author" content="Lasha Khoshtaria">
+  <meta name="theme-color" content="#1a365d">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <meta property="og:title" content="MediMind — The AI-Native Hospital OS">
+  <meta property="og:description" content="Investor pitch: $200K pre-seed, $5M cap SAFE. Covering the Georgian market & launching post-Soviet regional expansion.">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MediMind — The AI-Native Hospital OS">
+  <meta name="twitter:description" content="Investor pitch: $200K pre-seed, $5M cap SAFE.">
+  <meta name="twitter:image" content="assets/og-image.png">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+
+  <style>
+    :root {
+      /* Brand — aligned with /medimind-brand/04-colors/tokens.css */
+      --emr-primary: #1a365d;
+      --emr-secondary: #2b6cb0;
+      --emr-accent: #3182ce;
+      --emr-light-accent: #bee3f8;
+
+      --emr-success: #38a169;
+      --emr-warning: #dd6b20;
+      --emr-warning-bg: #feebc8;
+      --emr-error: #e53e3e;
+      --emr-info: #3182ce;
+
+      --emr-bg-page: #ffffff;
+      --emr-bg-subtle: #f8fafc;
+      --emr-bg-tint: #f0f7ff;
+
+      --emr-text-primary: #1a365d;
+      --emr-text-body: #334155;
+      --emr-text-muted: #64748b;
+      --emr-text-light: #94a3b8;
+      --emr-border: #e2e8f0;
+
+      --emr-gradient-primary: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #3182ce 100%);
+      --emr-gradient-section: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+
+      /* Extended: depth gradient tail for tiered visuals */
+      --emr-primary-dark: #0f1f3a;
+    }
+
+    .reveal {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Noto Sans Georgian', sans-serif;
+      font-weight: 400;
+      color: var(--emr-text-body);
+      font-size: 22px;
+      background: var(--emr-bg-page);
+    }
+    .reveal .slides { text-align: left; }
+    .reveal .slides section {
+      padding: 0;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide-inner {
+      height: 100%;
+      padding: 80px 90px 60px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .slide-inner.center { justify-content: center; padding-top: 70px; }
+    .slide-inner > .headline-big,
+    .slide-inner > .hook-headline {
+      margin-top: 28px;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Noto Sans Georgian', sans-serif;
+      font-weight: 700;
+      color: var(--emr-text-primary);
+      line-height: 1.1;
+      margin: 0 0 24px 0;
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+    .reveal h1 { font-size: 3.2em; font-weight: 800; }
+    .reveal h2 { font-size: 2.2em; font-weight: 700; }
+    .reveal h3 { font-size: 1.4em; font-weight: 600; }
+    .reveal p { line-height: 1.5; margin: 0 0 16px 0; }
+    .reveal strong { color: var(--emr-text-primary); font-weight: 600; }
+    .reveal em { color: var(--emr-secondary); font-style: italic; }
+    .reveal ul, .reveal ol { margin: 0; padding: 0; list-style: none; }
+    .reveal li { margin: 0 0 12px 0; line-height: 1.4; }
+
+    .reveal .slide-number {
+      background: transparent;
+      color: var(--emr-text-light);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Noto Sans Georgian', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .reveal .progress { color: var(--emr-secondary); }
+    .reveal .controls { color: var(--emr-accent); }
+
+    .slide-label {
+      position: absolute;
+      top: 32px; left: 90px;
+      font-size: 0.7em;
+      color: var(--emr-text-light);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .slide-label .label-num { color: var(--emr-accent); margin-right: 8px; }
+
+    .headline-big {
+      font-size: 3.4em;
+      font-weight: 800;
+      color: var(--emr-text-primary);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 95%;
+    }
+    .sub-head {
+      font-size: 1.3em;
+      font-weight: 400;
+      color: var(--emr-secondary);
+      line-height: 1.4;
+      margin-top: 24px;
+      max-width: 85%;
+    }
+
+    /* ─── SLIDE 1: COVER (premium redesign) ──────────── */
+    .cover {
+      background:
+        radial-gradient(ellipse 60% 80% at 85% 15%, rgba(49,130,206,0.45) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 60% at 10% 90%, rgba(190,227,248,0.22) 0%, transparent 55%),
+        linear-gradient(135deg, #0a1628 0%, #1a365d 45%, #2b6cb0 100%);
+      color: white;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Layer 1: precision dot grid */
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.09) 1.2px, transparent 1.2px);
+      background-size: 42px 42px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+    }
+    /* Layer 2: large pulsing glow behind the logo */
+    .cover::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 1300px; height: 1300px;
+      background: radial-gradient(circle,
+        rgba(190,227,248,0.18) 0%,
+        rgba(190,227,248,0.08) 30%,
+        transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      animation: coverGlowPulse 7s ease-in-out infinite;
+    }
+    @keyframes coverGlowPulse {
+      0%, 100% { opacity: 0.7; width: 1300px; height: 1300px; }
+      50% { opacity: 1; width: 1420px; height: 1420px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cover::after { animation: none; }
+    }
+
+    /* Corner frame marks */
+    .cover-corner {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255,255,255,0.25);
+      pointer-events: none;
+      z-index: 1;
+      animation: cornerFade 0.8s 0.1s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    @keyframes cornerFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-corner { animation: none; }
+    }
+    .cover-corner.tl { top: 30px; left: 30px; border-right: 0; border-bottom: 0; }
+    .cover-corner.tr { top: 30px; right: 30px; border-left: 0; border-bottom: 0; }
+    .cover-corner.bl { bottom: 30px; left: 30px; border-right: 0; border-top: 0; }
+    .cover-corner.br { bottom: 30px; right: 30px; border-left: 0; border-top: 0; }
+
+    /* Make all cover content rise above background layers */
+    .cover .slide-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Logo — bigger with layered shadow */
+    .cover-logo {
+      width: 600px;
+      height: auto;
+      margin: 0 auto 44px;
+      display: block;
+      filter:
+        drop-shadow(0 20px 50px rgba(0,0,0,0.35))
+        drop-shadow(0 0 80px rgba(190,227,248,0.2));
+      animation: logoEntrance 1.2s 0.3s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    @keyframes logoEntrance {
+      0% { opacity: 0; transform: translateY(20px) scale(0.94); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-logo { animation: none; }
+    }
+
+    /* Tagline — gradient-filled, bigger, confident */
+    .cover .tagline {
+      font-size: 2em;
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      max-width: 820px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #ffffff 0%, #bee3f8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      animation: fadeInUp 1s 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    .cover .tagline em {
+      font-style: normal;
+      font-weight: 600;
+      -webkit-text-fill-color: #ffffff;
+      color: #ffffff;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cover .tagline { animation: none; }
+    }
+
+    /* Badge — glass with pinging indicator */
+    .cover .badge-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border: 1px solid rgba(190,227,248,0.35);
+      background: rgba(190,227,248,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 100px;
+      font-size: 0.68em;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 2.8em;
+      color: rgba(255,255,255,0.95);
+      animation: fadeInUp 0.8s 0.15s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    .cover .badge-accent::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emr-light-accent);
+      box-shadow: 0 0 12px var(--emr-light-accent);
+      animation: ping 2.5s ease-in-out infinite;
+    }
+    @keyframes ping {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(1.4); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cover .badge-accent { animation: none; }
+      .cover .badge-accent::before { animation: none; }
+    }
+
+    /* Footer — split layout with accent line */
+    .cover .footer-row {
+      position: absolute;
+      bottom: 60px;
+      left: 90px; right: 90px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(255,255,255,0.62);
+      font-size: 0.68em;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      text-transform: uppercase;
+      z-index: 2;
+      animation: fadeInUp 1s 1s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    .cover .footer-row::before {
+      content: '';
+      position: absolute;
+      top: -20px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255,255,255,0.28) 50%,
+        transparent 100%);
+    }
+    .cover .footer-row strong {
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cover .footer-row { animation: none; }
+    }
+
+    /* ─── Brand footer (top-right watermark — clickable link) ─ */
+    .reveal .brand-footer {
+      position: absolute !important;
+      top: 28px !important;
+      right: 40px !important;
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--emr-secondary);
+      opacity: 0.95;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      z-index: 100;
+      text-transform: lowercase;
+      text-decoration: none;
+      transition: opacity 0.2s ease, color 0.2s ease;
+      cursor: pointer;
+      visibility: visible !important;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--emr-bg-tint);
+    }
+    .brand-footer:hover {
+      background: var(--emr-accent);
+      color: white !important;
+      opacity: 1 !important;
+    }
+    .brand-footer:hover {
+      opacity: 1;
+      color: var(--emr-accent);
+    }
+    .brand-footer img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+    .brand-footer.on-dark {
+      color: rgba(255,255,255,0.6);
+    }
+    .cover .brand-footer { display: none; }
+
+    /* ─── SLIDE 2: HOOK / CRISIS (premium redesign) ───── */
+    .hook-slide {
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 55% 45% at 88% 12%, rgba(49,130,206,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 8% 92%, rgba(190,227,248,0.22) 0%, transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+    /* Precision dot grid — matches cover slide DNA */
+    .hook-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(26,54,93,0.06) 1.1px, transparent 1.1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+    }
+    /* Soft gradient hairline separator between the two statements */
+    .hook-slide .hook-divider {
+      position: relative;
+      width: 100%;
+      max-width: 1120px;
+      height: 1px;
+      margin: 64px 0;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(49,130,206,0.25) 25%,
+        rgba(26,54,93,0.35) 50%,
+        rgba(49,130,206,0.25) 75%,
+        transparent 100%);
+      z-index: 1;
+    }
+    .hook-slide .hook-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--emr-accent);
+      box-shadow: 0 0 0 4px rgba(49,130,206,0.12), 0 0 16px rgba(49,130,206,0.35);
+    }
+
+    /* Statement block — headline + ghost numeral + gradient rail */
+    .hook-statement {
+      position: relative;
+      padding: 6px 180px 6px 48px;
+      max-width: 1180px;
+      z-index: 1;
+    }
+    /* Gradient accent rail on the left edge */
+    .hook-statement::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10px; bottom: 10px;
+      width: 5px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, #1a365d 0%, #2b6cb0 50%, #3182ce 100%);
+      box-shadow: 0 4px 20px rgba(49,130,206,0.25);
+    }
+    /* Oversized ghost numeral in the top-right */
+    .hook-statement .hook-numeral {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      font-size: 4.4em;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, rgba(49,130,206,0.14) 0%, rgba(26,54,93,0.05) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    .hook-statement .hook-numeral::before {
+      content: '';
+      position: absolute;
+      left: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 64%;
+      background: linear-gradient(180deg, transparent 0%, rgba(49,130,206,0.35) 50%, transparent 100%);
+    }
+
+    .hook-headline {
+      font-size: 3em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      max-width: 100%;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .hook-sub {
+      font-size: 1.5em;
+      color: var(--emr-secondary);
+      margin-top: 40px;
+      line-height: 1.4;
+      max-width: 80%;
+    }
+    /* Emphasis: gradient-filled italic with underline accent */
+    .hook-emphasis {
+      font-style: italic;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 60%, #4299e1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      position: relative;
+      padding-bottom: 2px;
+      background-size: 200% 100%;
+      animation: hookEmphasisShimmer 6s ease-in-out infinite;
+    }
+    .hook-emphasis::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -4px;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #2b6cb0 0%, #3182ce 50%, #bee3f8 100%);
+      opacity: 0.55;
+    }
+    @keyframes hookEmphasisShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hook-emphasis { animation: none; }
+    }
+
+    /* Staggered entrance — replays on slide activation */
+    .hook-slide.present .hook-statement {
+      animation: hookStatementIn 0.9s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    .hook-slide.present .hook-statement:nth-of-type(1) { animation-delay: 0.15s; }
+    .hook-slide.present .hook-divider              { animation: hookDividerIn 0.7s 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+    .hook-slide.present .hook-statement:nth-of-type(2) { animation-delay: 0.65s; }
+
+    @keyframes hookStatementIn {
+      0%   { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hookDividerIn {
+      0%   { opacity: 0; transform: scaleX(0.3); }
+      100% { opacity: 1; transform: scaleX(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hook-slide.present .hook-statement,
+      .hook-slide.present .hook-divider { animation: none; }
+    }
+
+    /* ─── SLIDE 3: SOLUTION / PALANTIR-INSPIRED ISOMETRIC ARCHITECTURE ──── */
+    .arch-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 80px;
+      width: min(960px, 96%);
+      margin: 14px auto 0;
+      padding-left: 10px;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Patient Object callout card — Palantir signature */
+    .obj-callout {
+      background: white;
+      border: 1.5px solid var(--emr-primary);
+      border-radius: 6px;
+      padding: 0;
+      box-shadow:
+        0 1px 2px rgba(26, 54, 93, 0.04),
+        0 10px 28px rgba(26, 54, 93, 0.08);
+      animation: calloutIn 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) 0.35s both;
+      overflow: hidden;
+      position: relative;
+    }
+    @keyframes calloutIn {
+      from { opacity: 0; transform: translateX(-12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    /* Dashed connector from callout card pointing toward the Heart */
+    .obj-callout::after {
+      content: '';
+      position: absolute;
+      right: -18px;
+      top: 50%;
+      width: 18px;
+      height: 1.4px;
+      background: repeating-linear-gradient(to right,
+        rgba(49, 130, 206, 0.55) 0 4px,
+        transparent 4px 8px);
+      transform: translateY(-50%);
+    }
+    /* Right-side callout mirror — no dashed connector (was overlapping) */
+    .obj-callout-right::after {
+      display: none;
+    }
+    .obj-callout-right {
+      animation: calloutInRight 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) 0.35s both;
+    }
+    @keyframes calloutInRight {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    /* Footer quote for right-side card */
+    .obj-callout-quote {
+      margin: 6px 12px 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--emr-primary);
+      font-style: italic;
+      color: #64748b;
+      font-size: 0.54em;
+      line-height: 1.45;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .obj-callout-quote strong {
+      font-style: normal;
+      color: var(--emr-primary);
+      font-weight: 700;
+    }
+    /* Flow rows — arrow first, then stacked layer + description */
+    .obj-callout-right .obj-callout-body { padding: 12px 12px 8px; }
+    .flow-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.28);
+    }
+    .flow-row:last-of-type { border-bottom: none; }
+    .flow-arrow {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      font-size: 0.82em;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .flow-arrow.flow-both {
+      background: var(--emr-primary);
+      color: white;
+    }
+    .flow-arrow.flow-out {
+      background: var(--emr-accent);
+      color: white;
+    }
+    .flow-arrow.flow-in {
+      background: rgba(49, 130, 206, 0.15);
+      color: var(--emr-primary);
+      border: 1px solid var(--emr-primary);
+    }
+    .flow-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+    .flow-layer {
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.54em;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--emr-primary);
+      line-height: 1.2;
+    }
+    .flow-desc {
+      font-size: 0.50em;
+      font-weight: 500;
+      color: #64748b;
+      font-style: italic;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+    }
+    .obj-callout-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--emr-primary);
+      color: white;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.48em;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .obj-callout-id {
+      color: var(--emr-light-accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    .obj-callout-body { padding: 10px 12px 8px; }
+    .obj-callout-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 4px 0;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.48em;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.3);
+    }
+    .obj-callout-row:last-of-type { border-bottom: none; }
+    .obj-callout-key {
+      color: #64748b;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+    .obj-callout-val {
+      color: var(--emr-primary);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .obj-callout-layer {
+      color: var(--emr-primary);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.92em;
+      flex-shrink: 0;
+    }
+    .obj-callout-action {
+      color: #64748b;
+      font-weight: 500;
+      font-style: italic;
+      text-align: right;
+      letter-spacing: 0.02em;
+      padding-left: 10px;
+    }
+    .obj-callout-val .dot-active {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--emr-success, #38a169);
+      margin-right: 4px;
+      box-shadow: 0 0 6px rgba(56, 161, 105, 0.6);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .obj-callout-health {
+      margin: 8px 12px 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--emr-primary);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .obj-callout-health-label {
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.45em;
+      font-weight: 800;
+      color: #64748b;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+    .obj-callout-health-score {
+      font-size: 2.4em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* SVG architectural scene */
+    .arch-scene {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+    .arch-scene .plate-top {
+      fill: #ffffff;
+      stroke: var(--emr-primary);
+      stroke-width: 1.4;
+      stroke-linejoin: round;
+    }
+    .arch-scene .plate-front {
+      fill: #edf1f7;
+      stroke: var(--emr-primary);
+      stroke-width: 1.4;
+      stroke-linejoin: round;
+    }
+    .arch-scene .plate-right {
+      fill: #dae2ee;
+      stroke: var(--emr-primary);
+      stroke-width: 1.4;
+      stroke-linejoin: round;
+    }
+    .arch-scene .heart-top {
+      fill: url(#heartGrad);
+      stroke: #0a1e38;
+      stroke-width: 1.4;
+      stroke-linejoin: round;
+    }
+    .arch-scene .heart-front {
+      fill: url(#heartFront);
+      stroke: #0a1e38;
+      stroke-width: 1.4;
+      stroke-linejoin: round;
+    }
+    .arch-scene .heart-right {
+      fill: #091a30;
+      stroke: #0a1e38;
+      stroke-width: 1.4;
+      stroke-linejoin: round;
+    }
+    .arch-scene .icon-stroke {
+      fill: none;
+      stroke: var(--emr-primary);
+      stroke-width: 1.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .arch-scene .icon-white {
+      fill: none;
+      stroke: white;
+      stroke-width: 1.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .arch-scene .connector {
+      fill: none;
+      stroke: var(--emr-accent);
+      stroke-width: 1.4;
+      stroke-dasharray: 3 4;
+      opacity: 0.55;
+      animation: dashFlow 3s linear infinite;
+    }
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -14; }
+    }
+    .arch-scene .plate-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.26em;
+      fill: var(--emr-primary);
+      text-transform: uppercase;
+      text-anchor: middle;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .arch-scene .plate-sublabel {
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      fill: #64748b;
+      text-anchor: middle;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .arch-scene .heart-obj-label {
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      fill: rgba(255, 255, 255, 0.88);
+      text-anchor: middle;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .arch-scene .heart-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.30em;
+      fill: var(--emr-primary);
+      text-anchor: middle;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .arch-scene .heart-sublabel {
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      fill: #64748b;
+      text-anchor: middle;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .arch-scene .tier-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      fill: #94a3b8;
+      text-transform: uppercase;
+      text-anchor: middle;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .arch-scene .plate-sublabel-inline {
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      fill: #64748b;
+      text-anchor: middle;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-style: italic;
+    }
+    .arch-scene .flow-annotation {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.34em;
+      fill: #94a3b8;
+      text-transform: uppercase;
+      text-anchor: middle;
+      font-style: italic;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    /* Plate entrance animation — opacity only, so SVG transform="translate(x,y)" is preserved */
+    .arch-scene .plate-group,
+    .arch-scene .heart-group {
+      animation: plateFade 0.7s ease-out both;
+    }
+    .arch-scene .top-row .plate-group:nth-child(1) { animation-delay: 0.10s; }
+    .arch-scene .top-row .plate-group:nth-child(2) { animation-delay: 0.18s; }
+    .arch-scene .top-row .plate-group:nth-child(3) { animation-delay: 0.26s; }
+    .arch-scene .heart-group { animation-delay: 0.42s; }
+    .arch-scene .bottom-row .plate-group:nth-child(1) { animation-delay: 0.60s; }
+    .arch-scene .bottom-row .plate-group:nth-child(2) { animation-delay: 0.68s; }
+    .arch-scene .bottom-row .plate-group:nth-child(3) { animation-delay: 0.76s; }
+    @keyframes plateFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Subtle shimmer across the Heart */
+    .arch-scene .heart-shimmer {
+      opacity: 0;
+      animation: heartShimmerSvg 7s ease-in-out infinite;
+    }
+    @keyframes heartShimmerSvg {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.28; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .arch-scene .plate-group,
+      .arch-scene .connector,
+      .arch-scene .heart-shimmer,
+      .obj-callout,
+      .obj-callout-val .dot-active { animation: none; }
+      .arch-scene .plate-group { opacity: 1; }
+    }
+
+    /* Bottom replaces strip */
+    .arch-replaces {
+      margin: 8px auto 0;
+      width: min(960px, 99%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px;
+      background: rgba(148, 163, 184, 0.06);
+      border: 1px dashed rgba(148, 163, 184, 0.32);
+      border-radius: 8px;
+      font-size: 0.52em;
+      line-height: 1.5;
+    }
+    .arch-replaces-label {
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-weight: 800;
+      color: rgba(100, 116, 139, 0.95);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      padding-right: 12px;
+      border-right: 1px solid rgba(148, 163, 184, 0.32);
+      flex-shrink: 0;
+    }
+    .arch-replaces-list {
+      flex: 1;
+      color: rgba(100, 116, 139, 0.72);
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      text-decoration: line-through;
+      text-decoration-color: rgba(100, 116, 139, 0.42);
+      text-decoration-thickness: 1px;
+    }
+    .arch-replaces-more {
+      color: var(--emr-accent);
+      font-weight: 800;
+      text-decoration: none;
+      padding-left: 10px;
+      letter-spacing: 0.02em;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      flex-shrink: 0;
+    }
+
+    /* Thesis tagline */
+    .arch-tagline {
+      margin-top: 6px;
+      text-align: center;
+      font-size: 0.8em;
+      color: var(--emr-primary);
+      font-weight: 600;
+      letter-spacing: -0.005em;
+    }
+    .arch-tagline em {
+      font-style: normal;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a365d 0%, #3182ce 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .solution-takeaway {
+      text-align: center;
+      font-size: 1.15em;
+      font-weight: 500;
+      color: var(--emr-primary);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* ─── SLIDE 4: REGULATORY FREEDOM (redesigned cards + proof strip) ──── */
+    .reg-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .reg-card {
+      position: relative;
+      padding: 20px 20px 18px;
+      background: white;
+      border: 1px solid var(--emr-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .reg-card > p { flex: 1; }
+    .reg-card > .reg-tag { margin-top: auto; align-self: flex-start; }
+    .reg-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--emr-accent);
+      box-shadow: 0 24px 50px rgba(26,54,93,0.14);
+    }
+    /* Ghost number watermark in card background */
+    .reg-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: -38px; right: -8px;
+      font-size: 9em;
+      font-weight: 900;
+      color: var(--emr-bg-tint);
+      line-height: 1;
+      z-index: 0;
+      pointer-events: none;
+      letter-spacing: -0.08em;
+      opacity: 0.75;
+    }
+    /* Gradient top accent bar */
+    .reg-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--emr-gradient-primary);
+    }
+    .reg-card > * { position: relative; z-index: 1; }
+    /* Icon in gradient square */
+    .reg-icon {
+      width: 46px; height: 46px;
+      background: var(--emr-gradient-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 20px rgba(26,54,93,0.28);
+    }
+    .reg-icon svg {
+      width: 22px; height: 22px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .reg-card h3 {
+      font-size: 1.05em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .reg-card p {
+      font-size: 0.74em;
+      color: var(--emr-text-body);
+      line-height: 1.5;
+      margin: 0 0 12px;
+    }
+    .reg-card strong { color: var(--emr-primary); }
+    .reg-card .reg-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--emr-bg-tint);
+      color: var(--emr-accent);
+      border-radius: 100px;
+      font-size: 0.62em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Bottom proof strip — concrete numbers */
+    .reg-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 18px;
+      padding: 16px 0;
+      background: var(--emr-gradient-primary);
+      border-radius: 14px;
+      box-shadow: 0 16px 36px rgba(26,54,93,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .reg-stats::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .reg-stat {
+      text-align: center;
+      padding: 0 20px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      position: relative;
+      z-index: 1;
+    }
+    .reg-stat:last-child { border-right: none; }
+    .reg-stat-num {
+      font-size: 2.1em;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--emr-light-accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .reg-stat-label {
+      font-size: 0.62em;
+      color: rgba(255,255,255,0.82);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── (legacy — kept for older slides that may still use it) */
+    .unified-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+      align-items: start;
+    }
+    .unified-col {
+      padding: 28px;
+      background: var(--emr-bg-subtle);
+      border-radius: 14px;
+      border-left: 4px solid var(--emr-accent);
+    }
+    .unified-col h3 {
+      font-size: 1.1em;
+      color: var(--emr-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .unified-col p {
+      font-size: 0.95em;
+      color: var(--emr-text-body);
+      line-height: 1.55;
+    }
+    .unified-col strong { color: var(--emr-primary); }
+
+    .competitor-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .competitor-chip {
+      padding: 8px 16px;
+      background: white;
+      border: 1px solid var(--emr-border);
+      border-radius: 100px;
+      font-size: 0.82em;
+      color: var(--emr-text-muted);
+      font-weight: 500;
+    }
+    .vs-divider {
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--emr-accent);
+      margin-top: 28px;
+      letter-spacing: 0.1em;
+    }
+
+    .tiny-team-note {
+      margin-top: 32px;
+      padding: 24px 32px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 1.15em;
+      line-height: 1.5;
+      box-shadow: 0 10px 30px rgba(26,54,93,0.2);
+    }
+    .tiny-team-note strong { color: white; }
+
+    /* ─── SLIDE 6: TEAM — premium two-tier redesign ──── */
+    .team-slide {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 50% 40% at 92% 10%, rgba(49,130,206,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 35% at 5% 95%, rgba(190,227,248,0.18) 0%, transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+    .team-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(26,54,93,0.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 25%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 85%);
+    }
+    .team-slide .slide-inner { position: relative; z-index: 1; }
+
+    .team-slide .headline-big {
+      font-size: 2.3em;
+      margin-top: 4px;
+      margin-bottom: 18px;
+    }
+
+    .team-section { margin-top: 14px; }
+    .team-section + .team-section { margin-top: 22px; }
+    .team-section-label {
+      font-size: 0.62em;
+      color: var(--emr-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .team-section-label::before,
+    .team-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(49,130,206,0.28) 50%, transparent 100%);
+    }
+    .team-section-label::before { flex: 0 0 8px; }
+
+    /* Founders grid — 2 hero cards */
+    .founders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .founder-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 18px 16px 20px;
+      background: linear-gradient(180deg, #ffffff 0%, #fafcff 100%);
+      border: 1px solid var(--emr-border);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(26,54,93,0.06);
+      overflow: hidden;
+    }
+    .founder-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #1a365d 0%, #2b6cb0 50%, #3182ce 100%);
+    }
+    .founder-photo {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 3px solid #ffffff;
+      box-shadow:
+        0 0 0 2px rgba(49,130,206,0.35),
+        0 6px 18px rgba(26,54,93,0.18);
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .founder-info { min-width: 0; flex: 1; }
+    .founder-info h4 {
+      font-size: 0.98em;
+      color: var(--emr-primary);
+      font-weight: 800;
+      margin: 0 0 2px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .founder-info .role {
+      font-size: 0.72em;
+      color: var(--emr-secondary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 6px;
+    }
+    .founder-info .hook {
+      font-size: 0.74em;
+      color: var(--emr-text-body);
+      font-style: italic;
+      line-height: 1.35;
+      margin: 0 0 8px;
+    }
+
+    /* Chips — institutional credentials */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      font-size: 0.58em;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 100px;
+      color: var(--emr-secondary);
+      background: rgba(190,227,248,0.22);
+      border: 1px solid rgba(49,130,206,0.25);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .chip.chip-pilot {
+      color: #fff;
+      background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+      border-color: transparent;
+      box-shadow: 0 2px 8px rgba(49,130,206,0.3);
+      position: relative;
+      padding-left: 18px;
+    }
+    .chip.chip-pilot::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 50%;
+      transform: translateY(-50%);
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #bee3f8;
+      box-shadow: 0 0 0 2px rgba(190,227,248,0.4);
+      animation: pilotPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pilotPulse {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(190,227,248,0.4); }
+      50%      { box-shadow: 0 0 0 4px rgba(190,227,248,0.15); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .chip.chip-pilot::before { animation: none; }
+    }
+
+    .founder-badge {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 0.52em;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--emr-accent);
+      opacity: 0.55;
+    }
+
+    /* Advisors grid — 5 compact cards */
+    .advisors-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .advisor-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 14px 8px 10px;
+      background: #ffffff;
+      border: 1px solid var(--emr-border);
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(26,54,93,0.05);
+    }
+    .advisor-card.is-pilot {
+      border-color: rgba(49,130,206,0.35);
+      background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+    }
+    .advisor-card.is-pilot::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px; right: -1px;
+      height: 3px;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      background: linear-gradient(90deg, #2b6cb0 0%, #3182ce 100%);
+    }
+    .advisor-photo {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 9px;
+      border: 2px solid #ffffff;
+      box-shadow:
+        0 0 0 1.5px rgba(49,130,206,0.28),
+        0 4px 12px rgba(26,54,93,0.1);
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .advisor-card h5 {
+      font-size: 0.68em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      margin: 0 0 3px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    .advisor-card .role-small {
+      font-size: 0.52em;
+      color: var(--emr-text-muted);
+      line-height: 1.35;
+      margin: 0 0 7px;
+      min-height: 2.7em;
+      font-weight: 500;
+    }
+    .advisor-card .chip-row { justify-content: center; gap: 4px; }
+    .advisor-card .chip { font-size: 0.48em; padding: 2px 6px; }
+
+    .team-closer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.95em;
+      color: var(--emr-primary);
+      font-weight: 600;
+    }
+    .team-closer em {
+      font-style: italic;
+      color: var(--emr-accent);
+      font-weight: 700;
+    }
+
+    /* Staggered entrance on slide activation */
+    .team-slide.present .founder-card {
+      animation: teamCardIn 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    .team-slide.present .founder-card:nth-child(1) { animation-delay: 0.15s; }
+    .team-slide.present .founder-card:nth-child(2) { animation-delay: 0.28s; }
+    .team-slide.present .advisor-card {
+      animation: teamCardIn 0.65s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    .team-slide.present .advisor-card:nth-child(1) { animation-delay: 0.50s; }
+    .team-slide.present .advisor-card:nth-child(2) { animation-delay: 0.57s; }
+    .team-slide.present .advisor-card:nth-child(3) { animation-delay: 0.64s; }
+    .team-slide.present .advisor-card:nth-child(4) { animation-delay: 0.71s; }
+    .team-slide.present .advisor-card:nth-child(5) { animation-delay: 0.78s; }
+    .team-slide.present .team-closer {
+      animation: teamCardIn 0.6s 1.00s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    @keyframes teamCardIn {
+      0%   { opacity: 0; transform: translateY(14px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .team-slide.present .founder-card,
+      .team-slide.present .advisor-card,
+      .team-slide.present .team-closer { animation: none; }
+    }
+
+    /* ─── SLIDE 5: MARKET (cards + growth ramp + country chips) ──── */
+    .market-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .market-card {
+      padding: 22px 22px;
+      border-radius: 14px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 26px rgba(26,54,93,0.15);
+    }
+    .market-card-som { background: linear-gradient(135deg, var(--emr-accent) 0%, var(--emr-secondary) 100%); }
+    .market-card-sam { background: linear-gradient(135deg, var(--emr-secondary) 0%, var(--emr-primary) 100%); }
+    .market-card-tam { background: linear-gradient(135deg, var(--emr-primary) 0%, var(--emr-primary-dark) 100%); }
+    .market-card .card-tier {
+      font-size: 0.62em;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      opacity: 0.85;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .market-card .card-value {
+      font-size: 2.6em;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .market-card .card-label {
+      font-size: 0.82em;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .market-card .card-desc {
+      font-size: 0.72em;
+      opacity: 0.85;
+      line-height: 1.45;
+    }
+
+    /* Growth ramp — 4-year hospital trajectory */
+    .market-ramp {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 16px;
+      padding: 18px 24px 16px;
+      background: var(--emr-bg-subtle);
+      border-radius: 14px;
+      position: relative;
+      border: 1px solid var(--emr-border);
+    }
+    .ramp-label-row {
+      position: absolute;
+      top: -10px; left: 24px;
+      background: white;
+      padding: 0 10px;
+      font-size: 0.6em;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .ramp-node {
+      text-align: center;
+      padding: 4px 0 2px;
+      position: relative;
+    }
+    .ramp-node::after {
+      content: '→';
+      position: absolute;
+      right: -6px; top: 38%;
+      transform: translateY(-50%);
+      color: var(--emr-accent);
+      opacity: 0.45;
+      font-size: 1.1em;
+      font-weight: 700;
+    }
+    .ramp-node:last-child::after { display: none; }
+    .ramp-year {
+      font-size: 0.6em;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .ramp-count {
+      font-size: 2.1em;
+      font-weight: 900;
+      color: var(--emr-primary);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .ramp-node:last-child .ramp-count {
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    .ramp-sublabel {
+      font-size: 0.6em;
+      color: var(--emr-text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .ramp-sublabel strong { color: var(--emr-primary); }
+
+    .countries-strip {
+      margin-top: 14px;
+      padding: 10px 16px;
+      background: var(--emr-bg-tint);
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
+    }
+    .countries-label {
+      font-size: 0.6em;
+      color: var(--emr-text-muted);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+    .country-chip {
+      padding: 3px 10px;
+      background: white;
+      border: 1px solid var(--emr-light-accent);
+      border-radius: 100px;
+      font-size: 0.65em;
+      font-weight: 500;
+      color: var(--emr-primary);
+      white-space: nowrap;
+    }
+    .country-chip.home {
+      background: var(--emr-accent);
+      color: white;
+      border-color: var(--emr-accent);
+      font-weight: 700;
+    }
+
+    /* ─── SLIDE 8: PROGRESS / TIMELINE ───────────────── */
+    .timeline-list {
+      margin-top: 18px;
+      position: relative;
+      padding-left: 40px;
+    }
+    .timeline-list::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 8px; bottom: 8px;
+      width: 3px;
+      background: linear-gradient(180deg, var(--emr-primary) 0%, var(--emr-secondary) 50%, var(--emr-accent) 100%);
+      border-radius: 3px;
+      box-shadow: 0 0 8px rgba(49,130,206,0.3);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 3px;
+      padding: 7px 0;
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 22px;
+      align-items: baseline;
+    }
+    .tl-date { white-space: nowrap; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -33px; top: 15px;
+      width: 12px; height: 12px;
+      background: white;
+      border: 2.5px solid var(--emr-secondary);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px white;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+    .tl-item:hover::before {
+      transform: scale(1.2);
+    }
+    .tl-date {
+      font-size: 0.86em;
+      font-weight: 700;
+      color: var(--emr-primary);
+      text-align: left;
+      letter-spacing: 0.02em;
+    }
+    .tl-desc {
+      font-size: 0.9em;
+      color: var(--emr-text-body);
+      line-height: 1.4;
+    }
+
+    /* ─── SLIDE 9: AMBITION (escalating stages redesign) ─── */
+    .ambition-headline {
+      font-size: 3em;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+    .ambition-headline .h-home { color: var(--emr-primary); opacity: 0.5; }
+    .ambition-headline .h-region { color: var(--emr-secondary); }
+    .ambition-headline .h-global {
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ambition-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.15fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .ambition-card {
+      padding: 22px 22px 20px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .ambition-card:hover {
+      transform: translateY(-4px);
+    }
+    .ambition-card-1 {
+      background: var(--emr-bg-tint);
+      border: 1px solid var(--emr-light-accent);
+    }
+    .ambition-card-2 {
+      background: white;
+      border: 1px solid var(--emr-border);
+      border-top: 4px solid var(--emr-accent);
+      box-shadow: 0 10px 26px rgba(26,54,93,0.1);
+    }
+    .ambition-card-3 {
+      background: var(--emr-gradient-primary);
+      color: white;
+      border: none;
+      box-shadow: 0 20px 44px rgba(26,54,93,0.32);
+    }
+    .ambition-card-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    .ambition-card-3 > * { position: relative; z-index: 1; }
+
+    .stage-label {
+      font-size: 0.58em;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--emr-accent);
+      margin-bottom: 4px;
+    }
+    .ambition-card-3 .stage-label {
+      color: var(--emr-light-accent);
+      opacity: 0.95;
+    }
+
+    .stage-title {
+      font-size: 1.9em;
+      font-weight: 900;
+      color: var(--emr-primary);
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+      line-height: 1.05;
+    }
+    .ambition-card-3 .stage-title { color: white; }
+
+    .stage-subtitle {
+      font-size: 0.72em;
+      color: var(--emr-text-muted);
+      margin-bottom: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .ambition-card-3 .stage-subtitle {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .stage-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 14px;
+      background: white;
+      border: 1px solid var(--emr-light-accent);
+      border-radius: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .ambition-card-3 .stage-stat {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(190,227,248,0.25);
+    }
+    .stage-stat-value {
+      font-size: 1.05em;
+      font-weight: 900;
+      color: var(--emr-primary);
+      letter-spacing: -0.02em;
+    }
+    .ambition-card-3 .stage-stat-value { color: var(--emr-light-accent); }
+    .stage-stat-label {
+      font-size: 0.68em;
+      color: var(--emr-text-muted);
+      font-weight: 500;
+    }
+    .ambition-card-3 .stage-stat-label { color: rgba(255,255,255,0.75); }
+
+    .stage-body {
+      font-size: 0.8em;
+      color: var(--emr-text-body);
+      line-height: 1.5;
+      margin: 0;
+      flex: 1;
+    }
+    .ambition-card-3 .stage-body { color: rgba(255,255,255,0.9); }
+    .stage-body strong { color: var(--emr-primary); }
+    .ambition-card-3 .stage-body strong { color: var(--emr-light-accent); }
+
+    .ambition-vision {
+      margin-top: 18px;
+      padding: 14px 28px;
+      background: var(--emr-bg-subtle);
+      color: var(--emr-primary);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.9em;
+      font-weight: 500;
+      line-height: 1.5;
+      border: 1px solid var(--emr-border);
+    }
+    .ambition-vision strong { color: var(--emr-accent); font-weight: 700; }
+
+    /* Tagline for combined Ambition + Market slide */
+    .ambition-tagline {
+      font-size: 0.98em;
+      color: var(--emr-text-body);
+      line-height: 1.5;
+      max-width: 960px;
+      margin: 12px 0 0;
+      font-weight: 400;
+    }
+    .ambition-tagline strong {
+      color: var(--emr-accent);
+      font-weight: 700;
+    }
+
+    /* Compact 4-year ramp strip */
+    .combined-ramp {
+      margin-top: 16px;
+      padding: 12px 20px;
+      background: var(--emr-bg-subtle);
+      border: 1px solid var(--emr-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .combined-ramp-label {
+      font-size: 0.58em;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding-right: 14px;
+      border-right: 1px solid var(--emr-border);
+    }
+    .combined-ramp-years {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ramp-year-node {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .ramp-year-num {
+      font-size: 1.3em;
+      font-weight: 900;
+      color: var(--emr-primary);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .ramp-year-node:last-child .ramp-year-num {
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ramp-year-lbl {
+      font-size: 0.58em;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .combined-ramp-arrow {
+      color: var(--emr-accent);
+      opacity: 0.5;
+      font-size: 1em;
+      font-weight: 700;
+    }
+    .combined-ramp-tag {
+      margin-left: 6px;
+      padding: 6px 14px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 100px;
+      font-size: 0.68em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      box-shadow: 0 4px 12px rgba(26,54,93,0.2);
+    }
+
+    /* ─── SLIDE 10: THE ASK ───────────────────────────── */
+    .ask-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+    .ask-section h3 {
+      font-size: 0.75em;
+      color: var(--emr-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .milestones {
+      list-style: none;
+      padding: 0;
+      counter-reset: milestone;
+    }
+    .milestones li {
+      padding: 10px 0 10px 52px;
+      position: relative;
+      counter-increment: milestone;
+      font-size: 0.9em;
+      color: var(--emr-text-body);
+      border-bottom: 1px solid var(--emr-border);
+    }
+    .milestones li:last-child { border-bottom: none; }
+    .milestones li::before {
+      content: counter(milestone);
+      position: absolute;
+      left: 0; top: 10px;
+      width: 32px; height: 32px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85em;
+    }
+    .milestones strong { color: var(--emr-primary); }
+
+    .funds-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .funds-table td {
+      padding: 10px 12px;
+      font-size: 0.88em;
+      border-bottom: 1px solid var(--emr-border);
+    }
+    .funds-table td:first-child { color: var(--emr-text-body); }
+    .funds-table td:nth-child(2) {
+      color: var(--emr-accent);
+      font-weight: 700;
+      text-align: right;
+    }
+    .funds-table td:last-child {
+      color: var(--emr-primary);
+      font-weight: 600;
+      text-align: right;
+    }
+    .funds-table tr.total td {
+      font-weight: 800;
+      color: var(--emr-primary);
+      border-top: 2px solid var(--emr-primary);
+      border-bottom: none;
+      padding-top: 14px;
+      font-size: 1em;
+    }
+
+    .cta {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 1.5em;
+      font-weight: 700;
+      padding: 20px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(26,54,93,0.25);
+      letter-spacing: -0.01em;
+    }
+
+    /* ─── SLIDE 8: TIMELINE (wider date column + award style) ── */
+    /* Award milestone — gradient-filled with glow */
+    .tl-item.award::before {
+      background: var(--emr-gradient-primary);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px white, 0 0 0 4px var(--emr-primary), 0 0 16px rgba(26, 54, 93, 0.5);
+      width: 14px; height: 14px;
+      left: -33px;
+    }
+    .tl-item.award .tl-desc {
+      font-weight: 600;
+      color: var(--emr-primary);
+    }
+    .tl-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 100px;
+      font-size: 0.62em;
+      font-weight: 700;
+      margin-right: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      vertical-align: middle;
+      box-shadow: 0 2px 8px rgba(26, 54, 93, 0.25);
+    }
+
+    /* Timeline phase labels (left gutter) */
+    .tl-phase {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: center;
+      margin: 12px 0 4px;
+      position: relative;
+    }
+    .tl-phase:first-child { margin-top: 0; }
+    .tl-phase-label {
+      font-size: 0.62em;
+      color: var(--emr-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .tl-phase-line {
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--emr-accent) 0%, var(--emr-light-accent) 40%, transparent 100%);
+      opacity: 0.55;
+      border-radius: 1.5px;
+    }
+    /* Hide the vertical gutter timeline behind phase labels */
+    .tl-phase::before {
+      content: '';
+      position: absolute;
+      left: -32px; top: -4px; bottom: -4px;
+      width: 14px;
+      background: white;
+      z-index: 2;
+    }
+
+    /* Contract signed — HERO milestone card */
+    .tl-item.highlight {
+      background: linear-gradient(90deg, rgba(49,130,206,0.12) 0%, rgba(190,227,248,0.2) 40%, transparent 90%);
+      border-radius: 10px;
+      margin: 4px -14px 4px -14px;
+      padding: 8px 14px;
+      border-left: 3px solid var(--emr-accent);
+    }
+    .tl-item.highlight::before {
+      background: var(--emr-gradient-primary);
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px white, 0 0 0 5px var(--emr-accent), 0 0 24px rgba(49, 130, 206, 0.7);
+      width: 16px; height: 16px;
+      left: -41px;
+      animation: pulseDot 2.5s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 0 3px white, 0 0 0 5px var(--emr-accent), 0 0 24px rgba(49, 130, 206, 0.7); }
+      50% { box-shadow: 0 0 0 3px white, 0 0 0 5px var(--emr-accent), 0 0 40px rgba(49, 130, 206, 1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tl-item.highlight::before { animation: none; }
+    }
+    .tl-item.highlight .tl-desc {
+      font-weight: 700;
+      color: var(--emr-primary);
+      font-size: 0.9em;
+    }
+    .tl-item.highlight .tl-date {
+      color: var(--emr-accent);
+    }
+    .tl-star {
+      display: inline-block;
+      margin-left: 6px;
+      color: var(--emr-accent);
+      font-size: 1.15em;
+      animation: starPulse 3s ease-in-out infinite;
+    }
+    @keyframes starPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.15); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tl-star { animation: none; }
+    }
+
+    /* ─── SLIDE 6: PROGRESS — PHASE CARDS (redesigned) ──── */
+    .timeline-phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .phase-card {
+      padding: 22px 22px 18px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .phase-card:hover {
+      transform: translateY(-3px);
+    }
+    .phase-card-1 {
+      background: var(--emr-bg-tint);
+      border: 1px solid var(--emr-light-accent);
+    }
+    .phase-card-2 {
+      background: white;
+      border: 1px solid var(--emr-border);
+      border-top: 4px solid var(--emr-accent);
+      box-shadow: 0 8px 22px rgba(26,54,93,0.08);
+    }
+    .phase-card-3 {
+      background: var(--emr-gradient-primary);
+      color: white;
+      border: none;
+      box-shadow: 0 18px 40px rgba(26,54,93,0.3);
+    }
+    .phase-card-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    .phase-card-3 > * { position: relative; z-index: 1; }
+
+    .phase-label {
+      font-size: 0.58em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--emr-accent);
+      margin-bottom: 4px;
+    }
+    .phase-card-3 .phase-label {
+      color: var(--emr-light-accent);
+      opacity: 0.9;
+    }
+    .phase-title {
+      font-size: 1.35em;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--emr-primary);
+      margin-bottom: 2px;
+      line-height: 1.1;
+    }
+    .phase-card-3 .phase-title { color: white; }
+    .phase-range {
+      font-size: 0.66em;
+      color: var(--emr-text-muted);
+      margin-bottom: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .phase-card-3 .phase-range {
+      color: rgba(255,255,255,0.72);
+    }
+    .phase-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .phase-list li {
+      font-size: 0.76em;
+      color: var(--emr-text-body);
+      line-height: 1.45;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .phase-list li:last-child { margin-bottom: 0; }
+    .phase-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 7px;
+      width: 5px; height: 5px;
+      background: var(--emr-accent);
+      border-radius: 50%;
+    }
+    .phase-card-3 .phase-list li {
+      color: rgba(255,255,255,0.92);
+    }
+    .phase-card-3 .phase-list li::before {
+      background: var(--emr-light-accent);
+    }
+    .phase-list li strong { color: var(--emr-primary); }
+    .phase-card-3 .phase-list li strong { color: var(--emr-light-accent); }
+    .phase-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 100px;
+      font-size: 0.78em;
+      font-weight: 700;
+      margin-right: 6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      vertical-align: baseline;
+    }
+    .phase-card-3 .phase-badge {
+      background: rgba(190,227,248,0.22);
+      color: var(--emr-light-accent);
+    }
+
+    /* Proof stat strip — compact */
+    .timeline-proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 10px;
+      padding: 10px 0;
+      background: var(--emr-gradient-primary);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(26,54,93,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .timeline-proof::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    .timeline-proof-item {
+      text-align: center;
+      padding: 0 16px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-proof-item:last-child { border-right: none; }
+    .timeline-proof-num {
+      font-size: 1.25em;
+      font-weight: 900;
+      color: var(--emr-light-accent);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .timeline-proof-label {
+      font-size: 0.55em;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* ─── SLIDE 10: ASK (redesigned — simpler hero) ──── */
+    .ask-hero {
+      margin-top: 28px;
+      padding: 32px 40px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(26,54,93,0.22);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .ask-hero-left {
+      text-align: center;
+    }
+    .ask-hero-label {
+      font-size: 0.65em;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      opacity: 0.75;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .ask-hero-number {
+      font-size: 6em;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--emr-light-accent);
+    }
+    .ask-hero-right {
+      border-left: 1px solid rgba(255,255,255,0.2);
+      padding-left: 36px;
+    }
+    .ask-hero-desc {
+      font-size: 1.3em;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .ask-hero-sub {
+      font-size: 0.88em;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    .ask-outcomes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .outcome-box {
+      padding: 24px 28px;
+      background: var(--emr-bg-subtle);
+      border-radius: 14px;
+      border-left: 4px solid var(--emr-accent);
+    }
+    .outcome-box:nth-child(2) {
+      border-left-color: var(--emr-primary);
+    }
+    .outcome-box h4 {
+      font-size: 0.75em;
+      color: var(--emr-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .outcome-box p {
+      font-size: 1.05em;
+      color: var(--emr-primary);
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.4;
+    }
+    .outcome-box .outcome-icon {
+      font-size: 1.5em;
+      margin-right: 12px;
+      color: var(--emr-accent);
+    }
+
+    .terms-preview {
+      margin-top: 24px;
+      padding: 16px 24px;
+      background: var(--emr-bg-tint);
+      border-radius: 10px;
+      text-align: center;
+      font-size: 0.88em;
+      color: var(--emr-primary);
+    }
+    .terms-preview strong { color: var(--emr-accent); }
+
+    /* Ask slide — 3-station journey */
+    .ask-journey {
+      display: grid;
+      grid-template-columns: 1fr auto 1.15fr auto 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin-top: 24px;
+    }
+    .journey-station {
+      padding: 20px 20px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+    .journey-station.now {
+      background: var(--emr-bg-tint);
+      border: 1px solid var(--emr-light-accent);
+    }
+    .journey-station.hero {
+      background: var(--emr-gradient-primary);
+      color: white;
+      box-shadow: 0 20px 44px rgba(26,54,93,0.32);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 24px 20px;
+    }
+    .journey-station.hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    .journey-station.hero > * { position: relative; z-index: 1; }
+    .journey-station.unlock {
+      background: white;
+      border: 2px solid var(--emr-accent);
+      border-style: dashed;
+    }
+
+    .station-phase {
+      font-size: 0.56em;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--emr-accent);
+      margin-bottom: 8px;
+    }
+    .journey-station.hero .station-phase {
+      color: var(--emr-light-accent);
+      opacity: 0.92;
+    }
+
+    .station-headline {
+      font-size: 1em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .station-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+    .station-bullets li {
+      font-size: 0.74em;
+      color: var(--emr-text-body);
+      line-height: 1.5;
+      padding-left: 14px;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .station-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 7px;
+      width: 5px; height: 5px;
+      background: var(--emr-accent);
+      border-radius: 50%;
+    }
+    .station-bullets li strong { color: var(--emr-primary); }
+
+    /* Hero station interior */
+    .station-hero-value {
+      font-size: 3.2em;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: white;
+    }
+    .station-hero-sub {
+      font-size: 0.68em;
+      color: rgba(190,227,248,0.9);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 6px;
+      margin-bottom: 14px;
+    }
+    .station-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.18);
+      margin: 4px 10px 12px;
+    }
+    .station-sub-label {
+      font-size: 0.56em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(190,227,248,0.85);
+      margin-bottom: 4px;
+    }
+    .station-sub-value {
+      font-size: 1.1em;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 2px;
+    }
+    .station-sub-desc {
+      font-size: 0.7em;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .journey-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      color: var(--emr-accent);
+      padding: 0 10px;
+      font-weight: 700;
+    }
+
+    /* Use-of-funds stacked bar */
+    .ask-funds {
+      margin-top: 20px;
+    }
+    .funds-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .funds-label {
+      font-size: 0.6em;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .funds-total {
+      font-size: 0.72em;
+      color: var(--emr-primary);
+      font-weight: 700;
+    }
+    .funds-bar {
+      display: flex;
+      height: 34px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(26,54,93,0.08);
+    }
+    .funds-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.66em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0 8px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .funds-segment.team { background: var(--emr-primary); }
+    .funds-segment.gtm { background: var(--emr-secondary); }
+    .funds-segment.rd { background: var(--emr-accent); }
+    .funds-segment.legal { background: #5aa5e1; color: white; }
+    .funds-segment.buffer {
+      background: var(--emr-light-accent);
+      color: var(--emr-primary);
+    }
+
+    /* ─── SLIDE 11: CONVERTIBLE NOTE TERMS ────────────── */
+    .terms-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.3fr;
+      gap: 32px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    /* Premium dark deal-terms card */
+    .terms-box {
+      background: linear-gradient(160deg, #0f2142 0%, #1a365d 35%, #2b6cb0 120%);
+      color: white;
+      padding: 26px 28px 22px;
+      border-radius: 18px;
+      box-shadow:
+        0 24px 48px rgba(15,33,66,0.35),
+        0 4px 12px rgba(15,33,66,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        inset 0 -1px 0 rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    /* Top-right glow pocket */
+    .terms-box::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(49,130,206,0.45) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Bottom-left glow pocket */
+    .terms-box::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(190,227,248,0.22) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .terms-box > * { position: relative; z-index: 1; }
+
+    /* Eyebrow label above hero number */
+    .terms-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.52em;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      font-weight: 700;
+      color: var(--emr-light-accent);
+      margin-bottom: 10px;
+      padding: 5px 10px 5px 10px;
+      background: rgba(190,227,248,0.1);
+      border: 1px solid rgba(190,227,248,0.22);
+      border-radius: 100px;
+    }
+    .terms-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--emr-light-accent);
+      box-shadow: 0 0 8px rgba(190,227,248,0.9);
+    }
+
+    /* Hero number: $200K */
+    .terms-hero-val {
+      font-size: 3.2em;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 0.95;
+      background: linear-gradient(135deg, #ffffff 0%, #bee3f8 70%, #90cdf4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+    .terms-hero-sub {
+      font-size: 0.68em;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+
+    /* Gradient divider between hero and grid */
+    .terms-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(190,227,248,0.4) 50%, transparent 100%);
+      margin: 18px 0 14px 0;
+    }
+
+    /* Key-value grid */
+    .terms-grid {
+      display: flex;
+      flex-direction: column;
+    }
+    .term-item {
+      display: grid;
+      grid-template-columns: 10px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .term-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .term-dot {
+      width: 6px; height: 6px;
+      margin-top: 6px;
+      border-radius: 50%;
+      background: var(--emr-light-accent);
+      box-shadow: 0 0 10px rgba(190,227,248,0.7);
+      flex-shrink: 0;
+    }
+    .term-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .term-label {
+      font-size: 0.6em;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.55);
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .term-text {
+      font-size: 0.78em;
+      font-weight: 700;
+      color: var(--emr-light-accent);
+      text-align: right;
+      letter-spacing: -0.005em;
+    }
+
+    /* Footer badge: "Y Combinator SAFE · industry standard" */
+    .terms-footer-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      font-size: 0.55em;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(190,227,248,0.95);
+      backdrop-filter: blur(10px);
+    }
+    .terms-footer-badge::before {
+      content: '✓';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--emr-accent) 0%, var(--emr-secondary) 100%);
+      color: white;
+      font-size: 0.85em;
+      font-weight: 900;
+    }
+
+    /* Ownership hero — upgraded visual */
+    .ownership-hero {
+      padding: 18px 24px;
+      background: linear-gradient(135deg, var(--emr-bg-tint) 0%, white 100%);
+      border-radius: 14px;
+      border: 2px solid var(--emr-accent);
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 22px;
+      align-items: center;
+      box-shadow: 0 10px 26px rgba(49,130,206,0.12);
+    }
+    .ownership-pie {
+      width: 104px; height: 104px;
+      background: conic-gradient(var(--emr-accent) 0deg 14.4deg, var(--emr-light-accent) 14.4deg 360deg);
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 10px 22px rgba(26,54,93,0.18);
+    }
+    .ownership-pie::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px; height: 72px;
+      background: white;
+      border-radius: 50%;
+    }
+    .ownership-pie-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.4em;
+      font-weight: 900;
+      z-index: 1;
+      letter-spacing: -0.03em;
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ownership-text { line-height: 1.3; }
+    .ownership-text .own-big {
+      font-size: 1.3em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .ownership-text .own-big em {
+      color: var(--emr-accent);
+      font-style: normal;
+      font-weight: 900;
+    }
+    .ownership-text .own-math {
+      font-size: 0.78em;
+      color: var(--emr-text-muted);
+      font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+      letter-spacing: 0.02em;
+    }
+
+    /* NEW: Visual scenario bars (replaces table) */
+    .scenario-visual {
+      margin-bottom: 14px;
+    }
+    .scenario-visual-title {
+      font-size: 0.56em;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--emr-border);
+    }
+    .scenario-row {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 6px 0;
+    }
+    .scenario-row:last-child { margin-bottom: 0; }
+    .scenario-valuation {
+      font-size: 0.82em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: -0.02em;
+    }
+    .scenario-bars {
+      position: relative;
+      height: 28px;
+    }
+    .scenario-bar-row {
+      position: absolute;
+      left: 0;
+      height: 12px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 0 8px;
+      font-size: 0.58em;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: width 0.8s ease;
+    }
+    .scenario-bar-without {
+      top: 0;
+      background: var(--emr-light-accent);
+      color: var(--emr-primary);
+      opacity: 0.6;
+    }
+    .scenario-bar-with {
+      bottom: 0;
+      background: var(--emr-gradient-primary);
+      color: white;
+      box-shadow: 0 2px 6px rgba(49,130,206,0.3);
+    }
+    .scenario-gain {
+      font-size: 0.72em;
+      font-weight: 800;
+      color: var(--emr-accent);
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+      background: var(--emr-bg-tint);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .ownership-footer {
+      padding: 10px 16px;
+      background: var(--emr-gradient-primary);
+      color: white;
+      border-radius: 10px;
+      font-size: 0.7em;
+      line-height: 1.45;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(26,54,93,0.25);
+    }
+    .ownership-footer strong { color: var(--emr-light-accent); }
+
+    /* SAFE 3-step vertical timeline */
+    .flow-steps {
+      margin-bottom: 12px;
+    }
+    .flow-step {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 14px;
+      background: linear-gradient(135deg, var(--emr-bg-tint) 0%, #ffffff 100%);
+      border: 1.5px solid var(--emr-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(26,54,93,0.06);
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .flow-step:last-child { margin-bottom: 0; }
+    .flow-step-highlight {
+      border-color: var(--emr-accent);
+      background: linear-gradient(135deg, var(--emr-light-accent) 0%, #ffffff 70%);
+      box-shadow: 0 10px 22px rgba(49,130,206,0.22);
+    }
+    .flow-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--emr-gradient-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85em;
+      letter-spacing: -0.02em;
+      box-shadow: 0 4px 10px rgba(26,54,93,0.22);
+      flex-shrink: 0;
+    }
+    .flow-step-highlight .flow-num {
+      background: linear-gradient(135deg, var(--emr-accent) 0%, var(--emr-secondary) 100%);
+      box-shadow: 0 6px 14px rgba(49,130,206,0.4);
+    }
+    .flow-label {
+      font-size: 0.82em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+    .flow-sub {
+      font-size: 0.62em;
+      color: var(--emr-text-muted);
+      line-height: 1.4;
+    }
+
+    /* Perks section — "Why early investors win" */
+    .perks-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.55em;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--emr-accent);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .perks-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--emr-accent), transparent);
+      opacity: 0.35;
+    }
+
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .perk-card {
+      padding: 14px 14px 12px;
+      background: linear-gradient(150deg, #ffffff 0%, var(--emr-bg-tint) 100%);
+      border: 1.5px solid var(--emr-border);
+      border-radius: 14px;
+      box-shadow: 0 6px 14px rgba(26,54,93,0.07);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .perk-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--emr-accent) 0%, var(--emr-secondary) 100%);
+      border-radius: 14px 14px 0 0;
+    }
+    .perk-card::after {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, rgba(49,130,206,0.1), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .perk-icon {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--emr-accent) 0%, var(--emr-secondary) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(49,130,206,0.3);
+    }
+    .perk-icon svg {
+      width: 18px; height: 18px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .perk-title {
+      font-size: 0.82em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 5px;
+      line-height: 1.2;
+    }
+    .perk-desc {
+      font-size: 0.62em;
+      color: var(--emr-text-muted);
+      line-height: 1.45;
+    }
+
+    /* Upgraded footer band */
+    .perks-footer {
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #0f2142 0%, #1a365d 55%, #2b6cb0 130%);
+      color: white;
+      border-radius: 14px;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      align-items: center;
+      box-shadow: 0 12px 28px rgba(15,33,66,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .perks-footer::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(49,130,206,0.3), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .perks-footer-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--emr-light-accent) 0%, #ffffff 100%);
+      color: var(--emr-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1em;
+      box-shadow: 0 4px 12px rgba(190,227,248,0.35);
+      flex-shrink: 0;
+    }
+    .perks-footer-text { line-height: 1.3; }
+    .perks-footer-hero {
+      font-size: 0.82em;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .perks-footer-hero em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--emr-light-accent) 0%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .perks-footer-note {
+      font-size: 0.58em;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.02em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       APPENDIX · PLATFORM GALLERY — soft-light mosaic slides
+       ═══════════════════════════════════════════════════════════ */
+    section.gallery-slide {
+      background: #ffffff;
+    }
+    .gallery-slide .slide-inner {
+      color: var(--emr-primary);
+      position: relative;
+      z-index: 1;
+      padding: 42px 90px 30px;
+    }
+    .gallery-slide::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(49,130,206,0.16) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .gallery-slide::after {
+      content: '';
+      position: absolute;
+      bottom: -120px; left: -100px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(26,54,93,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gallery-slide .slide-label { color: var(--emr-text-muted); }
+    .gallery-slide .slide-label .label-num { color: var(--emr-accent); }
+
+    .gallery-headline {
+      font-size: 1.35em;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--emr-primary);
+      margin-bottom: 2px;
+      margin-top: 0;
+    }
+    .gallery-headline em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--emr-accent) 0%, var(--emr-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gallery-sub {
+      font-size: 0.68em;
+      color: var(--emr-text-muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .gallery-tile { display: flex; flex-direction: column; gap: 10px; }
+    .gallery-frame {
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 22px 46px rgba(15,33,66,0.13),
+        0 6px 16px rgba(15,33,66,0.07),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      border: 1px solid rgba(26,54,93,0.08);
+      aspect-ratio: 2.3 / 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .gallery-chrome {
+      height: 20px;
+      background: linear-gradient(180deg, #edf2f7 0%, #e2e8f0 100%);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .chrome-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .chrome-dot-red { background: #ff5f57; }
+    .chrome-dot-yellow { background: #febc2e; }
+    .chrome-dot-green { background: #28c840; }
+    .chrome-url {
+      margin-left: 10px;
+      font-size: 0.48em;
+      color: #64748b;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      padding: 2px 8px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 100px;
+      line-height: 1.6;
+    }
+    .gallery-img {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+      min-height: 0;
+      padding: 14px;
+      background:
+        radial-gradient(ellipse at top, rgba(49,130,206,0.04), transparent 60%),
+        linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+      cursor: zoom-in;
+      transition: transform 0.18s ease;
+      box-sizing: border-box;
+    }
+    .gallery-img:hover { transform: scale(1.015); }
+
+    /* Click-to-expand lightbox */
+    .gallery-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 23, 41, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 48px 60px;
+      cursor: zoom-out;
+      animation: galleryLightboxFade 0.22s ease-out;
+    }
+    .gallery-lightbox.open { display: flex; }
+    @keyframes galleryLightboxFade { from { opacity: 0; } to { opacity: 1; } }
+    .gallery-lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 14px;
+      box-shadow: 0 40px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
+      cursor: default;
+      animation: galleryLightboxZoom 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    @keyframes galleryLightboxZoom {
+      from { transform: scale(0.94); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .gallery-lightbox-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      line-height: 1;
+      padding: 0;
+    }
+    .gallery-lightbox-close:hover {
+      background: rgba(255,255,255,0.18);
+      transform: scale(1.05);
+    }
+    .gallery-lightbox-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.72);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 7px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .gallery-placeholder {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      margin: 14px;
+      padding: 16px 18px;
+      text-align: center;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(49,130,206,0.08), transparent 60%),
+        linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+    }
+    .gallery-placeholder-icon {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--emr-accent) 0%, var(--emr-secondary) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85em;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(49,130,206,0.3);
+      letter-spacing: -0.02em;
+    }
+    .gallery-placeholder-title {
+      font-size: 0.62em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: -0.01em;
+    }
+    .gallery-placeholder-hint {
+      font-size: 0.46em;
+      color: var(--emr-text-muted);
+      font-weight: 500;
+      line-height: 1.35;
+      max-width: 210px;
+    }
+    .gallery-caption {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 2px;
+    }
+    .gallery-caption-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--emr-light-accent);
+      box-shadow: 0 0 8px rgba(190,227,248,0.7);
+      flex-shrink: 0;
+    }
+    .gallery-caption-dot {
+      background: var(--emr-accent);
+      box-shadow: 0 0 8px rgba(49,130,206,0.45);
+    }
+    .gallery-caption-text {
+      font-size: 0.72em;
+      font-weight: 700;
+      color: var(--emr-primary);
+      letter-spacing: -0.005em;
+      line-height: 1.15;
+    }
+    .gallery-slide .brand-footer { color: var(--emr-text-muted); }
+
+    @media print {
+      .reveal .slides section { page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 1: COVER (premium redesign)
+           ═══════════════════════════════════════════════ -->
+      <section class="cover">
+        <div class="cover-corner tl"></div>
+        <div class="cover-corner tr"></div>
+        <div class="cover-corner bl"></div>
+        <div class="cover-corner br"></div>
+        <div class="slide-inner center">
+          <div class="badge-accent">The AI-Native Hospital OS</div>
+          <img src="assets/logo-horizontal-dark.svg" class="cover-logo" alt="MediMind — The AI-Native Hospital OS">
+          <div class="tagline">The <em>AI-native</em> operating system<br>for the modern hospital.</div>
+          <div class="footer-row">
+            <div><strong>Lasha Khoshtaria</strong> &nbsp;·&nbsp; team@medimind.md</div>
+            <div>Investor Pitch &nbsp;·&nbsp; April 2026</div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Thanks for taking the meeting. I'm Lasha, founder of MediMind. In the next five minutes I'll walk you through why we're building the AI-native hospital — and what $200K lets us do next.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 2: PROBLEM (merged Hook + Crisis)
+           ═══════════════════════════════════════════════ -->
+      <section class="hook-slide">
+        <div class="slide-inner center">
+          <div class="slide-label"><span class="label-num">01</span>THE PROBLEM</div>
+
+          <div class="hook-statement">
+            <span class="hook-numeral" aria-hidden="true">01</span>
+            <h2 class="hook-headline">Practicing medicine without AI is becoming <span class="hook-emphasis">malpractice</span>.</h2>
+          </div>
+
+          <div class="hook-divider" aria-hidden="true"></div>
+
+          <div class="hook-statement">
+            <span class="hook-numeral" aria-hidden="true">02</span>
+            <h2 class="hook-headline">When a patient with ChatGPT knows more than their doctor, it's not a tech gap — <span class="hook-emphasis">it's a crisis.</span></h2>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          The uncomfortable truth. A patient opens ChatGPT today and gets a more thorough second opinion than their physician can deliver in the time allotted. That's not anti-doctor — it's the reality of a system where tooling hasn't caught up to what doctors need. Medicine as practiced today increasingly looks like malpractice compared to what AI already enables. This is the gap we're here to close.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 3: SOLUTION — Palantir-style isometric architecture
+           ═══════════════════════════════════════════════ -->
+      <section>
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">02</span>SOLUTION</div>
+          <h2 class="headline-big" style="font-size: 1.85em; line-height: 1.05;">One hospital. <em>One operating system.</em></h2>
+          <p class="sub-head" style="font-size: 0.88em; margin-top: 6px; max-width: 920px;">Every department. Every workflow. One AI-native codebase, built ground-up on FHIR.</p>
+
+          <div class="arch-wrapper">
+            <svg class="arch-scene" viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1a365d"/>
+                  <stop offset="52%" stop-color="#2b6cb0"/>
+                  <stop offset="100%" stop-color="#3182ce"/>
+                </linearGradient>
+                <linearGradient id="heartFront" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#0f2947"/>
+                  <stop offset="100%" stop-color="#0a1e38"/>
+                </linearGradient>
+                <radialGradient id="heartShine" cx="28%" cy="30%" r="75%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+                  <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                </radialGradient>
+              </defs>
+
+              <g class="top-row">
+                <g class="plate-group" transform="translate(40, 14)">
+                  <polygon class="plate-front" points="0,36 170,36 170,44 0,44"/>
+                  <polygon class="plate-right" points="170,36 195,0 195,8 170,44"/>
+                  <polygon class="plate-top" points="25,0 195,0 170,36 0,36"/>
+                  <g class="icon-stroke" transform="translate(40, 10)"><path d="M3 1 v 6 a 3 3 0 0 0 6 0 v -6"/><path d="M6 10 v 3 a 3 3 0 0 0 6 0 v -3"/><circle cx="12" cy="13" r="1.6"/></g>
+                  <g class="icon-stroke" transform="translate(75, 10)"><circle cx="6" cy="4" r="2.5"/><path d="M1 15 Q 1 9 6 9 Q 11 9 11 15"/></g>
+                  <g class="icon-stroke" transform="translate(108, 10)"><path d="M0 8 h 3 l 2 -4 l 3 8 l 2 -4 h 3"/></g>
+                  <g class="icon-stroke" transform="translate(142, 10)"><rect x="0" y="0" width="11" height="14" rx="1"/><path d="M3 4 h 5 M 3 7 h 5 M 3 10 h 3"/></g>
+                  <text class="plate-label" x="97" y="66">CLINICIANS</text>
+                  <text class="plate-sublabel-inline" x="97" y="78">doctors &amp; nurses</text>
+                </g>
+
+                <g class="plate-group" transform="translate(275, 14)">
+                  <polygon class="plate-front" points="0,36 170,36 170,44 0,44"/>
+                  <polygon class="plate-right" points="170,36 195,0 195,8 170,44"/>
+                  <polygon class="plate-top" points="25,0 195,0 170,36 0,36"/>
+                  <g class="icon-stroke" transform="translate(40, 10)"><rect x="1" y="2" width="10" height="12" rx="1"/><path d="M3 0 h 6 v 3 h -6 z"/><path d="M3 7 h 6 M 3 10 h 4"/></g>
+                  <g class="icon-stroke" transform="translate(75, 10)"><path d="M0 3 v 4 a 6 6 0 0 1 12 0 v 4"/><rect x="0" y="7" width="3" height="6" rx="1"/><rect x="9" y="7" width="3" height="6" rx="1"/></g>
+                  <g class="icon-stroke" transform="translate(108, 10)"><rect x="0" y="0" width="13" height="13" rx="2"/><path d="M3 6 l 3 3 l 5 -5"/></g>
+                  <g class="icon-stroke" transform="translate(144, 10)"><path d="M0 1 h 11 v 8 h -4 l -3 3 v -3 h -4 z"/></g>
+                  <text class="plate-label" x="97" y="66">COORDINATORS</text>
+                  <text class="plate-sublabel-inline" x="97" y="78">admin &amp; operations</text>
+                </g>
+
+                <g class="plate-group" transform="translate(510, 14)">
+                  <polygon class="plate-front" points="0,36 170,36 170,44 0,44"/>
+                  <polygon class="plate-right" points="170,36 195,0 195,8 170,44"/>
+                  <polygon class="plate-top" points="25,0 195,0 170,36 0,36"/>
+                  <g class="icon-stroke" transform="translate(40, 10)"><circle cx="6" cy="4" r="2.5"/><path d="M1 15 Q 1 9 6 9 Q 11 9 11 15"/></g>
+                  <g class="icon-stroke" transform="translate(75, 10)"><rect x="2" y="0" width="9" height="14" rx="1"/><path d="M5 12 h 3"/><path d="M4 1.5 h 5"/></g>
+                  <g class="icon-stroke" transform="translate(108, 10)"><rect x="0" y="2" width="14" height="12" rx="1"/><path d="M0 5 h 14"/><path d="M3 0 v 3 M 11 0 v 3"/><rect x="3" y="8" width="2" height="2"/><rect x="9" y="8" width="2" height="2"/></g>
+                  <g class="icon-stroke" transform="translate(144, 10)"><path d="M3 11 a 4 4 0 0 1 -1 -3 v -1 a 5 5 0 0 1 10 0 v 1 a 4 4 0 0 1 -1 3 z"/><path d="M5 13 a 2 2 0 0 0 4 0"/></g>
+                  <text class="plate-label" x="97" y="66">PATIENTS</text>
+                  <text class="plate-sublabel-inline" x="97" y="78">portal &amp; notifications</text>
+                </g>
+              </g>
+
+              <text class="tier-label" x="360" y="108">SKIN — THE SURFACES OF THE HOSPITAL</text>
+              <text class="flow-annotation" x="360" y="122">— view · edit · write —</text>
+
+              <g class="heart-group" transform="translate(30, 130)">
+                <polygon class="heart-front" points="10,74 670,74 670,92 10,92"/>
+                <polygon class="heart-right" points="670,74 720,0 720,18 670,92"/>
+                <polygon class="heart-top" points="60,0 720,0 670,74 10,74"/>
+                <polygon class="heart-shimmer" points="60,0 720,0 670,74 10,74" fill="url(#heartShine)"/>
+
+                <g transform="translate(95, 10)">
+                  <g class="icon-white"><circle cx="9" cy="5" r="3"/><path d="M3 16 Q 3 10 9 10 Q 15 10 15 16"/></g>
+                  <text class="heart-obj-label" x="9" y="26">Patient</text>
+                </g>
+                <g transform="translate(235, 8)">
+                  <g class="icon-white"><rect x="2" y="2" width="14" height="16" rx="1"/><path d="M5 0 h 8 v 3 h -8 z"/><path d="M5 8 h 8 M 5 11 h 6 M 5 14 h 4"/></g>
+                  <text class="heart-obj-label" x="9" y="26">Encounter</text>
+                </g>
+                <g transform="translate(375, 6)">
+                  <g class="icon-white"><path d="M0 14 v -8 h 6 v -2 h 11 v 10 h -17 z"/><circle cx="3.5" cy="9" r="1.5"/><path d="M6 10 h 11"/></g>
+                  <text class="heart-obj-label" x="9" y="26">Bed</text>
+                </g>
+                <g transform="translate(515, 4)">
+                  <g class="icon-white"><rect x="4" y="0" width="9" height="16" rx="4.5" transform="rotate(35 8.5 8)"/><path d="M8.5 0 L 8.5 16" transform="rotate(35 8.5 8)"/></g>
+                  <text class="heart-obj-label" x="9" y="26">Medication</text>
+                </g>
+
+                <g transform="translate(155, 38)">
+                  <g class="icon-white"><rect x="2" y="0" width="12" height="15" rx="1"/><path d="M5 4 h 6 M 5 7 h 6 M 5 10 h 4"/></g>
+                  <text class="heart-obj-label" x="8" y="25">Claim</text>
+                </g>
+                <g transform="translate(295, 36)">
+                  <g class="icon-white"><path d="M9 0 l 8 3 v 5 a 8 11 0 0 1 -8 10 a 8 11 0 0 1 -8 -10 v -5 z"/><path d="M5 9 l 3 3 l 5 -5"/></g>
+                  <text class="heart-obj-label" x="9" y="25">Coverage</text>
+                </g>
+                <g transform="translate(435, 34)">
+                  <g class="icon-white"><path d="M5 1 v 12 a 4 4 0 0 0 8 0 v -12"/><path d="M3 1 h 12"/><path d="M5 8 h 8"/></g>
+                  <text class="heart-obj-label" x="9" y="25">Specimen</text>
+                </g>
+                <g transform="translate(575, 32)">
+                  <g class="icon-white"><rect x="0" y="0" width="16" height="15" rx="1"/><path d="M4 4 h 8 M 4 7 h 8 M 4 10 h 5"/><circle cx="2" cy="4" r="0.7"/><circle cx="2" cy="7" r="0.7"/><circle cx="2" cy="10" r="0.7"/></g>
+                  <text class="heart-obj-label" x="8" y="25">Order</text>
+                </g>
+              </g>
+
+              <text class="heart-label" x="360" y="238">HEART — THE LIVING HOSPITAL MODEL</text>
+              <text class="heart-sublabel" x="360" y="252">80+ FHIR R4 resources  ·  one living model  ·  ground-up, not an API layer</text>
+              <text class="flow-annotation" x="360" y="272">— reason · act · remember —</text>
+
+              <g class="bottom-row">
+                <!-- BRAIN — AI reasoning across the Heart -->
+                <g class="plate-group" transform="translate(40, 304)">
+                  <polygon class="plate-front" points="0,36 170,36 170,44 0,44"/>
+                  <polygon class="plate-right" points="170,36 195,0 195,8 170,44"/>
+                  <polygon class="plate-top" points="25,0 195,0 170,36 0,36"/>
+                  <g class="icon-stroke" transform="translate(40, 10)"><path d="M7 1 a 3 3 0 0 0 -6 2 a 3 3 0 0 0 1 5 a 3 3 0 0 0 5 3 a 3 3 0 0 0 5 -3 a 3 3 0 0 0 1 -5 a 3 3 0 0 0 -6 -2 z"/><path d="M7 4 v 8"/></g>
+                  <g class="icon-stroke" transform="translate(75, 10)"><circle cx="2" cy="2" r="1.5"/><circle cx="11" cy="2" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="11" cy="12" r="1.5"/><circle cx="6.5" cy="7" r="1.5"/><path d="M3.5 2 L 5.5 6 M 9.5 2 L 7.5 6 M 3.5 12 L 5.5 8 M 9.5 12 L 7.5 8"/></g>
+                  <g class="icon-stroke" transform="translate(108, 10)"><path d="M6 2 l 1 3 l 3 1 l -3 1 l -1 3 l -1 -3 l -3 -1 l 3 -1 z"/><path d="M1 11 l 0.5 1.5 l 1.5 0.5 l -1.5 0.5 l -0.5 1.5 l -0.5 -1.5 l -1.5 -0.5 l 1.5 -0.5 z"/></g>
+                  <g class="icon-stroke" transform="translate(144, 10)"><path d="M0 1 h 11 v 8 h -4 l -3 3 v -3 h -4 z"/><circle cx="3" cy="5" r="0.7"/><circle cx="5.5" cy="5" r="0.7"/><circle cx="8" cy="5" r="0.7"/></g>
+                  <text class="plate-label" x="97" y="66">AI-BRAIN</text>
+                  <text class="plate-sublabel-inline" x="97" y="78">reasons across the Heart</text>
+                </g>
+
+                <!-- MUSCLE — actions into the real world -->
+                <g class="plate-group" transform="translate(275, 304)">
+                  <polygon class="plate-front" points="0,36 170,36 170,44 0,44"/>
+                  <polygon class="plate-right" points="170,36 195,0 195,8 170,44"/>
+                  <polygon class="plate-top" points="25,0 195,0 170,36 0,36"/>
+                  <g class="icon-stroke" transform="translate(40, 10)"><path d="M0 7 h 12"/><path d="M8 3 l 4 4 l -4 4"/></g>
+                  <g class="icon-stroke" transform="translate(75, 10)"><circle cx="3" cy="3" r="2"/><circle cx="11" cy="11" r="2"/><circle cx="3" cy="11" r="2"/><path d="M4 4 l 6 6"/></g>
+                  <g class="icon-stroke" transform="translate(108, 10)"><path d="M0 6 l 13 -5 l -5 13 l -2 -5 z"/><path d="M3 6 l 4 4"/></g>
+                  <g class="icon-stroke" transform="translate(144, 10)"><circle cx="6" cy="7" r="1.5"/><path d="M3 4 a 4 4 0 0 0 0 6 M 9 4 a 4 4 0 0 1 0 6 M 1 2 a 7 7 0 0 0 0 10 M 11 2 a 7 7 0 0 1 0 10"/></g>
+                  <text class="plate-label" x="97" y="66">MUSCLE</text>
+                  <text class="plate-sublabel-inline" x="97" y="78">acts on the real world</text>
+                </g>
+
+                <!-- NERVE — events, audit, provenance, real-time signals -->
+                <g class="plate-group" transform="translate(510, 304)">
+                  <polygon class="plate-front" points="0,36 170,36 170,44 0,44"/>
+                  <polygon class="plate-right" points="170,36 195,0 195,8 170,44"/>
+                  <polygon class="plate-top" points="25,0 195,0 170,36 0,36"/>
+                  <g class="icon-stroke" transform="translate(40, 10)"><path d="M0 7 L 2 7 L 4 3 L 6 11 L 8 7 L 10 7 L 12 4 L 14 7"/></g>
+                  <g class="icon-stroke" transform="translate(75, 10)"><rect x="2" y="0" width="12" height="14" rx="1"/><path d="M5 4 h 7 M 5 7 h 7 M 5 10 h 4"/><circle cx="3.5" cy="4" r="0.5"/><circle cx="3.5" cy="7" r="0.5"/><circle cx="3.5" cy="10" r="0.5"/></g>
+                  <g class="icon-stroke" transform="translate(108, 10)"><path d="M7 0 L 13 3 v 4 c 0 4 -3 7 -6 8 c -3 -1 -6 -4 -6 -8 v -4 z"/><path d="M4 7 l 2 2 l 4 -4"/></g>
+                  <g class="icon-stroke" transform="translate(144, 10)"><circle cx="7" cy="7" r="6"/><path d="M7 4 v 3 l 2 2"/></g>
+                  <text class="plate-label" x="97" y="66">NERVE</text>
+                  <text class="plate-sublabel-inline" x="97" y="78">feels every change</text>
+                </g>
+              </g>
+            </svg>
+
+            <div class="obj-callout obj-callout-right">
+              <div class="obj-callout-header">
+                <span>Data Flow</span>
+                <span class="obj-callout-id">Live</span>
+              </div>
+              <div class="obj-callout-body">
+                <div class="flow-row"><span class="flow-arrow flow-both">&#x2195;</span><div class="flow-text"><span class="flow-layer">Skin</span><span class="flow-desc">people read &amp; write</span></div></div>
+                <div class="flow-row"><span class="flow-arrow flow-both">&#x2195;</span><div class="flow-text"><span class="flow-layer">AI-Brain</span><span class="flow-desc">AI reasons &amp; writes</span></div></div>
+                <div class="flow-row"><span class="flow-arrow flow-out">&rarr;</span><div class="flow-text"><span class="flow-layer">Muscle</span><span class="flow-desc">sends actions out</span></div></div>
+                <div class="flow-row"><span class="flow-arrow flow-in">&larr;</span><div class="flow-text"><span class="flow-layer">Nerve</span><span class="flow-desc">records every change</span></div></div>
+              </div>
+              <div class="obj-callout-quote">
+                <strong>Heart</strong> is the center.<br/>Everything else flows through it.
+              </div>
+            </div>
+          </div>
+
+          <div class="arch-tagline">Not an EMR. Not an integration layer. <em>The whole thing.</em></div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          One hospital. One operating system. Built ground-up on FHIR R4 — not as an API layer, as the storage primitive. AI is in the architecture — the Brain reasons across the FHIR Heart. The Muscle reaches into MOH, insurance, pharmacy, DICOM, SMS. The Skin is every UI a hospital role touches. The Nerve carries every event and audit signal through the whole body. That's the scope: we replace Epic, Cerner, athena, DeepScribe, Nuance, OpenEMR, and thirty more — in one codebase. Not an EMR. Not an integration layer. The whole thing.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 4: REGULATORY FREEDOM — HEAD START
+           ═══════════════════════════════════════════════ -->
+      <section>
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">03</span>WHY AI-NATIVE WINS</div>
+          <h2 class="headline-big" style="font-size: 2.3em; line-height: 1.1;">Regulatory freedom = <em>years of head start</em>.</h2>
+          <p class="sub-head" style="font-size: 1.05em; margin-top: 10px;">While the West waits for regulation — <strong>we deploy today</strong>.</p>
+
+          <div class="reg-cards">
+            <div class="reg-card" data-num="1">
+              <div class="reg-icon">
+                <svg viewBox="0 0 24 24"><path d="M5 13l-2 7 7-2 11-11a2.83 2.83 0 10-4-4L6 14z"/><path d="M14 6l4 4"/><path d="M9 11l4 4"/></svg>
+              </div>
+              <h3>Ship today</h3>
+              <p>Run AI in <strong>live hospitals now</strong>. U.S. / E.U. competitors stuck in FDA review.</p>
+              <div class="reg-tag">Deployment</div>
+            </div>
+            <div class="reg-card" data-num="2">
+              <div class="reg-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6z"/><path d="M9 12l2 2 4-4"/></svg>
+              </div>
+              <h3>Real-world moat</h3>
+              <p>Every deployment compounds <strong>clinical data, workflows, expertise</strong> — unreplicable post-approval.</p>
+              <div class="reg-tag">Data &amp; expertise</div>
+            </div>
+            <div class="reg-card" data-num="3">
+              <div class="reg-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              </div>
+              <h3>Most tested when West unlocks</h3>
+              <p>When global markets open AI, we arrive <strong>battle-tested</strong> — not Day-1.</p>
+              <div class="reg-tag">Global readiness</div>
+            </div>
+          </div>
+
+          <div class="reg-stats">
+            <div class="reg-stat">
+              <div class="reg-stat-num">25+</div>
+              <div class="reg-stat-label">Hospitals contracted</div>
+            </div>
+            <div class="reg-stat">
+              <div class="reg-stat-num">2 yrs</div>
+              <div class="reg-stat-label">Head start over U.S. / E.U.</div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          This is our unfair advantage. Most investors see "Georgia" and think small market. The right read is regulatory arbitrage. While every U.S. and E.U. AI-medical startup waits in FDA or CE review, we're deploying today. Every day of deployment compounds our clinical data, operational playbook, integration expertise. That moat cannot be replicated by a company that starts two years later. When the West opens AI in medicine, we arrive with a product that's been battle-tested across 25 hospitals and flagged 500+ clinical issues. Not a Day-1 startup — a proven operating system. That's the position.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 6: TEAM — Doctors building for doctors
+           ═══════════════════════════════════════════════ -->
+      <section class="team-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">04</span>TEAM</div>
+          <h2 class="headline-big">We are <em>doctors</em> building for doctors.</h2>
+
+          <div class="team-section">
+            <div class="team-section-label">Founders</div>
+            <div class="founders-grid">
+              <div class="founder-card">
+                <span class="founder-badge">Co-Founder</span>
+                <img class="founder-photo" src="assets/team/lasha.png?v=2" alt="Lasha Khoshtaria">
+                <div class="founder-info">
+                  <h4>Lasha Khoshtaria</h4>
+                  <div class="role">Co-Founder · Clinical-Product</div>
+                  <p class="hook">Physician turned builder — shipping the EMR I wished I had at the bedside.</p>
+                  <div class="chip-row">
+                    <span class="chip">Tbilisi State Medical Univ.</span>
+                    <span class="chip">DevoteAI</span>
+                  </div>
+                </div>
+              </div>
+              <div class="founder-card">
+                <span class="founder-badge">Co-Founder</span>
+                <img class="founder-photo" src="assets/team/irakli-pkh.png?v=2" alt="Irakli Pkhovelishvili">
+                <div class="founder-info">
+                  <h4>Irakli Pkhovelishvili</h4>
+                  <div class="role">Co-Founder · Product &amp; Strategy</div>
+                  <p class="hook">Scaled product at Riot Games to 10M+ players. Now scaling care at the bedside.</p>
+                  <div class="chip-row">
+                    <span class="chip">Duke Fuqua MBA</span>
+                    <span class="chip">Riot Games · PM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="team-section">
+            <div class="team-section-label">Clinical &amp; Strategic Advisory</div>
+            <div class="advisors-grid">
+              <div class="advisor-card is-pilot">
+                <img class="advisor-photo" src="assets/team/gogorishvili.png?v=3" alt="Dr. Irakli Gogorishvili">
+                <h5>Dr. Irakli Gogorishvili, MD, PhD</h5>
+                <p class="role-small">Head of Interventional Cardiology</p>
+                <div class="chip-row">
+                  <span class="chip chip-pilot">Healthycore · Pilot</span>
+                </div>
+              </div>
+              <div class="advisor-card is-pilot">
+                <img class="advisor-photo" src="assets/team/kobalava.png?v=5" alt="Dr. Mamuka Kobalava">
+                <h5>Dr. Mamuka Kobalava, MD, PhD</h5>
+                <p class="role-small">Head of Cardiology</p>
+                <div class="chip-row">
+                  <span class="chip chip-pilot">Healthycore · Pilot</span>
+                </div>
+              </div>
+              <div class="advisor-card">
+                <img class="advisor-photo" src="assets/team/levan.png?v=2" alt="Dr. Levan G.">
+                <h5>Dr. Levan G., MD</h5>
+                <p class="role-small">Head of Surgery · Liver Transplant &amp; HPB</p>
+                <div class="chip-row">
+                  <span class="chip">Liver Research Network</span>
+                  <span class="chip">Univ. of Regensburg</span>
+                </div>
+              </div>
+              <div class="advisor-card">
+                <img class="advisor-photo" src="assets/team/felipe.png?v=2" alt="Felipe Infante de Castro">
+                <h5>Felipe Infante de Castro</h5>
+                <p class="role-small">Strategic Advisor · US GTM &amp; Fundraising</p>
+                <div class="chip-row">
+                  <span class="chip">Harvard HBS</span>
+                  <span class="chip">Distillery</span>
+                </div>
+              </div>
+              <div class="advisor-card">
+                <img class="advisor-photo" src="assets/team/tornike.png?v=2" alt="Tornike Phkhovelishvili">
+                <h5>Tornike Phkhovelishvili</h5>
+                <p class="role-small">Strategic Advisor · Regional Ecosystem</p>
+                <div class="chip-row">
+                  <span class="chip">Univ. of Tartu</span>
+                  <span class="chip">Radiusi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="team-closer">
+            They use the product. They break it. They shape it. <em>Clinical depth × technical depth.</em>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          The team is the reason we can execute this. I'm a physician — my co-founder Irakli comes from Riot Games where he led product for TeamFight Tactics. Clinical context plus product-at-scale experience. Our advisory isn't decorative: Dr. Gogorishvili heads interventional cardiology at Healthycore — our active pilot site. Dr. Kobalava heads cardiology there. They use the product daily. They break it. They shape it. On surgical and transplant depth we have Dr. Levan — Head of Surgery, HPB and liver transplant surgeon, founder of Liver Research Network, University of Regensburg. On GTM and fundraising we're advised by Felipe Infante de Castro — HBS, Distillery. On regional ecosystem we work with Tornike Phkhovelishvili — University of Tartu, co-founder of Radiusi coworking. Clinical depth × technical depth × GTM depth — that's the shape of team this takes.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 5: AMBITION (combined Market + Where we're going)
+           ═══════════════════════════════════════════════ -->
+      <section>
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">05</span>AMBITION</div>
+          <h2 class="ambition-headline" style="font-size: 2.8em;"><span class="h-home">Georgia.</span> <span class="h-region">Region.</span> <span class="h-global">Global.</span></h2>
+          <p class="ambition-tagline">Among the first <strong>AI-native medical platforms</strong> in the world — <strong>global-ready from the core</strong>.</p>
+
+          <div class="ambition-cards" style="margin-top: 22px;">
+            <div class="ambition-card ambition-card-1">
+              <div class="stage-label">Stage 1 · Home</div>
+              <div class="stage-title">Georgia</div>
+              <div class="stage-subtitle">Year 1 – 2 · Dominate home market</div>
+              <div class="stage-stat">
+                <span class="stage-stat-value">3 → 22</span>
+                <span class="stage-stat-label">hospitals by Y4</span>
+              </div>
+              <p class="stage-body">Elevate outdated local systems to <strong>world-leading standards</strong>. Category leadership within a year.</p>
+            </div>
+
+            <div class="ambition-card ambition-card-2">
+              <div class="stage-label">Stage 2 · Expansion</div>
+              <div class="stage-title">Region</div>
+              <div class="stage-subtitle">Year 2 – 4 · Replicate the playbook</div>
+              <div class="stage-stat">
+                <span class="stage-stat-value">9 countries</span>
+                <span class="stage-stat-label">· 236 hosp · <strong style="color: var(--emr-accent);">$10.2M ARR</strong></span>
+              </div>
+              <p class="stage-body">Natural expansion across <strong>post-Soviet + CEE</strong>. Georgian experience translates directly.</p>
+            </div>
+
+            <div class="ambition-card ambition-card-3">
+              <div class="stage-label">Stage 3 · Global</div>
+              <div class="stage-title">U.S. + E.U.</div>
+              <div class="stage-subtitle">Year 4+ · Arrive battle-tested</div>
+              <div class="stage-stat">
+                <span class="stage-stat-value">$45B TAM</span>
+                <span class="stage-stat-label">· FHIR-native from day 1</span>
+              </div>
+              <p class="stage-body">Built to <strong>FHIR R4, SMART-on-FHIR, OAuth 2.0</strong>. When the West opens AI, we arrive with years of proof.</p>
+            </div>
+          </div>
+
+          <div class="combined-ramp">
+            <span class="combined-ramp-label">4-Year Ramp</span>
+            <div class="combined-ramp-years">
+              <div class="ramp-year-node"><span class="ramp-year-num">3</span><span class="ramp-year-lbl">Y1</span></div>
+              <span class="combined-ramp-arrow">→</span>
+              <div class="ramp-year-node"><span class="ramp-year-num">34</span><span class="ramp-year-lbl">Y2</span></div>
+              <span class="combined-ramp-arrow">→</span>
+              <div class="ramp-year-node"><span class="ramp-year-num">137</span><span class="ramp-year-lbl">Y3</span></div>
+              <span class="combined-ramp-arrow">→</span>
+              <div class="ramp-year-node"><span class="ramp-year-num">236</span><span class="ramp-year-lbl">Y4</span></div>
+            </div>
+            <span class="combined-ramp-tag">$10.2M ARR · 9 countries</span>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Our ambition, tied to our market plan. Three stages. Stage 1 — Georgia: we elevate outdated local systems to world-leading standards. Three hospitals Year 1, twenty-two by Y4. Category leadership at home within a year. Stage 2 — region: we expand across post-Soviet and CEE markets. Nine countries total, 236 hospitals, $10.2M annual recurring revenue by Year 4. Stage 3 — U.S. and E.U.: the key point. We built MediMind from day 1 on FHIR R4, SMART-on-FHIR, OAuth 2.0 — the exact standards U.S. and E.U. hospitals demand. We aren't a regional product we'll someday try to export. We're a globally-compliant product we're growing regionally while the West sorts out AI regulation. When those markets open, we arrive with the most tested AI-medical product in the category. That's the plan.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 8: PROGRESS / TIMELINE
+           ═══════════════════════════════════════════════ -->
+      <section>
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">06</span>PROGRESS MADE</div>
+          <h2 class="headline-big" style="font-size: 2.1em; line-height: 1.15;">Built, shipped, signed — <em>25 hospitals in 13 months</em>.</h2>
+
+          <div class="timeline-list">
+            <div class="tl-phase">
+              <div class="tl-phase-label">Foundation · 2025</div>
+              <div class="tl-phase-line"></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-date">March 2025</div>
+              <div class="tl-desc">Started with the idea.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-date">May – Sept 2025</div>
+              <div class="tl-desc">First cardiology pilot (<strong>50 testers</strong>) → <strong>$150K Gita grant</strong>.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-date">Oct – Nov 2025</div>
+              <div class="tl-desc">Pivoted to full AI-native ecosystem + <strong>FHIR &amp; international standards</strong>.</div>
+            </div>
+
+            <div class="tl-phase">
+              <div class="tl-phase-label">Recognition · Early 2026</div>
+              <div class="tl-phase-line"></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-date">January 2026</div>
+              <div class="tl-desc">LOI signed with hospital chain — <strong>25 hospitals</strong>.</div>
+            </div>
+            <div class="tl-item award">
+              <div class="tl-date">February 2026</div>
+              <div class="tl-desc"><span class="tl-badge">★ Award</span><strong>"Innovative Startup"</strong> — Government of Georgia · Healthycore pilot live.</div>
+            </div>
+
+            <div class="tl-phase">
+              <div class="tl-phase-label">Scale · Mid 2026+</div>
+              <div class="tl-phase-line"></div>
+            </div>
+            <div class="tl-item highlight">
+              <div class="tl-date">April 2026</div>
+              <div class="tl-desc"><strong>Contract signed</strong> with the 25-hospital chain.<span class="tl-star">★</span></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-date">August 2026</div>
+              <div class="tl-desc">Full go-live — 25 hospitals (planned).</div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Thirteen months of progress. Started as an idea last March. Built a cardiology pilot with 50 doctors in May. Won a 150K grant in September — validated clinical readiness. Pivoted to the full ecosystem in October. Adopted FHIR and international standards in November for global readiness. Signed an LOI with a 25-hospital chain in January. In February we were awarded "Innovative Startup" status by the Government of Georgia — one of the first companies in the country to get it. That's the government's validation on top of the clinical validation. Signed the actual 25-hospital contract in April. Full go-live August. This is what momentum looks like.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 7: THE ASK (3-station journey)
+           ═══════════════════════════════════════════════ -->
+      <section>
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">07</span>THE ASK</div>
+          <h2 class="headline-big" style="font-size: 2.2em;"><em>$200K</em> pre-seed. Cover Georgia. Start regional.</h2>
+
+          <div class="ask-journey">
+            <!-- Station 1: Now -->
+            <div class="journey-station now">
+              <div class="station-phase">Today</div>
+              <div class="station-headline">Live &amp; growing</div>
+              <ul class="station-bullets">
+                <li><strong>25-hospital</strong> contract signed</li>
+                <li><strong>Healthycore</strong> pilot live</li>
+                <li><strong>Gov</strong> recognition + $150K grant</li>
+              </ul>
+            </div>
+
+            <div class="journey-arrow">→</div>
+
+            <!-- Station 2: Raise (HERO) -->
+            <div class="journey-station hero">
+              <div class="station-phase">We are raising</div>
+              <div class="station-hero-value">$200K</div>
+              <div class="station-hero-sub">pre-seed · SAFE · $5M cap</div>
+              <div class="station-divider"></div>
+              <div class="station-sub-label">Milestone · 12–18 mo</div>
+              <div class="station-sub-value">30 Georgian contracts</div>
+              <div class="station-sub-desc">Full market + regional launch</div>
+            </div>
+
+            <div class="journey-arrow">→</div>
+
+            <!-- Station 3: Unlocks -->
+            <div class="journey-station unlock">
+              <div class="station-phase">Unlocks</div>
+              <div class="station-headline">Seed-ready</div>
+              <ul class="station-bullets">
+                <li><strong>Georgian leader</strong> — full coverage</li>
+                <li><strong>Regional launch</strong> — 2–3 countries</li>
+                <li><strong>Series A pipeline</strong> — metrics-proven</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ask-funds">
+            <div class="funds-header">
+              <span class="funds-label">Use of funds</span>
+              <span class="funds-total">$200K total</span>
+            </div>
+            <div class="funds-bar">
+              <div class="funds-segment team" style="width: 45%;">Team 45% · $90K</div>
+              <div class="funds-segment gtm" style="width: 25%;">GTM 25% · $50K</div>
+              <div class="funds-segment rd" style="width: 15%;">R&amp;D 15%</div>
+              <div class="funds-segment legal" style="width: 10%;">Legal 10%</div>
+              <div class="funds-segment buffer" style="width: 5%;">5%</div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          The ask. $200K pre-seed round. SAFE with a $5M valuation cap. What it buys, concretely: 30 Georgian contracts signed and implemented in the next 12-18 months. That makes us the category leader at home, launches our post-Soviet regional expansion with 2-3 country partnerships active, and gets us to metrics-proven Seed-ready status. Use of funds: 45% team and senior contractors, 25% go-to-market, 15% R&D and AI infrastructure, 10% legal and regulatory groundwork for new countries, 5% ops and buffer. Next slide shows what that means for you as an investor in plain English.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 11: CONVERTIBLE NOTE + OWNERSHIP MATH
+           ═══════════════════════════════════════════════ -->
+      <section>
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">08</span>WHAT YOU'RE INVESTING IN</div>
+          <h2 class="headline-big" style="font-size: 1.9em; line-height: 1.15;">Early money. <em>Better terms</em> than whoever comes next.</h2>
+
+          <div class="terms-layout">
+            <div class="terms-box">
+              <div class="terms-eyebrow">Pre-seed · Deal terms</div>
+              <div class="terms-hero-val">$200K</div>
+              <div class="terms-hero-sub">Round size — what we're raising</div>
+
+              <div class="terms-divider"></div>
+
+              <div class="terms-grid">
+                <div class="term-item">
+                  <div class="term-dot"></div>
+                  <div class="term-content">
+                    <div class="term-label">Instrument</div>
+                    <div class="term-text">SAFE / Note</div>
+                  </div>
+                </div>
+                <div class="term-item">
+                  <div class="term-dot"></div>
+                  <div class="term-content">
+                    <div class="term-label">Price</div>
+                    <div class="term-text">Set at next round</div>
+                  </div>
+                </div>
+                <div class="term-item">
+                  <div class="term-dot"></div>
+                  <div class="term-content">
+                    <div class="term-label">Your advantage</div>
+                    <div class="term-text">Cap + discount</div>
+                  </div>
+                </div>
+                <div class="term-item">
+                  <div class="term-dot"></div>
+                  <div class="term-content">
+                    <div class="term-label">Investor rights</div>
+                    <div class="term-text">Pro-rata + MFN</div>
+                  </div>
+                </div>
+                <div class="term-item">
+                  <div class="term-dot"></div>
+                  <div class="term-content">
+                    <div class="term-label">Horizon</div>
+                    <div class="term-text">12–18 months</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="terms-footer-badge">Y Combinator SAFE · Industry Standard</div>
+            </div>
+
+            <div>
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <div class="flow-num">1</div>
+                  <div>
+                    <div class="flow-label">You invest today</div>
+                    <div class="flow-sub">Money wired, SAFE signed. No valuation negotiated.</div>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <div class="flow-num">2</div>
+                  <div>
+                    <div class="flow-label">We raise our next priced round</div>
+                    <div class="flow-sub">Seed / Series A, 12–18 months out. Lead investor sets the price.</div>
+                  </div>
+                </div>
+                <div class="flow-step flow-step-highlight">
+                  <div class="flow-num">3</div>
+                  <div>
+                    <div class="flow-label">Your SAFE converts — at preferred terms</div>
+                    <div class="flow-sub">You get shares at a better price than new investors pay.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="perks-heading">Why early investors win</div>
+              <div class="perks-grid">
+                <div class="perk-card">
+                  <div class="perk-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9.5c-4.5-1-8-4.5-8-9.5V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+                  </div>
+                  <div class="perk-title">Valuation cap</div>
+                  <div class="perk-desc">Upside protection — if we grow fast, you still convert at the early-stage price.</div>
+                </div>
+                <div class="perk-card">
+                  <div class="perk-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 15l6-6"/><circle cx="9.5" cy="9.5" r="1.5"/><circle cx="14.5" cy="14.5" r="1.5"/><path d="M20 12l-3-3-2 2-3-3-3 3-2-2-3 3 3 3 2-2 3 3 3-3 2 2z" opacity="0.4"/></svg>
+                  </div>
+                  <div class="perk-title">Discount</div>
+                  <div class="perk-desc">More shares per dollar than whoever invests at the next priced round.</div>
+                </div>
+                <div class="perk-card">
+                  <div class="perk-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3l2.5 6 6.5 0.8-5 4.5 1.5 6.7-5.5-3.5-5.5 3.5 1.5-6.7-5-4.5 6.5-0.8z"/></svg>
+                  </div>
+                  <div class="perk-title">Pro-rata + MFN</div>
+                  <div class="perk-desc">Keep your share in future rounds. Later SAFE gets better terms? Yours auto-matches.</div>
+                </div>
+              </div>
+
+              <div class="perks-footer">
+                <div class="perks-footer-icon">★</div>
+                <div class="perks-footer-text">
+                  <div class="perks-footer-hero">Better terms than <em>anyone who comes after you.</em></div>
+                  <div class="perks-footer-note">Specific cap and discount finalized with our lead investor.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          This is a SAFE — Simple Agreement for Future Equity, Y Combinator template, industry standard. Three-step story. You invest $200K today. We don't argue valuation now — that's the whole point of this instrument. In 12 to 18 months we raise our next priced round, Seed or Series A, where a lead investor does full diligence and sets the price properly. At that moment your SAFE converts into shares automatically. And because you came in early, you get two forms of protection: a valuation cap, which is a ceiling on the price you convert at, and a discount versus what new investors pay. Plus pro-rata and MFN as standard. The exact cap and discount get negotiated with our lead — no serious round prices itself without a lead investor doing that work. What you're buying today is the right to convert on better terms than anyone who shows up after you. Early risk, early reward. Happy to walk through any of it.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           APPENDIX A1: PLATFORM GALLERY — AI-NATIVE
+           Replace each .gallery-placeholder block with:
+             <img class="gallery-img" src="assets/screenshots/<name>.png" alt="">
+           Target export: 2560×1440 PNG (2× of 1280×720 canvas)
+           ═══════════════════════════════════════════════ -->
+      <section class="gallery-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">A1</span>APPENDIX · PLATFORM</div>
+          <h2 class="gallery-headline">AI-native <em>from day one.</em></h2>
+          <div class="gallery-sub">Ambient scribe, clinical chat, and auto-drafted notes — built in, not bolted on.</div>
+
+          <div class="gallery-grid">
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/mediscribe</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/mediscribe.png" alt="MediMind ambient AI scribe recording screen">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Ambient AI scribe</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/research</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/research.png" alt="MediMind Research & scanning">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Research & scanning</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/ai-assistant</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/ai-chat.png" alt="MediMind Clinical AI Assistant chat">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Clinical AI chat</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/patient-history/history</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/patient-360.png" alt="MediMind Patient 360 clinical dashboard">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Patient 360 view</span></div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Appendix A1 — AI-native moments. Four tiles: ambient scribe mid-recording with live Georgian + English transcription, the research & scanning feature, the clinical AI chat with cited sources and per-case memory, and the Patient 360 dashboard with AI summary. Point: AI isn't a feature we added on top — it's how the product works end-to-end.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           APPENDIX A2: PLATFORM GALLERY — CLINICAL DEPTH
+           ═══════════════════════════════════════════════ -->
+      <section class="gallery-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">A2</span>APPENDIX · PLATFORM</div>
+          <h2 class="gallery-headline">Clinical depth, <em>not a veneer.</em></h2>
+          <div class="gallery-sub">Orders, meds, beds, and ministry-grade forms — the daily grind, solved.</div>
+
+          <div class="gallery-grid">
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/patient-history/orders</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/cpoe.png" alt="MediMind unified CPOE orders screen">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Unified orders</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/patient-history/mar</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/mar.png" alt="MediMind Medication Administration Record">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Medication admin</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/patient-hub/bed-board</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/bed-board.png" alt="MediMind interactive bed board">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Live bed board</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/forms/builder</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/form-builder.png" alt="MediMind Golden Form Builder">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Form builder</span></div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Appendix A2 — clinical depth. Four tiles: unified CPOE (labs + meds + imaging + consults in one cart), MAR with barcode verification and high-alert double-check on insulin, interactive floor-plan bed board with drag-drop assignments, and the Golden Form Builder producing ministry-grade paperwork. Point: we aren't a thin UI on top of a database — the clinical workflows are built the way a working clinician needs them.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           APPENDIX A3: PLATFORM GALLERY — OPS + BILLING + IMAGING
+           ═══════════════════════════════════════════════ -->
+      <section class="gallery-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">A3</span>APPENDIX · PLATFORM</div>
+          <h2 class="gallery-headline">Operations, billing, <em>imaging.</em></h2>
+          <div class="gallery-sub">What sits above the clinical stack — and why hospitals actually sign.</div>
+
+          <div class="gallery-grid">
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/command-center</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/command-center.png" alt="MediMind Hospital Command Center">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Command center</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/dashboard/financial</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/revenue-cycle.png" alt="MediMind Revenue Cycle dashboard">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Revenue cycle</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/coordinator</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/coordinator.png" alt="MediMind Patient Coordinator workspace">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Coordinator hub</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/imaging/dicom</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/dicom.png" alt="MediMind DICOM PACS viewer">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">DICOM viewer</span></div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Appendix A3 — operations, billing, imaging. Four tiles: hospital command center (real-time occupancy, ED boarding alerts, discharge queue), revenue cycle dashboard for the CFO view (DSO, AR aging, payer mix, denials), patient coordinator hub (pre-op, insurance, funding, debt), and an in-browser DICOM viewer with CAD-RADS scoring. Point: hospitals don't sign EMRs that can't run operations or get paid — MediMind does both, and the imaging viewer removes another standalone license they'd otherwise need.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           APPENDIX A4: PLATFORM GALLERY — SPECIALIZED MODULES
+           ═══════════════════════════════════════════════ -->
+      <section class="gallery-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">A4</span>APPENDIX · PLATFORM</div>
+          <h2 class="gallery-headline">Specialized modules, <em>shipped.</em></h2>
+          <div class="gallery-sub">Laboratory, nursing, handoffs, ministry submission — the rest of the surface area.</div>
+
+          <div class="gallery-grid">
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/laboratory</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/laboratory.png" alt="MediMind Laboratory module">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Laboratory</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/nursing-station</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/nursing.png" alt="MediMind Nursing Workstation">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Nursing workstation</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/handoff</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/handoff.png" alt="MediMind Shift Handoff SBAR">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Shift handoff</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/moh</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/moh.png" alt="MediMind MOH Gov-EHR submission">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">MOH submission</span></div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Appendix A4 — specialized modules. Four tiles: the laboratory module (orders, results, specimen tracking), nursing workstation (mobile-first, offline-capable, department bed grid), shift handoff with SBAR structure and live event alerts, and Ministry-of-Health submission queue with code mapping for regulatory compliance. Point: this is the surface area competitors haven't built yet — and it's why hospitals switch.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Click-to-expand lightbox for gallery screenshots -->
+  <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Expanded screenshot">
+    <button class="gallery-lightbox-close" type="button" aria-label="Close" onclick="closeGalleryLightbox()">×</button>
+    <img id="gallery-lightbox-img" src="" alt="">
+    <div class="gallery-lightbox-caption" id="gallery-lightbox-caption"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      width: 1280,
+      height: 720,
+      margin: 0,
+      controls: true,
+      progress: true,
+      slideNumber: false,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      keyboard: true,
+      overview: true,
+      touch: true,
+      center: false
+    });
+
+    // Brand footer is now inlined directly in each section's HTML — see <a class="brand-footer"> tags.
+
+    // Gallery lightbox — click any screenshot to expand fullscreen
+    (function() {
+      const lb = document.getElementById('gallery-lightbox');
+      const lbImg = document.getElementById('gallery-lightbox-img');
+      const lbCap = document.getElementById('gallery-lightbox-caption');
+
+      function openLightbox(src, alt, caption) {
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lbCap.textContent = caption || '';
+        lb.classList.add('open');
+      }
+
+      window.closeGalleryLightbox = function() {
+        lb.classList.remove('open');
+        setTimeout(() => { lbImg.src = ''; }, 250);
+      };
+
+      document.querySelectorAll('.gallery-img').forEach(img => {
+        img.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // Find the caption in the same tile for the lightbox subtitle
+          const tile = img.closest('.gallery-tile');
+          const capEl = tile ? tile.querySelector('.gallery-caption-text') : null;
+          const caption = capEl ? capEl.textContent.trim() : '';
+          openLightbox(img.src, img.alt, caption);
+        });
+      });
+
+      // Close when clicking the dark backdrop (but not the image itself)
+      lb.addEventListener('click', (e) => {
+        if (e.target === lb) closeGalleryLightbox();
+      });
+
+      // Escape closes lightbox (intercept before Reveal's overview-toggle)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lb.classList.contains('open')) {
+          e.stopPropagation();
+          closeGalleryLightbox();
+        }
+      }, true);
+    })();
+  </script>
+</body>
+</html>
