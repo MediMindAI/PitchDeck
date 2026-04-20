@@ -1140,6 +1140,177 @@
       text-transform: uppercase;
     }
 
+    /* ─── SLIDE 6: PROGRESS — TWO-YEAR SPLIT + FOOTER STATS ─ */
+    .progress-years {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 26px;
+      border-top: 1px solid var(--emr-border);
+      border-bottom: 1px solid var(--emr-border);
+      border-radius: 2px;
+    }
+    .progress-year {
+      padding: 22px 30px 20px;
+      position: relative;
+    }
+    .progress-year-2025 {
+      border-right: 1px solid var(--emr-border);
+    }
+    .progress-year-2026 {
+      background: linear-gradient(180deg, rgba(49,130,206,0.04) 0%, rgba(190,227,248,0.08) 100%);
+    }
+    .py-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--emr-light-accent);
+    }
+    .py-year {
+      font-size: 2em;
+      font-weight: 900;
+      color: var(--emr-primary);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .progress-year-2026 .py-year {
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .py-label {
+      font-size: 0.6em;
+      font-weight: 700;
+      color: var(--emr-accent);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+    .py-items {
+      display: grid;
+      gap: 10px;
+    }
+    .py-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 16px;
+      align-items: baseline;
+      padding: 6px 0;
+      line-height: 1.35;
+    }
+    .py-month {
+      font-size: 0.7em;
+      font-weight: 800;
+      color: var(--emr-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .py-desc {
+      font-size: 0.88em;
+      font-weight: 500;
+      color: var(--emr-text-body);
+    }
+    .py-desc strong {
+      color: var(--emr-primary);
+      font-weight: 700;
+    }
+    .py-item-award {
+      border-left: 2px solid var(--emr-accent);
+      background: linear-gradient(90deg, rgba(49,130,206,0.06) 0%, transparent 100%);
+      margin: 0 -14px;
+      padding: 8px 14px 8px 12px;
+      border-radius: 0 10px 10px 0;
+    }
+    .py-item-award .py-month { color: var(--emr-primary); }
+    .py-item-award .py-desc { color: var(--emr-primary); font-weight: 600; }
+    .py-item-hero {
+      background: var(--emr-gradient-primary);
+      color: white;
+      margin: 2px -14px;
+      padding: 12px 14px 12px 16px;
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(26,54,93,0.22);
+      position: relative;
+      overflow: hidden;
+    }
+    .py-item-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 18px 18px;
+      pointer-events: none;
+    }
+    .py-item-hero .py-month {
+      color: var(--emr-light-accent);
+      position: relative; z-index: 1;
+    }
+    .py-item-hero .py-desc {
+      color: white;
+      font-weight: 600;
+      position: relative; z-index: 1;
+    }
+    .py-item-hero .py-desc strong {
+      color: var(--emr-light-accent);
+      font-weight: 800;
+    }
+    .py-star {
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--emr-accent);
+      font-size: 1em;
+      vertical-align: 0;
+    }
+    .py-item-award .py-star { color: var(--emr-primary); }
+    .py-item-hero .py-star { color: var(--emr-light-accent); }
+
+    .progress-footer {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 20px;
+      margin-top: 22px;
+      padding: 14px 24px;
+      background: var(--emr-bg-tint);
+      border-radius: 12px;
+      border: 1px solid var(--emr-light-accent);
+      flex-wrap: nowrap;
+    }
+    .pf-metric {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .pf-num {
+      font-size: 1.35em;
+      font-weight: 900;
+      color: var(--emr-primary);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .pf-num-accent {
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .pf-lbl {
+      font-size: 0.64em;
+      color: var(--emr-text-muted);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pf-sep {
+      font-size: 1em;
+      color: var(--emr-text-light);
+      opacity: 0.5;
+      line-height: 1;
+    }
+
     /* ─── (legacy — kept for older slides that may still use it) */
     .unified-layout {
       display: grid;
@@ -1694,6 +1865,15 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .ambition-headline .h-arrow {
+      color: var(--emr-accent);
+      opacity: 0.45;
+      font-size: 0.72em;
+      font-weight: 500;
+      margin: 0 0.22em;
+      vertical-align: 0.08em;
+      letter-spacing: 0;
+    }
 
     .ambition-cards {
       display: grid;
@@ -1843,8 +2023,8 @@
 
     /* Compact 4-year ramp strip */
     .combined-ramp {
-      margin-top: 16px;
-      padding: 12px 20px;
+      margin-top: 56px;
+      padding: 16px 24px;
       background: var(--emr-bg-subtle);
       border: 1px solid var(--emr-border);
       border-radius: 12px;
@@ -2553,6 +2733,21 @@
     .funds-segment.buffer {
       background: var(--emr-light-accent);
       color: var(--emr-primary);
+    }
+    .funds-outcome {
+      margin-top: 12px;
+      padding: 11px 18px;
+      font-size: 0.72em;
+      color: var(--emr-text-body);
+      background: var(--emr-bg-tint);
+      border-left: 3px solid var(--emr-accent);
+      border-radius: 0 10px 10px 0;
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+    }
+    .funds-outcome strong {
+      color: var(--emr-primary);
+      font-weight: 700;
     }
 
     /* ─── SLIDE 11: CONVERTIBLE NOTE TERMS ────────────── */
@@ -3330,6 +3525,86 @@
     @media print {
       .reveal .slides section { page-break-after: always; }
     }
+    /* ─── APPENDIX DIVIDER SLIDE ──────────────────── */
+    .divider-slide {
+      background: linear-gradient(135deg, #0a1628 0%, #1a365d 45%, #2b6cb0 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .divider-slide::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.09) 1.2px, transparent 1.2px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    .divider-slide::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 15%, rgba(49,130,206,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 55% at 15% 90%, rgba(190,227,248,0.18) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .divider-slide .slide-inner { text-align: center; align-items: center; justify-content: center; }
+    .divider-slide .divider-kicker {
+      font-size: 0.7em;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--emr-light-accent);
+      font-weight: 700;
+      opacity: 0.92;
+      margin-bottom: 26px;
+      position: relative; z-index: 1;
+    }
+    .divider-slide .divider-title {
+      font-size: 5em;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #ffffff;
+      margin: 0 0 20px;
+      position: relative; z-index: 1;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    }
+    .divider-slide .divider-rule {
+      width: 84px;
+      height: 2px;
+      margin: 8px auto 22px;
+      background: linear-gradient(90deg, transparent, var(--emr-light-accent), transparent);
+      position: relative; z-index: 1;
+    }
+    .divider-slide .divider-tag {
+      font-size: 1.05em;
+      color: var(--emr-light-accent);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      position: relative; z-index: 1;
+    }
+    .divider-slide .divider-sub {
+      font-size: 0.85em;
+      color: rgba(255,255,255,0.72);
+      font-weight: 500;
+      margin-top: 8px;
+      letter-spacing: 0.02em;
+      position: relative; z-index: 1;
+    }
+    .divider-slide .divider-arrow {
+      margin-top: 42px;
+      font-size: 2em;
+      color: var(--emr-light-accent);
+      opacity: 0.65;
+      position: relative; z-index: 1;
+      animation: dividerArrowFloat 2.6s ease-in-out infinite;
+    }
+    @keyframes dividerArrowFloat {
+      0%,100% { transform: translateX(0);   opacity: 0.55; }
+      50%     { transform: translateX(6px); opacity: 0.95; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .divider-arrow { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -3368,7 +3643,7 @@
 
           <div class="hook-statement">
             <span class="hook-numeral" aria-hidden="true">01</span>
-            <h2 class="hook-headline">Practicing medicine without AI is becoming <span class="hook-emphasis">malpractice</span>.</h2>
+            <h2 class="hook-headline">In <span class="hook-emphasis">five years</span>, practicing medicine without an AI will be considered <span class="hook-emphasis">malpractice</span>.</h2>
           </div>
 
           <div class="hook-divider" aria-hidden="true"></div>
@@ -3380,7 +3655,7 @@
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          The uncomfortable truth. A patient opens ChatGPT today and gets a more thorough second opinion than their physician can deliver in the time allotted. That's not anti-doctor — it's the reality of a system where tooling hasn't caught up to what doctors need. Medicine as practiced today increasingly looks like malpractice compared to what AI already enables. This is the gap we're here to close.
+          Two uncomfortable truths on a five-year horizon. Practicing medicine without an AI won't just be inefficient in five years — it'll be considered malpractice. And today, a patient opening ChatGPT already gets a more thorough second opinion than their physician can deliver in the time allotted. That's not anti-doctor — it's a system where tooling hasn't caught up to what doctors need. This is the gap we close.
         </aside>
       </section>
 
@@ -3570,16 +3845,16 @@
       <section>
         <div class="slide-inner">
           <div class="slide-label"><span class="label-num">03</span>WHY AI-NATIVE WINS</div>
-          <h2 class="headline-big" style="font-size: 2.3em; line-height: 1.1;">Regulatory freedom = <em>years of head start</em>.</h2>
-          <p class="sub-head" style="font-size: 1.05em; margin-top: 10px;">While the West waits for regulation — <strong>we deploy today</strong>.</p>
+          <h2 class="headline-big" style="font-size: 2.3em; line-height: 1.1;">Georgia's AI-open law = <em>years of head start</em>.</h2>
+          <p class="sub-head" style="font-size: 1.05em; margin-top: 10px;">No FDA. No CE. <strong>We deploy AI in live Georgian hospitals today</strong> — while the West waits.</p>
 
           <div class="reg-cards">
             <div class="reg-card" data-num="1">
               <div class="reg-icon">
                 <svg viewBox="0 0 24 24"><path d="M5 13l-2 7 7-2 11-11a2.83 2.83 0 10-4-4L6 14z"/><path d="M14 6l4 4"/><path d="M9 11l4 4"/></svg>
               </div>
-              <h3>Ship today</h3>
-              <p>Run AI in <strong>live hospitals now</strong>. U.S. / E.U. competitors stuck in FDA review.</p>
+              <h3>Ship in Georgia today</h3>
+              <p>AI runs in <strong>live Georgian hospitals now</strong>. U.S. / E.U. competitors stuck in FDA / CE review.</p>
               <div class="reg-tag">Deployment</div>
             </div>
             <div class="reg-card" data-num="2">
@@ -3722,10 +3997,9 @@
       <section>
         <div class="slide-inner">
           <div class="slide-label"><span class="label-num">05</span>AMBITION</div>
-          <h2 class="ambition-headline" style="font-size: 2.8em;"><span class="h-home">Georgia.</span> <span class="h-region">Region.</span> <span class="h-global">Global.</span></h2>
-          <p class="ambition-tagline">Among the first <strong>AI-native medical platforms</strong> in the world — <strong>global-ready from the core</strong>.</p>
+          <h2 class="ambition-headline" style="font-size: 2.8em;"><span class="h-home">Georgia</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-region">Region</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-global">Global</span></h2>
 
-          <div class="ambition-cards" style="margin-top: 22px;">
+          <div class="ambition-cards" style="margin-top: 32px;">
             <div class="ambition-card ambition-card-1">
               <div class="stage-label">Stage 1 · Home</div>
               <div class="stage-title">Georgia</div>
@@ -3734,7 +4008,6 @@
                 <span class="stage-stat-value">3 → 22</span>
                 <span class="stage-stat-label">hospitals by Y4</span>
               </div>
-              <p class="stage-body">Elevate outdated local systems to <strong>world-leading standards</strong>. Category leadership within a year.</p>
             </div>
 
             <div class="ambition-card ambition-card-2">
@@ -3745,7 +4018,6 @@
                 <span class="stage-stat-value">9 countries</span>
                 <span class="stage-stat-label">· 236 hosp · <strong style="color: var(--emr-accent);">$10.2M ARR</strong></span>
               </div>
-              <p class="stage-body">Natural expansion across <strong>post-Soviet + CEE</strong>. Georgian experience translates directly.</p>
             </div>
 
             <div class="ambition-card ambition-card-3">
@@ -3756,7 +4028,6 @@
                 <span class="stage-stat-value">$45B TAM</span>
                 <span class="stage-stat-label">· FHIR-native from day 1</span>
               </div>
-              <p class="stage-body">Built to <strong>FHIR R4, SMART-on-FHIR, OAuth 2.0</strong>. When the West opens AI, we arrive with years of proof.</p>
             </div>
           </div>
 
@@ -3786,56 +4057,73 @@
       <section>
         <div class="slide-inner">
           <div class="slide-label"><span class="label-num">06</span>PROGRESS MADE</div>
-          <h2 class="headline-big" style="font-size: 2.1em; line-height: 1.15;">Built, shipped, signed — <em>25 hospitals in 13 months</em>.</h2>
+          <h2 class="headline-big" style="font-size: 2em; line-height: 1.1;"><em>13 months.</em> From idea to <em>25-hospital contract.</em></h2>
 
-          <div class="timeline-list">
-            <div class="tl-phase">
-              <div class="tl-phase-label">Foundation · 2025</div>
-              <div class="tl-phase-line"></div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">March 2025</div>
-              <div class="tl-desc">Started with the idea.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">May – Sept 2025</div>
-              <div class="tl-desc">First cardiology pilot (<strong>50 testers</strong>) → <strong>$150K Gita grant</strong>.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">Oct – Nov 2025</div>
-              <div class="tl-desc">Pivoted to full AI-native ecosystem + <strong>FHIR &amp; international standards</strong>.</div>
-            </div>
-
-            <div class="tl-phase">
-              <div class="tl-phase-label">Recognition · Early 2026</div>
-              <div class="tl-phase-line"></div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">January 2026</div>
-              <div class="tl-desc">LOI signed with hospital chain — <strong>25 hospitals</strong>.</div>
-            </div>
-            <div class="tl-item award">
-              <div class="tl-date">February 2026</div>
-              <div class="tl-desc"><span class="tl-badge">★ Award</span><strong>"Innovative Startup"</strong> — Government of Georgia · Healthycore pilot live.</div>
+          <div class="progress-years">
+            <div class="progress-year progress-year-2025">
+              <div class="py-header">
+                <span class="py-year">2025</span>
+                <span class="py-label">Foundation</span>
+              </div>
+              <div class="py-items">
+                <div class="py-item">
+                  <span class="py-month">Mar</span>
+                  <span class="py-desc">Idea born. MediMind concept.</span>
+                </div>
+                <div class="py-item">
+                  <span class="py-month">May</span>
+                  <span class="py-desc">Cardiology pilot · <strong>50 doctors</strong>.</span>
+                </div>
+                <div class="py-item">
+                  <span class="py-month">Sept</span>
+                  <span class="py-desc"><strong>$150K Gita grant</strong> · clinical validation.</span>
+                </div>
+                <div class="py-item">
+                  <span class="py-month">Oct</span>
+                  <span class="py-desc">Pivot to full AI-native + FHIR standards.</span>
+                </div>
+              </div>
             </div>
 
-            <div class="tl-phase">
-              <div class="tl-phase-label">Scale · Mid 2026+</div>
-              <div class="tl-phase-line"></div>
+            <div class="progress-year progress-year-2026">
+              <div class="py-header">
+                <span class="py-year">2026</span>
+                <span class="py-label">Scale</span>
+              </div>
+              <div class="py-items">
+                <div class="py-item">
+                  <span class="py-month">Jan</span>
+                  <span class="py-desc">LOI signed · <strong>25-hospital chain</strong>.</span>
+                </div>
+                <div class="py-item py-item-award">
+                  <span class="py-month">Feb</span>
+                  <span class="py-desc"><span class="py-star">★</span>Gov. <strong>"Innovative Startup"</strong> award.</span>
+                </div>
+                <div class="py-item py-item-hero">
+                  <span class="py-month">Apr</span>
+                  <span class="py-desc"><span class="py-star">★</span><strong>Contract SIGNED</strong> · 25 hospitals.</span>
+                </div>
+                <div class="py-item">
+                  <span class="py-month">Aug</span>
+                  <span class="py-desc">Full go-live · 25 hospitals (planned).</span>
+                </div>
+              </div>
             </div>
-            <div class="tl-item highlight">
-              <div class="tl-date">April 2026</div>
-              <div class="tl-desc"><strong>Contract signed</strong> with the 25-hospital chain.<span class="tl-star">★</span></div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">August 2026</div>
-              <div class="tl-desc">Full go-live — 25 hospitals (planned).</div>
-            </div>
+          </div>
+
+          <div class="progress-footer">
+            <div class="pf-metric"><span class="pf-num">13</span><span class="pf-lbl">months</span></div>
+            <div class="pf-sep" aria-hidden="true">·</div>
+            <div class="pf-metric"><span class="pf-num">25</span><span class="pf-lbl">hospitals signed</span></div>
+            <div class="pf-sep" aria-hidden="true">·</div>
+            <div class="pf-metric"><span class="pf-num">$150K</span><span class="pf-lbl">government grant</span></div>
+            <div class="pf-sep" aria-hidden="true">·</div>
+            <div class="pf-metric"><span class="pf-num pf-num-accent">★ Gov</span><span class="pf-lbl">"Innovative Startup"</span></div>
           </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          Thirteen months of progress. Started as an idea last March. Built a cardiology pilot with 50 doctors in May. Won a 150K grant in September — validated clinical readiness. Pivoted to the full ecosystem in October. Adopted FHIR and international standards in November for global readiness. Signed an LOI with a 25-hospital chain in January. In February we were awarded "Innovative Startup" status by the Government of Georgia — one of the first companies in the country to get it. That's the government's validation on top of the clinical validation. Signed the actual 25-hospital contract in April. Full go-live August. This is what momentum looks like.
+          13 months from idea to contract — and we can prove it. Started as an idea last March. Cardiology pilot with 50 doctors in May. $150K Gita grant in September, validating clinical readiness. Pivoted to the full AI-native ecosystem in October. Adopted FHIR and international standards in November for global readiness. LOI with a 25-hospital chain in January. February: awarded "Innovative Startup" status by the Government of Georgia — one of the first in the country to get it. Government validation on top of clinical validation. Signed the actual 25-hospital contract in April. Full go-live August. This is what momentum looks like.
         </aside>
       </section>
 
@@ -3888,21 +4176,24 @@
 
           <div class="ask-funds">
             <div class="funds-header">
-              <span class="funds-label">Use of funds</span>
-              <span class="funds-total">$200K total</span>
+              <span class="funds-label">What $200K builds</span>
+              <span class="funds-total">$200K · mapped to outcomes</span>
             </div>
             <div class="funds-bar">
-              <div class="funds-segment team" style="width: 45%;">Team 45% · $90K</div>
-              <div class="funds-segment gtm" style="width: 25%;">GTM 25% · $50K</div>
-              <div class="funds-segment rd" style="width: 15%;">R&amp;D 15%</div>
-              <div class="funds-segment legal" style="width: 10%;">Legal 10%</div>
-              <div class="funds-segment buffer" style="width: 5%;">5%</div>
+              <div class="funds-segment team" style="width: 45%;">MediMind OS · $90K</div>
+              <div class="funds-segment gtm" style="width: 25%;">GTM · $50K</div>
+              <div class="funds-segment rd" style="width: 15%;">AI depth · $30K</div>
+              <div class="funds-segment legal" style="width: 10%;">Markets · $20K</div>
+              <div class="funds-segment buffer" style="width: 5%;">$10K</div>
+            </div>
+            <div class="funds-outcome">
+              → <strong>Polished, battle-tested AI-native hospital OS</strong> · <strong>Full Georgian market dominance</strong> · <strong>First regional steps</strong>
             </div>
           </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          The ask. $200K pre-seed round. SAFE with a $5M valuation cap. What it buys, concretely: 30 Georgian contracts signed and implemented in the next 12-18 months. That makes us the category leader at home, launches our post-Soviet regional expansion with 2-3 country partnerships active, and gets us to metrics-proven Seed-ready status. Use of funds: 45% team and senior contractors, 25% go-to-market, 15% R&D and AI infrastructure, 10% legal and regulatory groundwork for new countries, 5% ops and buffer. Next slide shows what that means for you as an investor in plain English.
+          The ask. $200K pre-seed. SAFE with a $5M valuation cap. What $200K builds, three things: a polished, battle-tested AI-native hospital OS, full Georgian market dominance, and our first regional steps. Budget split: MediMind OS $90K, GTM $50K, AI depth $30K, Markets entry $20K, Buffer $10K. That makes us the category leader at home, launches post-Soviet regional expansion, and gets us to metrics-proven Seed-ready status. Next slide shows what this means for you as an investor in plain English.
         </aside>
       </section>
 
@@ -3912,11 +4203,11 @@
       <section>
         <div class="slide-inner">
           <div class="slide-label"><span class="label-num">08</span>WHAT YOU'RE INVESTING IN</div>
-          <h2 class="headline-big" style="font-size: 1.9em; line-height: 1.15;">Early money. <em>Better terms</em> than whoever comes next.</h2>
+          <h2 class="headline-big" style="font-size: 1.9em; line-height: 1.15;">How your $200K <em>becomes equity</em>.</h2>
 
           <div class="terms-layout">
             <div class="terms-box">
-              <div class="terms-eyebrow">Pre-seed · Deal terms</div>
+              <div class="terms-eyebrow">Pre-seed · SAFE terms</div>
               <div class="terms-hero-val">$200K</div>
               <div class="terms-hero-sub">Round size — what we're raising</div>
 
@@ -3940,7 +4231,7 @@
                 <div class="term-item">
                   <div class="term-dot"></div>
                   <div class="term-content">
-                    <div class="term-label">Your advantage</div>
+                    <div class="term-label">Conversion</div>
                     <div class="term-text">Cap + discount</div>
                   </div>
                 </div>
@@ -3982,50 +4273,61 @@
                 <div class="flow-step flow-step-highlight">
                   <div class="flow-num">3</div>
                   <div>
-                    <div class="flow-label">Your SAFE converts — at preferred terms</div>
-                    <div class="flow-sub">You get shares at a better price than new investors pay.</div>
+                    <div class="flow-label">Your SAFE converts to equity</div>
+                    <div class="flow-sub">Automatic conversion at the next priced round — cap and discount applied.</div>
                   </div>
                 </div>
               </div>
 
-              <div class="perks-heading">Why early investors win</div>
+              <div class="perks-heading">Built-in protections</div>
               <div class="perks-grid">
                 <div class="perk-card">
                   <div class="perk-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9.5c-4.5-1-8-4.5-8-9.5V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
                   </div>
                   <div class="perk-title">Valuation cap</div>
-                  <div class="perk-desc">Upside protection — if we grow fast, you still convert at the early-stage price.</div>
+                  <div class="perk-desc">A ceiling on your conversion price. Protects your upside if we grow fast.</div>
                 </div>
                 <div class="perk-card">
                   <div class="perk-icon">
                     <svg viewBox="0 0 24 24"><path d="M9 15l6-6"/><circle cx="9.5" cy="9.5" r="1.5"/><circle cx="14.5" cy="14.5" r="1.5"/><path d="M20 12l-3-3-2 2-3-3-3 3-2-2-3 3 3 3 2-2 3 3 3-3 2 2z" opacity="0.4"/></svg>
                   </div>
                   <div class="perk-title">Discount</div>
-                  <div class="perk-desc">More shares per dollar than whoever invests at the next priced round.</div>
+                  <div class="perk-desc">A percentage off the next round's share price — early-stage recognition.</div>
                 </div>
                 <div class="perk-card">
                   <div class="perk-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 3l2.5 6 6.5 0.8-5 4.5 1.5 6.7-5.5-3.5-5.5 3.5 1.5-6.7-5-4.5 6.5-0.8z"/></svg>
                   </div>
                   <div class="perk-title">Pro-rata + MFN</div>
-                  <div class="perk-desc">Keep your share in future rounds. Later SAFE gets better terms? Yours auto-matches.</div>
+                  <div class="perk-desc">Pro-rata keeps your ownership % in future rounds. MFN auto-matches any better later SAFE terms.</div>
                 </div>
               </div>
 
-              <div class="perks-footer">
-                <div class="perks-footer-icon">★</div>
-                <div class="perks-footer-text">
-                  <div class="perks-footer-hero">Better terms than <em>anyone who comes after you.</em></div>
-                  <div class="perks-footer-note">Specific cap and discount finalized with our lead investor.</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          This is a SAFE — Simple Agreement for Future Equity, Y Combinator template, industry standard. Three-step story. You invest $200K today. We don't argue valuation now — that's the whole point of this instrument. In 12 to 18 months we raise our next priced round, Seed or Series A, where a lead investor does full diligence and sets the price properly. At that moment your SAFE converts into shares automatically. And because you came in early, you get two forms of protection: a valuation cap, which is a ceiling on the price you convert at, and a discount versus what new investors pay. Plus pro-rata and MFN as standard. The exact cap and discount get negotiated with our lead — no serious round prices itself without a lead investor doing that work. What you're buying today is the right to convert on better terms than anyone who shows up after you. Early risk, early reward. Happy to walk through any of it.
+          This slide walks through the instrument. A Y Combinator SAFE — Simple Agreement for Future Equity, the industry standard for pre-seed. Three steps. One: you invest $200K today, SAFE signed — no valuation negotiated, which is the whole point of this instrument. Two: in 12 to 18 months we raise our priced round, Seed or Series A, where a lead investor does full diligence and sets the price. Three: your SAFE converts to equity automatically, adjusted by your cap and discount. The built-in protections are standard: a valuation cap which is a ceiling on your conversion price, a discount recognizing early-stage entry, plus pro-rata to preserve your ownership % and MFN so your terms auto-match any better later SAFE. Specific cap and discount get finalized with our lead investor during the round. Happy to walk through any of it.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           DIVIDER: END OF MAIN DECK — APPENDIX AHEAD
+           ═══════════════════════════════════════════════ -->
+      <section class="divider-slide">
+        <div class="slide-inner center">
+          <div class="divider-kicker">End of main deck</div>
+          <h1 class="divider-title">Thank you.</h1>
+          <div class="divider-rule" aria-hidden="true"></div>
+          <div class="divider-tag">Appendix ahead</div>
+          <div class="divider-sub">Platform screenshots · clinical depth · operations</div>
+          <div class="divider-arrow" aria-hidden="true">→</div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          End of the main deck. Thank you. The slides that follow are appendix material — platform screenshots, clinical depth, operations. Feel free to skim or dwell based on what you want to see more of. Happy to take questions here or between sections.
         </aside>
       </section>
 
@@ -4100,7 +4402,7 @@
         <div class="slide-inner">
           <div class="slide-label"><span class="label-num">A2</span>APPENDIX · PLATFORM</div>
           <h2 class="gallery-headline">Clinical depth, <em>not a veneer.</em></h2>
-          <div class="gallery-sub">Orders, meds, beds, and ministry-grade forms — the daily grind, solved.</div>
+          <div class="gallery-sub">Orders, medications, nursing, and shift handoffs — the frontline clinical workflow, solved.</div>
 
           <div class="gallery-grid">
             <div class="gallery-tile">
@@ -4129,117 +4431,6 @@
               <div class="gallery-frame">
                 <div class="gallery-chrome">
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
-                  <span class="chrome-url">medimind.md/emr/patient-hub/bed-board</span>
-                </div>
-                <img class="gallery-img" src="assets/screenshots/bed-board.png" alt="MediMind interactive bed board">
-              </div>
-              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Live bed board</span></div>
-            </div>
-
-            <div class="gallery-tile">
-              <div class="gallery-frame">
-                <div class="gallery-chrome">
-                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
-                  <span class="chrome-url">medimind.md/emr/forms/builder</span>
-                </div>
-                <img class="gallery-img" src="assets/screenshots/form-builder.png" alt="MediMind Golden Form Builder">
-              </div>
-              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Form builder</span></div>
-            </div>
-          </div>
-        </div>
-        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
-        <aside class="notes">
-          Appendix A2 — clinical depth. Four tiles: unified CPOE (labs + meds + imaging + consults in one cart), MAR with barcode verification and high-alert double-check on insulin, interactive floor-plan bed board with drag-drop assignments, and the Golden Form Builder producing ministry-grade paperwork. Point: we aren't a thin UI on top of a database — the clinical workflows are built the way a working clinician needs them.
-        </aside>
-      </section>
-
-      <!-- ═══════════════════════════════════════════════
-           APPENDIX A3: PLATFORM GALLERY — OPS + BILLING + IMAGING
-           ═══════════════════════════════════════════════ -->
-      <section class="gallery-slide">
-        <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">A3</span>APPENDIX · PLATFORM</div>
-          <h2 class="gallery-headline">Operations, billing, <em>imaging.</em></h2>
-          <div class="gallery-sub">What sits above the clinical stack — and why hospitals actually sign.</div>
-
-          <div class="gallery-grid">
-            <div class="gallery-tile">
-              <div class="gallery-frame">
-                <div class="gallery-chrome">
-                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
-                  <span class="chrome-url">medimind.md/emr/command-center</span>
-                </div>
-                <img class="gallery-img" src="assets/screenshots/command-center.png" alt="MediMind Hospital Command Center">
-              </div>
-              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Command center</span></div>
-            </div>
-
-            <div class="gallery-tile">
-              <div class="gallery-frame">
-                <div class="gallery-chrome">
-                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
-                  <span class="chrome-url">medimind.md/emr/dashboard/financial</span>
-                </div>
-                <img class="gallery-img" src="assets/screenshots/revenue-cycle.png" alt="MediMind Revenue Cycle dashboard">
-              </div>
-              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Revenue cycle</span></div>
-            </div>
-
-            <div class="gallery-tile">
-              <div class="gallery-frame">
-                <div class="gallery-chrome">
-                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
-                  <span class="chrome-url">medimind.md/emr/coordinator</span>
-                </div>
-                <img class="gallery-img" src="assets/screenshots/coordinator.png" alt="MediMind Patient Coordinator workspace">
-              </div>
-              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Coordinator hub</span></div>
-            </div>
-
-            <div class="gallery-tile">
-              <div class="gallery-frame">
-                <div class="gallery-chrome">
-                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
-                  <span class="chrome-url">medimind.md/emr/imaging/dicom</span>
-                </div>
-                <img class="gallery-img" src="assets/screenshots/dicom.png" alt="MediMind DICOM PACS viewer">
-              </div>
-              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">DICOM viewer</span></div>
-            </div>
-          </div>
-        </div>
-        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
-        <aside class="notes">
-          Appendix A3 — operations, billing, imaging. Four tiles: hospital command center (real-time occupancy, ED boarding alerts, discharge queue), revenue cycle dashboard for the CFO view (DSO, AR aging, payer mix, denials), patient coordinator hub (pre-op, insurance, funding, debt), and an in-browser DICOM viewer with CAD-RADS scoring. Point: hospitals don't sign EMRs that can't run operations or get paid — MediMind does both, and the imaging viewer removes another standalone license they'd otherwise need.
-        </aside>
-      </section>
-
-      <!-- ═══════════════════════════════════════════════
-           APPENDIX A4: PLATFORM GALLERY — SPECIALIZED MODULES
-           ═══════════════════════════════════════════════ -->
-      <section class="gallery-slide">
-        <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">A4</span>APPENDIX · PLATFORM</div>
-          <h2 class="gallery-headline">Specialized modules, <em>shipped.</em></h2>
-          <div class="gallery-sub">Laboratory, nursing, handoffs, ministry submission — the rest of the surface area.</div>
-
-          <div class="gallery-grid">
-            <div class="gallery-tile">
-              <div class="gallery-frame">
-                <div class="gallery-chrome">
-                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
-                  <span class="chrome-url">medimind.md/emr/laboratory</span>
-                </div>
-                <img class="gallery-img" src="assets/screenshots/laboratory.png" alt="MediMind Laboratory module">
-              </div>
-              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Laboratory</span></div>
-            </div>
-
-            <div class="gallery-tile">
-              <div class="gallery-frame">
-                <div class="gallery-chrome">
-                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/nursing-station</span>
                 </div>
                 <img class="gallery-img" src="assets/screenshots/nursing.png" alt="MediMind Nursing Workstation">
@@ -4257,6 +4448,56 @@
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Shift handoff</span></div>
             </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Appendix A2 — clinical depth. Four tiles: unified CPOE (labs + meds + imaging + consults in one cart), MAR with barcode verification and high-alert double-check on insulin, full nursing workstation (mobile-first, offline-capable, department bed grid), and shift handoff with SBAR structure and live event alerts. These are the workflows a hospital actually runs on — built the way working clinicians need them.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           APPENDIX A3: PLATFORM GALLERY — DIAGNOSTICS + DOCUMENTATION
+           ═══════════════════════════════════════════════ -->
+      <section class="gallery-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">A3</span>APPENDIX · PLATFORM</div>
+          <h2 class="gallery-headline">Diagnostics and <em>documentation.</em></h2>
+          <div class="gallery-sub">Labs, imaging, clinical forms, and ministry submission — clinical data captured and reported.</div>
+
+          <div class="gallery-grid">
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/laboratory</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/laboratory.png" alt="MediMind Laboratory module">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Laboratory</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/imaging/dicom</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/dicom.png" alt="MediMind DICOM PACS viewer">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">DICOM viewer</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/forms/builder</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/form-builder.png" alt="MediMind Golden Form Builder">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Form builder</span></div>
+            </div>
 
             <div class="gallery-tile">
               <div class="gallery-frame">
@@ -4272,7 +4513,68 @@
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          Appendix A4 — specialized modules. Four tiles: the laboratory module (orders, results, specimen tracking), nursing workstation (mobile-first, offline-capable, department bed grid), shift handoff with SBAR structure and live event alerts, and Ministry-of-Health submission queue with code mapping for regulatory compliance. Point: this is the surface area competitors haven't built yet — and it's why hospitals switch.
+          Appendix A3 — diagnostics and documentation. Four tiles: laboratory module (orders, results, specimen tracking, reference ranges, trends), DICOM imaging viewer with CAD-RADS scoring, Golden Form Builder producing ministry-grade clinical paperwork, and Ministry-of-Health submission queue with ICD / code mapping. The information pipeline of a hospital: clinical data captured cleanly, structured, and reported end-to-end.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           APPENDIX A4: PLATFORM GALLERY — OPERATIONS + FINANCE
+           ═══════════════════════════════════════════════ -->
+      <section class="gallery-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">A4</span>APPENDIX · PLATFORM</div>
+          <h2 class="gallery-headline">Operations and <em>finance.</em></h2>
+          <div class="gallery-sub">Bed management, command center, coordination, and revenue cycle — the hospital running as a business.</div>
+
+          <div class="gallery-grid">
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/patient-hub/bed-board</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/bed-board.png" alt="MediMind interactive bed board">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Live bed board</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/command-center</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/command-center.png" alt="MediMind Hospital Command Center">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Command center</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/coordinator</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/coordinator.png" alt="MediMind Patient Coordinator workspace">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Coordinator hub</span></div>
+            </div>
+
+            <div class="gallery-tile">
+              <div class="gallery-frame">
+                <div class="gallery-chrome">
+                  <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
+                  <span class="chrome-url">medimind.md/emr/dashboard/financial</span>
+                </div>
+                <img class="gallery-img" src="assets/screenshots/revenue-cycle.png" alt="MediMind Revenue Cycle dashboard">
+              </div>
+              <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Revenue cycle</span></div>
+            </div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Appendix A4 — operations and finance. Four tiles: interactive floor-plan bed board with drag-drop admits/discharges, hospital command center (real-time occupancy, ED boarding alerts, discharge queue), patient coordinator hub (pre-op, insurance, funding, debt), and revenue cycle dashboard for the CFO view (DSO, AR aging, payer mix, denials). Hospitals don't sign EMRs that can't run operations or get paid — MediMind does both.
         </aside>
       </section>
 
