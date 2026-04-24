@@ -1140,6 +1140,994 @@
       text-transform: uppercase;
     }
 
+    /* ════════════════════════════════════════════════════════
+       SLIDE 02·5 — CATEGORY · "What we are · Who we aren't"
+       ════════════════════════════════════════════════════════ */
+    .cat-slide .slide-inner { padding: 56px 70px 36px; }
+    .cat-split {
+      display: grid;
+      grid-template-columns: 42% 58%;
+      gap: 48px;
+      margin-top: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Left column — "What we are" (tight hero) */
+    .cat-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+      padding-right: 12px;
+    }
+    .cat-kicker {
+      font-size: 0.62em;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      color: var(--emr-accent);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition-delay: 0.15s;
+    }
+    .cat-slide.present .cat-kicker { opacity: 1; transform: translateY(0); }
+    .cat-display {
+      font-size: 2.3em;
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--emr-text-primary);
+      letter-spacing: -0.015em;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition-delay: 0.30s;
+    }
+    .cat-slide.present .cat-display { opacity: 1; transform: translateY(0); }
+    .cat-display em {
+      font-style: normal;
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cat-qualifiers {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 4px;
+      border-top: 1px solid var(--emr-border);
+    }
+    .cat-qualifier {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--emr-border);
+      font-size: 0.78em;
+      font-weight: 600;
+      color: var(--emr-text-primary);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .cat-slide.present .cat-qualifier { opacity: 1; transform: translateX(0); }
+    .cat-slide.present .cat-qualifier:nth-child(1) { transition-delay: 0.55s; }
+    .cat-slide.present .cat-qualifier:nth-child(2) { transition-delay: 0.65s; }
+    .cat-slide.present .cat-qualifier:nth-child(3) { transition-delay: 0.75s; }
+    .cat-slide.present .cat-qualifier:nth-child(4) { transition-delay: 0.85s; }
+    .cat-qualifier-num {
+      font-size: 0.72em;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--emr-accent);
+      min-width: 24px;
+      font-feature-settings: 'tnum';
+    }
+
+    /* Right column — Competitive terrain */
+    .cat-right {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+    }
+    .cat-terrain {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .cat-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 11px 16px;
+      background: transparent;
+      border-bottom: 1px solid var(--emr-border);
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .cat-row:first-child { border-top: 1px solid var(--emr-border); }
+    .cat-slide.present .cat-row { opacity: 1; transform: translateX(0); }
+    .cat-slide.present .cat-row:nth-child(1) { transition-delay: 0.45s; }
+    .cat-slide.present .cat-row:nth-child(2) { transition-delay: 0.55s; }
+    .cat-slide.present .cat-row:nth-child(3) { transition-delay: 0.65s; }
+    .cat-row-label {
+      font-size: 0.56em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--emr-text-muted);
+      line-height: 1.3;
+    }
+    .cat-row-label em {
+      display: block;
+      font-style: normal;
+      font-weight: 500;
+      color: var(--emr-text-light);
+      letter-spacing: 0.04em;
+      text-transform: none;
+      font-size: 0.88em;
+      margin-top: 2px;
+    }
+    .cat-row-names {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 10px;
+      font-size: 0.72em;
+      color: var(--emr-text-body);
+      font-weight: 500;
+    }
+    .cat-row-names .cat-dot {
+      color: var(--emr-border);
+      font-weight: 700;
+    }
+    .cat-row-names .cat-more {
+      color: var(--emr-text-light);
+      font-size: 0.88em;
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+
+    /* Progression arrow between "they exist" rows and the conclusion */
+    .cat-gap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0 6px;
+      position: relative;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transition-delay: 0.95s;
+    }
+    .cat-slide.present .cat-gap { opacity: 1; }
+    .cat-gap-line {
+      flex: 1;
+      height: 1px;
+      background-image: linear-gradient(to right, var(--emr-border) 50%, transparent 50%);
+      background-size: 6px 1px;
+    }
+    .cat-gap-chip {
+      padding: 3px 12px;
+      margin: 0 10px;
+      font-size: 0.52em;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--emr-accent);
+      background: #ffffff;
+      border: 1px solid var(--emr-accent);
+      border-radius: 999px;
+    }
+
+    /* The conclusion card — MediMind (visually dominant) */
+    .cat-hero {
+      position: relative;
+      padding: 18px 22px 20px;
+      background: var(--emr-gradient-primary);
+      border-radius: 16px;
+      box-shadow: 0 20px 48px rgba(26,54,93,0.38);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition-delay: 1.10s;
+    }
+    .cat-slide.present .cat-hero {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      animation: catGlowPulse 4s ease-in-out 2.2s infinite;
+    }
+    .cat-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    .cat-hero-label {
+      font-size: 0.54em;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .cat-hero-label svg { width: 12px; height: 12px; color: var(--emr-light-accent); fill: var(--emr-light-accent); }
+    .cat-hero-title {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+    .cat-hero-name {
+      font-size: 1.6em;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+    }
+    .cat-hero-sub {
+      font-size: 0.75em;
+      font-weight: 500;
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.02em;
+    }
+    .cat-hero-sub strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .cat-hero-footnote {
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.16);
+      font-size: 0.56em;
+      color: rgba(255,255,255,0.62);
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+    .cat-hero-footnote strong {
+      color: rgba(255,255,255,0.9);
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.92em;
+    }
+    @keyframes catGlowPulse {
+      0%, 100% { box-shadow: 0 20px 48px rgba(26,54,93,0.38); }
+      50%      { box-shadow: 0 22px 60px rgba(49,130,206,0.52); }
+    }
+
+    /* Footer megaline */
+    .cat-footer {
+      margin-top: 18px;
+      padding: 14px 24px 16px;
+      border-top: 1px solid var(--emr-border);
+      position: relative;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition-delay: 1.55s;
+    }
+    .cat-slide.present .cat-footer { opacity: 1; transform: translateY(0); }
+    .cat-footer-line {
+      font-size: 1.55em;
+      font-weight: 800;
+      line-height: 1.18;
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.015em;
+    }
+    .cat-footer-sub {
+      font-size: 0.78em;
+      font-weight: 500;
+      color: var(--emr-text-muted);
+      margin-top: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cat-kicker, .cat-display, .cat-qualifier, .cat-row,
+      .cat-gap, .cat-hero, .cat-footer {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SLIDE 03 — THE GEORGIA WINDOW (replacement)
+       ════════════════════════════════════════════════════════ */
+    .gw-slide .slide-inner { padding: 48px 70px 28px; gap: 0; }
+    .gw-hero { margin-bottom: 2px; }
+    .gw-kicker {
+      font-size: 0.54em;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      color: var(--emr-accent);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transition-delay: 0.10s;
+    }
+    .gw-slide.present .gw-kicker { opacity: 1; }
+    .gw-headline {
+      font-size: 2.15em;
+      font-weight: 800;
+      line-height: 1.06;
+      color: var(--emr-text-primary);
+      letter-spacing: -0.018em;
+      margin: 0 0 6px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition-delay: 0.20s;
+    }
+    .gw-headline em {
+      font-style: normal;
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gw-slide.present .gw-headline { opacity: 1; transform: translateY(0); }
+    .gw-sub {
+      font-size: 0.82em;
+      font-weight: 500;
+      color: var(--emr-text-muted);
+      line-height: 1.4;
+      max-width: 780px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transition-delay: 0.32s;
+    }
+    .gw-slide.present .gw-sub { opacity: 1; }
+
+    /* Timeline — clean grid, no absolute overlap */
+    .gw-timeline {
+      margin: 14px 0 14px;
+      padding: 16px 0 14px;
+      border-top: 1px solid var(--emr-border);
+      border-bottom: 1px solid var(--emr-border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .gw-stops {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      position: relative;
+    }
+    .gw-stops::before {
+      content: '';
+      position: absolute;
+      top: 11px;
+      left: 12%;
+      right: 18%;
+      height: 1px;
+      background: var(--emr-border);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.2, 1);
+      transition-delay: 0.40s;
+    }
+    .gw-slide.present .gw-stops::before { transform: scaleX(1); }
+    .gw-stops::after {
+      content: '';
+      position: absolute;
+      top: 10.5px;
+      left: 82%;
+      right: 4%;
+      height: 1px;
+      background-image: linear-gradient(to right, var(--emr-text-light) 40%, transparent 40%);
+      background-size: 5px 1px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transition-delay: 1.00s;
+    }
+    .gw-slide.present .gw-stops::after { opacity: 1; }
+    .gw-stop {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .gw-slide.present .gw-stop { opacity: 1; transform: translateY(0); }
+    .gw-slide.present .gw-stop:nth-child(1) { transition-delay: 0.55s; }
+    .gw-slide.present .gw-stop:nth-child(2) { transition-delay: 0.70s; }
+    .gw-slide.present .gw-stop:nth-child(3) { transition-delay: 0.85s; }
+    .gw-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid var(--emr-accent);
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 2;
+    }
+    .gw-stop--today .gw-dot {
+      background: var(--emr-gradient-primary);
+      border: none;
+      box-shadow: 0 0 0 3px rgba(49,130,206,0.18);
+    }
+    .gw-slide.present .gw-stop--today .gw-dot {
+      animation: gwTodayPulse 2.6s ease-in-out 1.4s infinite;
+    }
+    @keyframes gwTodayPulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(49,130,206,0.18); }
+      50%      { box-shadow: 0 0 0 7px rgba(49,130,206,0.08); }
+    }
+    .gw-stop-date {
+      font-size: 0.62em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--emr-primary);
+      line-height: 1.1;
+    }
+    .gw-stop-caption {
+      font-size: 0.56em;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--emr-text-muted);
+      line-height: 1.3;
+    }
+    .gw-stop-caption sup {
+      color: var(--emr-accent);
+      font-weight: 700;
+    }
+    .gw-stop--today .gw-stop-date { color: var(--emr-accent); }
+    .gw-span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 10px 0 4px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      transition-delay: 1.20s;
+    }
+    .gw-slide.present .gw-span { opacity: 1; }
+    .gw-span-line {
+      flex: 1;
+      max-width: 160px;
+      height: 1px;
+      background-image: linear-gradient(to right, var(--emr-accent) 40%, transparent 40%);
+      background-size: 6px 1px;
+    }
+    .gw-span-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--emr-gradient-primary);
+      color: #ffffff;
+      font-size: 0.6em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(26,54,93,0.26);
+      white-space: nowrap;
+    }
+    .gw-span-chip svg { width: 12px; height: 12px; }
+
+    /* Cards — clean, no ghost numbers, icon-led */
+    .gw-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .gw-card {
+      position: relative;
+      padding: 14px 16px 12px;
+      background: #ffffff;
+      border: 1px solid var(--emr-border);
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .gw-slide.present .gw-card {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .gw-slide.present .gw-card:nth-child(1) { transition-delay: 1.15s; }
+    .gw-slide.present .gw-card:nth-child(2) { transition-delay: 1.28s; }
+    .gw-slide.present .gw-card:nth-child(3) { transition-delay: 1.41s; }
+    .gw-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--emr-gradient-primary);
+    }
+    .gw-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .gw-card-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--emr-bg-tint);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--emr-accent);
+      flex-shrink: 0;
+    }
+    .gw-card-icon svg { width: 18px; height: 18px; stroke-width: 1.8; }
+    .gw-card h3 {
+      font-size: 0.72em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--emr-primary);
+      margin: 0;
+      line-height: 1.2;
+    }
+    .gw-card p {
+      font-size: 0.66em;
+      line-height: 1.5;
+      color: var(--emr-text-body);
+      margin: 0;
+    }
+    .gw-card strong { color: var(--emr-primary); font-weight: 700; }
+
+    /* Stats — 2-column hero (the visual climax) */
+    .gw-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      padding: 18px 16px 16px;
+      background: var(--emr-gradient-primary);
+      border-radius: 14px;
+      box-shadow: 0 16px 34px rgba(26,54,93,0.30);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition-delay: 1.60s;
+    }
+    .gw-slide.present .gw-stats { opacity: 1; transform: translateY(0); }
+    .gw-stats::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    .gw-stat {
+      text-align: center;
+      padding: 0 14px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      position: relative; z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+    .gw-stat:last-child { border-right: none; }
+    .gw-stat-num {
+      font-size: 1.8em;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      line-height: 1;
+    }
+    .gw-stat-num .gw-stat-unit {
+      font-size: 0.5em;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-left: 4px;
+      opacity: 0.88;
+    }
+    .gw-stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px 7px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.26);
+      border-radius: 999px;
+      color: #ffffff;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+    .gw-stat-badge svg {
+      width: 13px; height: 13px;
+      color: var(--emr-light-accent);
+      fill: var(--emr-light-accent);
+    }
+    .gw-stat-label {
+      font-size: 0.5em;
+      color: var(--emr-light-accent);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+    .gw-stat-sub {
+      font-size: 0.44em;
+      color: rgba(255,255,255,0.7);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+    }
+    .gw-footnotes {
+      margin-top: 10px;
+      font-size: 0.44em;
+      color: var(--emr-text-light);
+      line-height: 1.5;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      transition-delay: 1.85s;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .gw-slide.present .gw-footnotes { opacity: 1; }
+    .gw-footnotes sup {
+      color: var(--emr-accent);
+      font-weight: 700;
+      margin-right: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gw-kicker, .gw-headline, .gw-sub, .gw-axis, .gw-axis-tail, .gw-marker,
+      .gw-window, .gw-window-caption, .gw-card, .gw-stats, .gw-footnotes {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+      .gw-axis, .gw-window { transform: scaleX(1) !important; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SLIDE 05 — BUSINESS MODEL · three-tier pricing
+       ════════════════════════════════════════════════════════ */
+    .bm-slide .slide-inner { padding: 48px 70px 30px; gap: 0; }
+    .bm-hero { margin-bottom: 2px; }
+    .bm-kicker {
+      font-size: 0.54em;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      color: var(--emr-accent);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transition-delay: 0.10s;
+    }
+    .bm-slide.present .bm-kicker { opacity: 1; }
+    .bm-headline {
+      font-size: 2.3em;
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--emr-text-primary);
+      letter-spacing: -0.018em;
+      margin: 0 0 6px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition-delay: 0.20s;
+    }
+    .bm-headline em {
+      font-style: normal;
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bm-slide.present .bm-headline { opacity: 1; transform: translateY(0); }
+    .bm-sub {
+      font-size: 0.76em;
+      font-weight: 500;
+      color: var(--emr-text-muted);
+      line-height: 1.4;
+      max-width: 820px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transition-delay: 0.32s;
+    }
+    .bm-slide.present .bm-sub { opacity: 1; }
+
+    /* Three-tier cards — clean, single-focus */
+    .bm-tiers {
+      display: grid;
+      grid-template-columns: 1fr 1.06fr 1fr;
+      gap: 16px;
+      margin: 22px 0 18px;
+      align-items: stretch;
+    }
+    .bm-tier {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid var(--emr-border);
+      border-radius: 16px;
+      padding: 22px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .bm-tier::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--emr-gradient-primary);
+    }
+    .bm-slide.present .bm-tier:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.50s; }
+    .bm-slide.present .bm-tier:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.70s; }
+    .bm-slide.present .bm-tier--featured { opacity: 1; transform: translateY(0) scale(1.02); transition-delay: 0.85s; }
+    .bm-tier--featured {
+      background: var(--emr-gradient-primary);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 22px 52px rgba(26,54,93,0.38);
+      transform: translateY(12px) scale(1.02);
+      z-index: 2;
+    }
+    .bm-tier--featured::before { display: none; }
+    .bm-tier--featured::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 18px 18px;
+      pointer-events: none;
+    }
+    .bm-tier--premium {
+      background: var(--emr-primary-dark);
+      color: #ffffff;
+      border: none;
+    }
+    .bm-tier--premium::before { background: var(--emr-accent); }
+    .bm-tier > * { position: relative; z-index: 1; }
+
+    .bm-tier-label {
+      font-size: 0.58em;
+      font-weight: 800;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--emr-primary);
+      margin-bottom: 4px;
+    }
+    .bm-tier--featured .bm-tier-label { color: #ffffff; }
+    .bm-tier--premium .bm-tier-label { color: var(--emr-light-accent); }
+    .bm-tier-label-star {
+      display: inline-block;
+      margin-left: 6px;
+      color: var(--emr-accent);
+    }
+    .bm-tier--featured .bm-tier-label-star { color: var(--emr-light-accent); }
+    .bm-tier-regions {
+      font-size: 0.62em;
+      font-weight: 500;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .bm-tier--featured .bm-tier-regions { color: rgba(255,255,255,0.82); }
+    .bm-tier--premium .bm-tier-regions { color: rgba(255,255,255,0.72); }
+
+    .bm-tier-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin: 0;
+    }
+    .bm-tier-price-dollar {
+      font-size: 1.2em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: -0.02em;
+    }
+    .bm-tier-price-num {
+      font-size: 3.1em;
+      font-weight: 900;
+      color: var(--emr-primary);
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+    .bm-tier--featured .bm-tier-price-num,
+    .bm-tier--featured .bm-tier-price-dollar { color: #ffffff; }
+    .bm-tier--premium .bm-tier-price-num,
+    .bm-tier--premium .bm-tier-price-dollar { color: #ffffff; }
+    .bm-tier-price-unit {
+      font-size: 0.56em;
+      font-weight: 500;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+    .bm-tier--featured .bm-tier-price-unit { color: rgba(255,255,255,0.82); }
+    .bm-tier--premium .bm-tier-price-unit { color: rgba(255,255,255,0.72); }
+
+    .bm-tier-acv {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin: 14px 0 0;
+    }
+    .bm-tier-acv-num {
+      font-size: 0.9em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: -0.01em;
+    }
+    .bm-tier--featured .bm-tier-acv-num,
+    .bm-tier--premium .bm-tier-acv-num { color: #ffffff; }
+    .bm-tier-acv-label {
+      font-size: 0.58em;
+      font-weight: 500;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.01em;
+    }
+    .bm-tier--featured .bm-tier-acv-label { color: rgba(255,255,255,0.76); }
+    .bm-tier--premium .bm-tier-acv-label { color: rgba(255,255,255,0.68); }
+
+    /* Scope descriptor — single line, replaces the feature list */
+    .bm-tier-scope {
+      padding: 20px 0 0;
+      margin: 20px 0 0;
+      border-top: 1px solid var(--emr-border);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+    .bm-tier--featured .bm-tier-scope { border-color: rgba(255,255,255,0.18); }
+    .bm-tier--premium .bm-tier-scope { border-color: rgba(255,255,255,0.16); }
+    .bm-tier-scope-title {
+      font-size: 0.72em;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--emr-primary);
+      line-height: 1.2;
+      text-align: center;
+    }
+    .bm-tier--featured .bm-tier-scope-title { color: #ffffff; }
+    .bm-tier--premium .bm-tier-scope-title { color: var(--emr-light-accent); }
+
+    .bm-tier-foot {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--emr-border);
+      font-size: 0.58em;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--emr-accent);
+      line-height: 1.3;
+    }
+    .bm-tier--featured .bm-tier-foot {
+      border-color: rgba(255,255,255,0.22);
+      color: var(--emr-light-accent);
+    }
+    .bm-tier--premium .bm-tier-foot {
+      border-color: rgba(255,255,255,0.18);
+      color: var(--emr-light-accent);
+    }
+
+    /* Y4 ARR — one stat, three columns, zero noise */
+    .bm-arr {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 36px;
+      padding: 20px 40px;
+      background: var(--emr-gradient-primary);
+      border-radius: 14px;
+      box-shadow: 0 16px 36px rgba(26,54,93,0.30);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition-delay: 1.10s;
+    }
+    .bm-slide.present .bm-arr { opacity: 1; transform: translateY(0); }
+    .bm-arr::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    .bm-arr > * { position: relative; z-index: 1; }
+    .bm-arr-left,
+    .bm-arr-right {
+      font-size: 0.54em;
+      font-weight: 800;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--emr-light-accent);
+      line-height: 1.3;
+    }
+    .bm-arr-left { text-align: left; }
+    .bm-arr-right { text-align: right; }
+    .bm-arr-left span,
+    .bm-arr-right span {
+      display: block;
+      color: rgba(255,255,255,0.72);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      font-size: 0.85em;
+      margin-top: 4px;
+    }
+    .bm-arr-num {
+      font-size: 2.8em;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .bm-arr-num .bm-arr-unit {
+      font-size: 0.44em;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-left: 4px;
+      opacity: 0.9;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bm-kicker, .bm-headline, .bm-sub, .bm-tier, .bm-arr {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .bm-tier--featured { transform: scale(1.02) !important; }
+    }
+
     /* ─── SLIDE 6: PROGRESS — TWO-YEAR SPLIT + FOOTER STATS ─ */
     .progress-years {
       display: grid;
@@ -1156,6 +2144,40 @@
     }
     .progress-year-2025 {
       border-right: 1px solid var(--emr-border);
+    }
+    .progress-year-2025::after {
+      content: '›';
+      position: absolute;
+      top: 28px;
+      right: -16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--emr-gradient-primary);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 30px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(26,54,93,0.28);
+      z-index: 2;
+    }
+    .py-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 16px;
+      background: var(--emr-gradient-primary);
+      color: #fff;
+      font-size: 0.72em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      box-shadow: 0 4px 10px rgba(26,54,93,0.22);
+      margin-right: 2px;
+      align-self: center;
     }
     .progress-year-2026 {
       background: linear-gradient(180deg, rgba(49,130,206,0.04) 0%, rgba(190,227,248,0.08) 100%);
@@ -1192,6 +2214,19 @@
     .py-items {
       display: grid;
       gap: 10px;
+      position: relative;
+      padding-left: 24px;
+    }
+    .py-items::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--emr-accent) 0%, var(--emr-light-accent) 100%);
+      border-radius: 2px;
+      opacity: 0.55;
     }
     .py-item {
       display: grid;
@@ -1200,6 +2235,24 @@
       align-items: baseline;
       padding: 6px 0;
       line-height: 1.35;
+      position: relative;
+    }
+    .py-item::before {
+      content: '';
+      position: absolute;
+      left: -21px;
+      top: 14px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--emr-accent);
+      box-shadow: 0 0 0 2px rgba(49,130,206,0.12);
+      z-index: 1;
+    }
+    .py-item-award::before,
+    .py-item-hero::before {
+      display: none;
     }
     .py-month {
       font-size: 0.7em;
@@ -1990,6 +3043,33 @@
       flex: 1;
     }
     .ambition-card-3 .stage-body { color: rgba(255,255,255,0.9); }
+
+    .ambition-thesis {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-top: 44px;
+      padding: 0 8px;
+    }
+    .ambition-thesis .thesis-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--emr-light-accent) 50%, transparent 100%);
+    }
+    .ambition-thesis .thesis-line {
+      margin: 0;
+      font-size: 0.92em;
+      line-height: 1.5;
+      color: var(--emr-text-body);
+      text-align: center;
+      max-width: 720px;
+      font-weight: 500;
+      letter-spacing: 0.005em;
+    }
+    .ambition-thesis .thesis-line strong {
+      color: var(--emr-primary);
+      font-weight: 800;
+    }
     .stage-body strong { color: var(--emr-primary); }
     .ambition-card-3 .stage-body strong { color: var(--emr-light-accent); }
 
@@ -3643,7 +4723,7 @@
 
           <div class="hook-statement">
             <span class="hook-numeral" aria-hidden="true">01</span>
-            <h2 class="hook-headline">In <span class="hook-emphasis">five years</span>, practicing medicine without an AI will be considered <span class="hook-emphasis">malpractice</span>.</h2>
+            <h2 class="hook-headline">In <span class="hook-emphasis">four years</span>, practicing medicine without an AI will be considered <span class="hook-emphasis">malpractice</span>.</h2>
           </div>
 
           <div class="hook-divider" aria-hidden="true"></div>
@@ -3655,7 +4735,7 @@
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          Two uncomfortable truths on a five-year horizon. Practicing medicine without an AI won't just be inefficient in five years — it'll be considered malpractice. And today, a patient opening ChatGPT already gets a more thorough second opinion than their physician can deliver in the time allotted. That's not anti-doctor — it's a system where tooling hasn't caught up to what doctors need. This is the gap we close.
+          Two uncomfortable truths on a four-year horizon. Practicing medicine without an AI won't just be inefficient in four years — it'll be considered malpractice. And today, a patient opening ChatGPT already gets a more thorough second opinion than their physician can deliver in the time allotted. That's not anti-doctor — it's a system where tooling hasn't caught up to what doctors need. This is the gap we close.
         </aside>
       </section>
 
@@ -3840,55 +4920,310 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════
-           SLIDE 4: REGULATORY FREEDOM — HEAD START
+           SLIDE 02·5: CATEGORY — What we are · Who we aren't
            ═══════════════════════════════════════════════ -->
-      <section>
+      <section class="cat-slide">
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">03</span>WHY AI-NATIVE WINS</div>
-          <h2 class="headline-big" style="font-size: 2.3em; line-height: 1.1;">Georgia's AI-open law = <em>years of head start</em>.</h2>
-          <p class="sub-head" style="font-size: 1.05em; margin-top: 10px;">No FDA. No CE. <strong>We deploy AI in live Georgian hospitals today</strong> — while the West waits.</p>
+          <div class="slide-label"><span class="label-num">03</span>CATEGORY</div>
 
-          <div class="reg-cards">
-            <div class="reg-card" data-num="1">
-              <div class="reg-icon">
-                <svg viewBox="0 0 24 24"><path d="M5 13l-2 7 7-2 11-11a2.83 2.83 0 10-4-4L6 14z"/><path d="M14 6l4 4"/><path d="M9 11l4 4"/></svg>
+          <div class="cat-split">
+            <!-- Left: What we are (tight hero) -->
+            <div class="cat-left">
+              <div class="cat-kicker">One of the first</div>
+              <h2 class="cat-display">Hospital operating systems built <em>ground-up on FHIR R4</em>.</h2>
+
+              <div class="cat-qualifiers">
+                <div class="cat-qualifier">
+                  <span class="cat-qualifier-num">01</span>
+                  <span>AI as a native architectural primitive</span>
+                </div>
+                <div class="cat-qualifier">
+                  <span class="cat-qualifier-num">02</span>
+                  <span>Full hospital breadth · one codebase</span>
+                </div>
+                <div class="cat-qualifier">
+                  <span class="cat-qualifier-num">03</span>
+                  <span>Not acquisition-stitched, not an overlay</span>
+                </div>
+                <div class="cat-qualifier">
+                  <span class="cat-qualifier-num">04</span>
+                  <span>Priced for underserved markets</span>
+                </div>
               </div>
-              <h3>Ship in Georgia today</h3>
-              <p>AI runs in <strong>live Georgian hospitals now</strong>. U.S. / E.U. competitors stuck in FDA / CE review.</p>
-              <div class="reg-tag">Deployment</div>
             </div>
-            <div class="reg-card" data-num="2">
-              <div class="reg-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6z"/><path d="M9 12l2 2 4-4"/></svg>
+
+            <!-- Right: Competitive terrain — three quiet rows + the MediMind hero card -->
+            <div class="cat-right">
+              <div class="cat-terrain">
+                <div class="cat-row">
+                  <div class="cat-row-label">
+                    Ambient Scribes
+                    <em>write notes on top of Epic</em>
+                  </div>
+                  <div class="cat-row-names">
+                    <span>Abridge</span><span class="cat-dot">·</span>
+                    <span>Dragon Copilot</span><span class="cat-dot">·</span>
+                    <span>Suki</span>
+                    <span class="cat-more">+ 4 more</span>
+                  </div>
+                </div>
+
+                <div class="cat-row">
+                  <div class="cat-row-label">
+                    Proactive AI Overlays
+                    <em>reason on top of Epic</em>
+                  </div>
+                  <div class="cat-row-names">
+                    <span>Palantir AIP</span><span class="cat-dot">·</span>
+                    <span>Bayesian Health</span><span class="cat-dot">·</span>
+                    <span>Regard</span>
+                    <span class="cat-more">+ 5 more</span>
+                  </div>
+                </div>
+
+                <div class="cat-row">
+                  <div class="cat-row-label">
+                    Legacy Hospital EHR
+                    <em>own data, not AI</em>
+                  </div>
+                  <div class="cat-row-names">
+                    <span>Epic</span><span class="cat-dot">·</span>
+                    <span>Cerner</span><span class="cat-dot">·</span>
+                    <span>Oracle</span>
+                    <span class="cat-more">+ 2 more</span>
+                  </div>
+                </div>
               </div>
-              <h3>Real-world moat</h3>
-              <p>Every deployment compounds <strong>clinical data, workflows, expertise</strong> — unreplicable post-approval.</p>
-              <div class="reg-tag">Data &amp; expertise</div>
-            </div>
-            <div class="reg-card" data-num="3">
-              <div class="reg-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+
+              <div class="cat-gap">
+                <div class="cat-gap-line"></div>
+                <div class="cat-gap-chip">none of the above can reach</div>
+                <div class="cat-gap-line"></div>
               </div>
-              <h3>Most tested when West unlocks</h3>
-              <p>When global markets open AI, we arrive <strong>battle-tested</strong> — not Day-1.</p>
-              <div class="reg-tag">Global readiness</div>
+
+              <div class="cat-hero">
+                <div class="cat-hero-label">
+                  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15 9 22 9 16 14 18 21 12 17 6 21 8 14 2 9 9 9"/></svg>
+                  AI-native · Full Hospital · Ground-up on FHIR R4
+                </div>
+                <div class="cat-hero-title">
+                  <span class="cat-hero-name">MediMind</span>
+                  <span class="cat-hero-sub">All three layers · <strong>one FHIR-native codebase</strong> · AI in the write path</span>
+                </div>
+                <div class="cat-hero-footnote">
+                  <strong>Nearest attempt:</strong> SuperOS (Bengaluru) — 1 hospital, internal-only, not FHIR-native
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="reg-stats">
-            <div class="reg-stat">
-              <div class="reg-stat-num">25+</div>
-              <div class="reg-stat-label">Hospitals contracted</div>
-            </div>
-            <div class="reg-stat">
-              <div class="reg-stat-num">2 yrs</div>
-              <div class="reg-stat-label">Head start over U.S. / E.U.</div>
-            </div>
+          <!-- Footer megaline -->
+          <div class="cat-footer">
+            <div class="cat-footer-line">Palantir reads Epic. We replace Epic.</div>
+            <div class="cat-footer-sub">Palantir is Snowflake for hospitals. We are Linux for hospitals.</div>
           </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          This is our unfair advantage. Most investors see "Georgia" and think small market. The right read is regulatory arbitrage. While every U.S. and E.U. AI-medical startup waits in FDA or CE review, we're deploying today. Every day of deployment compounds our clinical data, operational playbook, integration expertise. That moat cannot be replicated by a company that starts two years later. When the West opens AI in medicine, we arrive with a product that's been battle-tested across 25 hospitals and flagged 500+ clinical issues. Not a Day-1 startup — a proven operating system. That's the position.
+          This slide defines the category so the regulatory slide that follows makes sense. Three things the market conflates right now. Ambient scribes — Abridge, Dragon, Suki — write notes on top of Epic. Proactive clinical AI — Palantir, Bayesian, Regard, Navina, Aidoc, Epic's own CoMET — flag risks and surface diagnoses on top of Epic. Full-breadth hospital EHRs — Epic, Cerner, Oracle, Meditech — are the system of record but legacy, not AI-native, and priced out of emerging markets. The only square with a real candidate is the bottom one: AI-native plus full breadth plus FHIR-primitive plus single codebase. SuperOS in Bengaluru claims that square but they're one hospital, internally built, and make no FHIR-native claim. The six-way intersection — commercial, FHIR as storage primitive, AI as architectural primitive, full hospital breadth, single codebase, underserved-market pricing — is the defensible position. No named competitor clears all six.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 03: THE GEORGIA WINDOW — regulatory runway
+           ═══════════════════════════════════════════════ -->
+      <section class="gw-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">04</span>THE GEORGIA WINDOW</div>
+
+          <div class="gw-hero">
+            <div class="gw-kicker">Regulatory runway</div>
+            <h2 class="gw-headline"><em>12–28 months</em> of head start.</h2>
+            <p class="gw-sub">While US and EU competitors queue for FDA clearance and EU AI Act conformity, we ship full-stack agentic AI in live Georgian hospitals today.</p>
+          </div>
+
+          <!-- Timeline — 3 stops + head-start chip -->
+          <div class="gw-timeline">
+            <div class="gw-stops">
+              <div class="gw-stop gw-stop--today">
+                <div class="gw-dot"></div>
+                <div class="gw-stop-date">Apr 2026</div>
+                <div class="gw-stop-caption">Today · shipping live</div>
+              </div>
+              <div class="gw-stop">
+                <div class="gw-dot"></div>
+                <div class="gw-stop-date">2 Aug 2027</div>
+                <div class="gw-stop-caption">EU AI Act activates<sup>¹</sup></div>
+              </div>
+              <div class="gw-stop">
+                <div class="gw-dot"></div>
+                <div class="gw-stop-date">2028 — Q1</div>
+                <div class="gw-stop-caption">Western equivalents filable<sup>²</sup></div>
+              </div>
+            </div>
+            <div class="gw-span">
+              <div class="gw-span-line"></div>
+              <div class="gw-span-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                16–28 months · MediMind ships into this gap
+              </div>
+              <div class="gw-span-line"></div>
+            </div>
+          </div>
+
+          <!-- Three cards — short, icon-led -->
+          <div class="gw-cards">
+            <div class="gw-card">
+              <div class="gw-card-head">
+                <div class="gw-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5 3 21l4.5-1.5"/><path d="M15 5l4 4"/><path d="M7.5 19.5L14 13l-3-3-6.5 6.5 3 3z"/><path d="M14 13l5-5a3 3 0 1 0-4-4l-5 5"/></svg>
+                </div>
+                <h3>Ship today</h3>
+              </div>
+              <p>Agentic CPOE, MAR prep, auto-discharge, predictive bed ops — <strong>live at GeoHospitals</strong>. Features that would need FDA 510(k) or EU Annex III conformity abroad.</p>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-head">
+                <div class="gw-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+                </div>
+                <h3>Rivals queue</h3>
+              </div>
+              <p>EU AI Act high-risk activates <strong>2 Aug 2027</strong><sup>¹</sup>, plus <strong>13–18 mo</strong> Notified Body queue<sup>²</sup>. FDA AI SaMD real-world: <strong>140–310 days</strong><sup>³</sup>.</p>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-head">
+                <div class="gw-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
+                </div>
+                <h3>Moat compounds</h3>
+              </div>
+              <p>Every Georgian deployment month becomes <strong>real-world evidence</strong> — shortening our own future FDA PCCP and EU Annex III submissions.</p>
+            </div>
+          </div>
+
+          <!-- Stats — the visual climax -->
+          <div class="gw-stats">
+            <div class="gw-stat">
+              <div class="gw-stat-num">25<span class="gw-stat-unit">+</span></div>
+              <div class="gw-stat-label">Hospitals · MSA signed</div>
+              <div class="gw-stat-sub">Counter-signed Apr 2026 · go-live Aug 2026</div>
+            </div>
+            <div class="gw-stat">
+              <div class="gw-stat-num">16–28<span class="gw-stat-unit">MO</span></div>
+              <div class="gw-stat-label">Head start · US + EU</div>
+              <div class="gw-stat-sub">~12–18 mo median for agentic clinical AI</div>
+            </div>
+          </div>
+
+          <!-- Footnotes -->
+          <div class="gw-footnotes">
+            <span><sup>¹</sup>Regulation (EU) 2024/1689, Art 6(1) + Annex I</span>
+            <span><sup>²</sup>MDR Notified Body avg certification time, 2025–26</span>
+            <span><sup>³</sup>FDA MDUFA V performance data · AI/ML 510(k) + De Novo</span>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          The Georgia window. Greenfield regulatory environment plus a ground-up FHIR-native codebase means we ship full-stack agentic AI against live clinical data today. The head start is real but it is feature-specific and it is bounded. EU AI Act Article 6(1) high-risk medical-device obligations activate on 2 August 2027. Add the Notified Body queue of thirteen to eighteen months and Western competitors are looking at 2028 Q1 before they can legitimately ship the equivalent of what we're shipping at Healthycore today. That's a sixteen to twenty-eight month runway — median closer to twelve to eighteen for the agentic clinical AI we actually build. And the real moat is not the legal arbitrage, it's the data. Every month of Georgian deployment becomes real-world evidence competitors cannot retroactively acquire. The head start compounds into a dossier. Twenty-five hospitals are under signed MSA as of April 2026, Healthycore is our live pilot site today, and every feature we ship there is feeding the file we'll use when we expand to the EU and US — shortening our own future FDA PCCP and Annex III submissions. The slide is honest about what's contracted versus what's live. That honesty is the sharpest claim in the room.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 05: BUSINESS MODEL — three-tier pricing
+           ═══════════════════════════════════════════════ -->
+      <section class="bm-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">05</span>BUSINESS MODEL</div>
+
+          <div class="bm-hero">
+            <div class="bm-kicker">Pricing</div>
+            <h2 class="bm-headline">Priced where <em>hospitals are</em>.</h2>
+            <p class="bm-sub">Same product. Three market tiers. Flex on price and SLA — never on features.</p>
+          </div>
+
+          <!-- Three-tier pricing cards — single focus per card -->
+          <div class="bm-tiers">
+            <!-- LAUNCH -->
+            <div class="bm-tier">
+              <div class="bm-tier-label">Launch</div>
+              <div class="bm-tier-regions">Georgia · Armenia · Azerbaijan</div>
+
+              <div class="bm-tier-price">
+                <span class="bm-tier-price-dollar">$</span>
+                <span class="bm-tier-price-num">40</span>
+              </div>
+              <div class="bm-tier-price-unit">per seat · per month</div>
+
+              <div class="bm-tier-acv">
+                <span class="bm-tier-acv-num">~$44K</span>
+                <span class="bm-tier-acv-label">annual ACV</span>
+              </div>
+
+              <div class="bm-tier-scope">
+                <div class="bm-tier-scope-title">Full platform</div>
+              </div>
+
+              <div class="bm-tier-foot">25 hospitals · live today</div>
+            </div>
+
+            <!-- REGIONAL (featured) -->
+            <div class="bm-tier bm-tier--featured">
+              <div class="bm-tier-label">Regional<span class="bm-tier-label-star">★</span></div>
+              <div class="bm-tier-regions">CEE · CIS · Türkiye · MENA · LatAm · SEA</div>
+
+              <div class="bm-tier-price">
+                <span class="bm-tier-price-dollar">$</span>
+                <span class="bm-tier-price-num">75</span>
+              </div>
+              <div class="bm-tier-price-unit">per seat · per month</div>
+
+              <div class="bm-tier-acv">
+                <span class="bm-tier-acv-num">~$81K</span>
+                <span class="bm-tier-acv-label">annual ACV</span>
+              </div>
+
+              <div class="bm-tier-scope">
+                <div class="bm-tier-scope-title">Full platform</div>
+              </div>
+
+              <div class="bm-tier-foot">Y4 target · 160 hospitals</div>
+            </div>
+
+            <!-- PREMIUM -->
+            <div class="bm-tier bm-tier--premium">
+              <div class="bm-tier-label">Premium</div>
+              <div class="bm-tier-regions">US · UK · EU · GCC · Australia</div>
+
+              <div class="bm-tier-price">
+                <span class="bm-tier-price-dollar">$</span>
+                <span class="bm-tier-price-num">200</span>
+              </div>
+              <div class="bm-tier-price-unit">per seat · per month</div>
+
+              <div class="bm-tier-acv">
+                <span class="bm-tier-acv-num">~$480K</span>
+                <span class="bm-tier-acv-label">annual ACV</span>
+              </div>
+
+              <div class="bm-tier-scope">
+                <div class="bm-tier-scope-title">Full platform</div>
+              </div>
+
+              <div class="bm-tier-foot">Strategic · Y5+ enterprise</div>
+            </div>
+          </div>
+
+          <!-- Y4 ARR — one stat, clean -->
+          <div class="bm-arr">
+            <div class="bm-arr-left">Y4 ARR<span>236 hospitals · 3 tiers</span></div>
+            <div class="bm-arr-num">~$28<span class="bm-arr-unit">M</span></div>
+            <div class="bm-arr-right">2.8×<span>our flat-price model · same execution plan</span></div>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          The business model. Monthly subscription, per seat, three tiers — priced where hospitals actually are, not where we are. Launch tier is Georgia and the South Caucasus: forty dollars per seat per month, roughly forty-four thousand in annual contract value per hospital. That's the ten-thousand lari flat we're already billing today, expressed in per-seat math. Regional is Turkey, CIS, Central and Eastern Europe, MENA outside the Gulf, Latin America, Southeast Asia — seventy-five dollars per seat, roughly eighty-one thousand ACV, forty to sixty percent below Commure while actually replacing the EHR beneath them. Premium is the US, UK, EU, and Gulf — two hundred dollars per seat, roughly four hundred eighty thousand ACV for a typical two-hundred-seat hospital, sixty to seventy percent below Epic and Oracle Health, unlocks after FDA and EU AI Act conformity in year five. Same product across all three tiers. Same codebase. We never gate features by tier — what flexes is price and SLA. And the punch line: with the existing two hundred thirty-six hospital target across nine countries, tiered pricing gets us to roughly twenty-eight million ARR at Year Four, not ten. Two point eight times the flat-price model, same execution plan. That's the pricing story.
         </aside>
       </section>
 
@@ -3897,7 +5232,7 @@
            ═══════════════════════════════════════════════ -->
       <section class="team-slide">
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">04</span>TEAM</div>
+          <div class="slide-label"><span class="label-num">06</span>TEAM</div>
           <h2 class="headline-big">We are <em>doctors</em> building for doctors.</h2>
 
           <div class="team-section">
@@ -3918,7 +5253,7 @@
               </div>
               <div class="founder-card">
                 <span class="founder-badge">Co-Founder</span>
-                <img class="founder-photo" src="assets/team/irakli-pkh.png?v=2" alt="Irakli Pkhovelishvili">
+                <img class="founder-photo" src="assets/team/irakli-pkh.png?v=5" alt="Irakli Pkhovelishvili">
                 <div class="founder-info">
                   <h4>Irakli Pkhovelishvili</h4>
                   <div class="role">Co-Founder · Product &amp; Strategy</div>
@@ -3996,7 +5331,7 @@
            ═══════════════════════════════════════════════ -->
       <section>
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">05</span>AMBITION</div>
+          <div class="slide-label"><span class="label-num">07</span>AMBITION</div>
           <h2 class="ambition-headline" style="font-size: 2.8em;"><span class="h-home">Georgia</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-region">Region</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-global">Global</span></h2>
 
           <div class="ambition-cards" style="margin-top: 32px;">
@@ -4005,7 +5340,7 @@
               <div class="stage-title">Georgia</div>
               <div class="stage-subtitle">Year 1 – 2 · Dominate home market</div>
               <div class="stage-stat">
-                <span class="stage-stat-value">3 → 22</span>
+                <span class="stage-stat-value">0 → 40+</span>
                 <span class="stage-stat-label">hospitals by Y4</span>
               </div>
             </div>
@@ -4031,18 +5366,10 @@
             </div>
           </div>
 
-          <div class="combined-ramp">
-            <span class="combined-ramp-label">4-Year Ramp</span>
-            <div class="combined-ramp-years">
-              <div class="ramp-year-node"><span class="ramp-year-num">3</span><span class="ramp-year-lbl">Y1</span></div>
-              <span class="combined-ramp-arrow">→</span>
-              <div class="ramp-year-node"><span class="ramp-year-num">34</span><span class="ramp-year-lbl">Y2</span></div>
-              <span class="combined-ramp-arrow">→</span>
-              <div class="ramp-year-node"><span class="ramp-year-num">137</span><span class="ramp-year-lbl">Y3</span></div>
-              <span class="combined-ramp-arrow">→</span>
-              <div class="ramp-year-node"><span class="ramp-year-num">236</span><span class="ramp-year-lbl">Y4</span></div>
-            </div>
-            <span class="combined-ramp-tag">$10.2M ARR · 9 countries</span>
+          <div class="ambition-thesis">
+            <span class="thesis-rule" aria-hidden="true"></span>
+            <p class="thesis-line">One playbook. Three stages. <strong>Built globally-compliant from day 1</strong> — scaling regionally while the West sorts out AI regulation.</p>
+            <span class="thesis-rule" aria-hidden="true"></span>
           </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
@@ -4056,12 +5383,13 @@
            ═══════════════════════════════════════════════ -->
       <section>
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">06</span>PROGRESS MADE</div>
+          <div class="slide-label"><span class="label-num">08</span>PROGRESS MADE</div>
           <h2 class="headline-big" style="font-size: 2em; line-height: 1.1;"><em>13 months.</em> From idea to <em>25-hospital contract.</em></h2>
 
           <div class="progress-years">
             <div class="progress-year progress-year-2025">
               <div class="py-header">
+                <span class="py-step">STEP 01</span>
                 <span class="py-year">2025</span>
                 <span class="py-label">Foundation</span>
               </div>
@@ -4076,7 +5404,7 @@
                 </div>
                 <div class="py-item">
                   <span class="py-month">Sept</span>
-                  <span class="py-desc"><strong>$150K Gita grant</strong> · clinical validation.</span>
+                  <span class="py-desc"><strong>₾150K Gita grant</strong> · clinical validation.</span>
                 </div>
                 <div class="py-item">
                   <span class="py-month">Oct</span>
@@ -4087,6 +5415,7 @@
 
             <div class="progress-year progress-year-2026">
               <div class="py-header">
+                <span class="py-step">STEP 02</span>
                 <span class="py-year">2026</span>
                 <span class="py-label">Scale</span>
               </div>
@@ -4111,19 +5440,10 @@
             </div>
           </div>
 
-          <div class="progress-footer">
-            <div class="pf-metric"><span class="pf-num">13</span><span class="pf-lbl">months</span></div>
-            <div class="pf-sep" aria-hidden="true">·</div>
-            <div class="pf-metric"><span class="pf-num">25</span><span class="pf-lbl">hospitals signed</span></div>
-            <div class="pf-sep" aria-hidden="true">·</div>
-            <div class="pf-metric"><span class="pf-num">$150K</span><span class="pf-lbl">government grant</span></div>
-            <div class="pf-sep" aria-hidden="true">·</div>
-            <div class="pf-metric"><span class="pf-num pf-num-accent">★ Gov</span><span class="pf-lbl">"Innovative Startup"</span></div>
-          </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          13 months from idea to contract — and we can prove it. Started as an idea last March. Cardiology pilot with 50 doctors in May. $150K Gita grant in September, validating clinical readiness. Pivoted to the full AI-native ecosystem in October. Adopted FHIR and international standards in November for global readiness. LOI with a 25-hospital chain in January. February: awarded "Innovative Startup" status by the Government of Georgia — one of the first in the country to get it. Government validation on top of clinical validation. Signed the actual 25-hospital contract in April. Full go-live August. This is what momentum looks like.
+          13 months from idea to contract — and we can prove it. Started as an idea last March. Cardiology pilot with 50 doctors in May. ₾150K Gita grant in September, validating clinical readiness. Pivoted to the full AI-native ecosystem in October. Adopted FHIR and international standards in November for global readiness. LOI with a 25-hospital chain in January. February: awarded "Innovative Startup" status by the Government of Georgia — one of the first in the country to get it. Government validation on top of clinical validation. Signed the actual 25-hospital contract in April. Full go-live August. This is what momentum looks like.
         </aside>
       </section>
 
@@ -4132,7 +5452,7 @@
            ═══════════════════════════════════════════════ -->
       <section>
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">07</span>THE ASK</div>
+          <div class="slide-label"><span class="label-num">09</span>THE ASK</div>
           <h2 class="headline-big" style="font-size: 2.2em;"><em>$200K</em> pre-seed. Cover Georgia. Start regional.</h2>
 
           <div class="ask-journey">
@@ -4143,7 +5463,7 @@
               <ul class="station-bullets">
                 <li><strong>25-hospital</strong> contract signed</li>
                 <li><strong>Healthycore</strong> pilot live</li>
-                <li><strong>Gov</strong> recognition + $150K grant</li>
+                <li><strong>Gov</strong> recognition + ₾150K grant</li>
               </ul>
             </div>
 
@@ -4202,7 +5522,7 @@
            ═══════════════════════════════════════════════ -->
       <section>
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">08</span>WHAT YOU'RE INVESTING IN</div>
+          <div class="slide-label"><span class="label-num">10</span>WHAT YOU'RE INVESTING IN</div>
           <h2 class="headline-big" style="font-size: 1.9em; line-height: 1.15;">How your $200K <em>becomes equity</em>.</h2>
 
           <div class="terms-layout">
