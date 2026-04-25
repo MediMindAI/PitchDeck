@@ -4522,18 +4522,74 @@
     }
     .gallery-lightbox-caption {
       position: absolute;
-      bottom: 24px;
+      top: 24px;
       left: 50%;
       transform: translateX(-50%);
-      color: rgba(255,255,255,0.72);
-      font-size: 13px;
+      max-width: min(640px, 78vw);
+      padding: 11px 20px;
+      background: rgba(10, 23, 41, 0.92);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, padding 0.25s ease;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+      user-select: none;
+    }
+    .gallery-lightbox-caption:hover {
+      background: rgba(10, 23, 41, 0.96);
+      border-color: rgba(255,255,255,0.28);
+    }
+    .gallery-lightbox-caption.expanded {
+      padding-bottom: 16px;
+    }
+    .gallery-lightbox-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+    .gallery-lightbox-title::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--emr-accent);
+      box-shadow: 0 0 10px rgba(49,130,206,0.85);
+      flex-shrink: 0;
+    }
+    .gallery-lightbox-title::after {
+      content: '';
+      width: 8px; height: 8px;
+      margin-left: 4px;
+      border-right: 1.5px solid rgba(255,255,255,0.7);
+      border-bottom: 1.5px solid rgba(255,255,255,0.7);
+      transform: rotate(45deg) translate(-2px, -2px);
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .gallery-lightbox-caption.expanded .gallery-lightbox-title::after {
+      transform: rotate(-135deg) translate(-2px, -2px);
+    }
+    .gallery-lightbox-desc {
+      color: rgba(255,255,255,0.92);
+      font-size: 15px;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      padding: 7px 16px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 100px;
-      white-space: nowrap;
+      line-height: 1.55;
+      letter-spacing: 0.005em;
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.25s ease;
+    }
+    .gallery-lightbox-caption.expanded .gallery-lightbox-desc {
+      max-height: 240px;
+      opacity: 1;
+      margin-top: 10px;
     }
     .gallery-placeholder {
       flex: 1;
@@ -4599,6 +4655,9 @@
       color: var(--emr-primary);
       letter-spacing: -0.005em;
       line-height: 1.15;
+    }
+    .gallery-caption-desc {
+      display: none;
     }
     .gallery-slide .brand-footer { color: var(--emr-text-muted); }
 
@@ -5670,9 +5729,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/mediscribe</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/mediscribe.png" alt="MediMind ambient AI scribe recording screen">
+                <img class="gallery-img" src="assets/screenshots/mediscribe.png" alt="MediMind ambient AI scribe recording screen" data-description="Records the doctor–patient conversation and produces a structured Georgian-language SOAP note in seconds — so clinicians stop typing and start listening.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Ambient AI scribe</span></div>
+              <div class="gallery-caption-desc">Records the doctor–patient conversation and produces a structured Georgian SOAP note in seconds.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5681,9 +5741,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/research</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/research.png" alt="MediMind Research & scanning">
+                <img class="gallery-img" src="assets/screenshots/research.png" alt="MediMind Research & scanning" data-description="Scans clinical-trial criteria across the entire patient panel automatically, surfacing eligible candidates without a single manual chart review.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Research & scanning</span></div>
+              <div class="gallery-caption-desc">Auto-scans the patient panel against trial criteria — eligible candidates surface without manual review.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5692,9 +5753,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/ai-assistant</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/ai-chat.png" alt="MediMind Clinical AI Assistant chat">
+                <img class="gallery-img" src="assets/screenshots/ai-chat.png" alt="MediMind Clinical AI Assistant chat" data-description="A bedside assistant that answers clinical questions from the patient's own chart, with cited sources and memory across the case.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Clinical AI chat</span></div>
+              <div class="gallery-caption-desc">Answers clinical questions from the patient's own chart, with cited sources and per-case memory.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5703,9 +5765,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/patient-history/history</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/patient-360.png" alt="MediMind Patient 360 clinical dashboard">
+                <img class="gallery-img" src="assets/screenshots/patient-360.png" alt="MediMind Patient 360 clinical dashboard" data-description="Every visit, lab, medication, note, and image on one timeline, with an AI-drafted summary at the top — a new clinician is up to speed in a minute, not an hour.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Patient 360 view</span></div>
+              <div class="gallery-caption-desc">One timeline of visits, labs, meds, notes and images — with an AI summary on top.</div>
             </div>
           </div>
         </div>
@@ -5731,9 +5794,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/patient-history/orders</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/cpoe.png" alt="MediMind unified CPOE orders screen">
+                <img class="gallery-img" src="assets/screenshots/cpoe.png" alt="MediMind unified CPOE orders screen" data-description="Labs, medications, imaging, and consults in one cart with built-in safety checks — one screen instead of five disconnected systems.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Unified orders</span></div>
+              <div class="gallery-caption-desc">Labs, meds, imaging and consults in one cart with safety checks built in.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5742,9 +5806,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/patient-history/mar</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/mar.png" alt="MediMind Medication Administration Record">
+                <img class="gallery-img" src="assets/screenshots/mar.png" alt="MediMind Medication Administration Record" data-description="Barcode-verified administration with high-alert double-check on insulin, opioids, and chemotherapy — the bedside safety net JCI accreditation requires.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Medication admin</span></div>
+              <div class="gallery-caption-desc">Barcode-verified bedside MAR with high-alert double-check on insulin, opioids and chemo.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5753,9 +5818,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/nursing-station</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/nursing.png" alt="MediMind Nursing Workstation">
+                <img class="gallery-img" src="assets/screenshots/nursing.png" alt="MediMind Nursing Workstation" data-description="A mobile-first, offline-capable workstation with the ward's bed grid, vitals, tasks, and handoff notes — designed around how nurses actually move.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Nursing workstation</span></div>
+              <div class="gallery-caption-desc">Mobile-first, offline-capable: bed grid, vitals, tasks and handoff in one nurse-shaped app.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5764,9 +5830,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/handoff</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/handoff.png" alt="MediMind Shift Handoff SBAR">
+                <img class="gallery-img" src="assets/screenshots/handoff.png" alt="MediMind Shift Handoff SBAR" data-description="Structured SBAR handoff with live event alerts so nothing — critical labs, code statuses, pending tasks — falls through the cracks between shifts.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Shift handoff</span></div>
+              <div class="gallery-caption-desc">SBAR handoff with live event alerts — nothing slips between shifts.</div>
             </div>
           </div>
         </div>
@@ -5792,9 +5859,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/laboratory</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/laboratory.png" alt="MediMind Laboratory module">
+                <img class="gallery-img" src="assets/screenshots/laboratory.png" alt="MediMind Laboratory module" data-description="The full lab loop: orders, specimen tracking, result entry with reference ranges, and trended values — including external-lab integration.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Laboratory</span></div>
+              <div class="gallery-caption-desc">Order to result: specimen tracking, reference ranges, trended values and external-lab integration.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5803,9 +5871,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/imaging/dicom</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/dicom.png" alt="MediMind DICOM PACS viewer">
+                <img class="gallery-img" src="assets/screenshots/dicom.png" alt="MediMind DICOM PACS viewer" data-description="On-prem PACS viewer with multi-modality support and CAD-RADS scoring — radiologists read in the same workspace, no separate viewer required.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">DICOM viewer</span></div>
+              <div class="gallery-caption-desc">On-prem PACS with multi-modality and CAD-RADS — no separate viewer to license.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5814,9 +5883,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/forms/builder</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/form-builder.png" alt="MediMind Golden Form Builder">
+                <img class="gallery-img" src="assets/screenshots/form-builder.png" alt="MediMind Golden Form Builder" data-description="A drag-and-drop builder for ministry-grade clinical forms — every Georgian Ministry-of-Health form digitized and submission-ready out of the box.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Form builder</span></div>
+              <div class="gallery-caption-desc">Drag-and-drop builder — every Georgian MOH form digitized and submission-ready.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5825,9 +5895,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/moh</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/moh.png" alt="MediMind MOH Gov-EHR submission">
+                <img class="gallery-img" src="assets/screenshots/moh.png" alt="MediMind MOH Gov-EHR submission" data-description="One-click submission to Georgia's MOH Gov-EHR with ICD code mapping and validation built in — what hospitals normally pay an integrator to do.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">MOH submission</span></div>
+              <div class="gallery-caption-desc">One-click Gov-EHR submission with ICD mapping and validation built in.</div>
             </div>
           </div>
         </div>
@@ -5853,9 +5924,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/patient-hub/bed-board</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/bed-board.png" alt="MediMind interactive bed board">
+                <img class="gallery-img" src="assets/screenshots/bed-board.png" alt="MediMind interactive bed board" data-description="An interactive floor-plan with drag-drop admits, transfers, and discharges — real-time occupancy without a single phone call.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Live bed board</span></div>
+              <div class="gallery-caption-desc">Interactive floor-plan: drag-drop admits, transfers and discharges in real time.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5864,9 +5936,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/command-center</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/command-center.png" alt="MediMind Hospital Command Center">
+                <img class="gallery-img" src="assets/screenshots/command-center.png" alt="MediMind Hospital Command Center" data-description="The hospital director's live screen: occupancy, ED boarding, discharge queue, and operational alerts — the whole hospital at a glance.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Command center</span></div>
+              <div class="gallery-caption-desc">The director's live screen: occupancy, ED boarding, discharge queue, alerts.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5875,9 +5948,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/coordinator</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/coordinator.png" alt="MediMind Patient Coordinator workspace">
+                <img class="gallery-img" src="assets/screenshots/coordinator.png" alt="MediMind Patient Coordinator workspace" data-description="The patient coordinator's workspace for pre-op, insurance verification, funding, and outstanding debt — closing the gap between clinical and financial workflows.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Coordinator hub</span></div>
+              <div class="gallery-caption-desc">Pre-op, insurance, funding and debt — the clinical-to-financial bridge.</div>
             </div>
 
             <div class="gallery-tile">
@@ -5886,9 +5960,10 @@
                   <span class="chrome-dot chrome-dot-red"></span><span class="chrome-dot chrome-dot-yellow"></span><span class="chrome-dot chrome-dot-green"></span>
                   <span class="chrome-url">medimind.md/emr/dashboard/financial</span>
                 </div>
-                <img class="gallery-img" src="assets/screenshots/revenue-cycle.png" alt="MediMind Revenue Cycle dashboard">
+                <img class="gallery-img" src="assets/screenshots/revenue-cycle.png" alt="MediMind Revenue Cycle dashboard" data-description="The CFO view: DSO, AR aging, payer mix, and denial trends — every claim and payment tracked from charge to deposit.">
               </div>
               <div class="gallery-caption"><span class="gallery-caption-dot"></span><span class="gallery-caption-text">Revenue cycle</span></div>
+              <div class="gallery-caption-desc">CFO view: DSO, AR aging, payer mix and denial trends — charge to deposit.</div>
             </div>
           </div>
         </div>
@@ -5905,7 +5980,10 @@
   <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Expanded screenshot">
     <button class="gallery-lightbox-close" type="button" aria-label="Close" onclick="closeGalleryLightbox()">×</button>
     <img id="gallery-lightbox-img" src="" alt="">
-    <div class="gallery-lightbox-caption" id="gallery-lightbox-caption"></div>
+    <div class="gallery-lightbox-caption" id="gallery-lightbox-caption">
+      <div class="gallery-lightbox-title" id="gallery-lightbox-title"></div>
+      <div class="gallery-lightbox-desc" id="gallery-lightbox-desc"></div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
@@ -5934,13 +6012,24 @@
       const lb = document.getElementById('gallery-lightbox');
       const lbImg = document.getElementById('gallery-lightbox-img');
       const lbCap = document.getElementById('gallery-lightbox-caption');
+      const lbTitle = document.getElementById('gallery-lightbox-title');
+      const lbDesc = document.getElementById('gallery-lightbox-desc');
 
-      function openLightbox(src, alt, caption) {
+      function openLightbox(src, alt, title, description) {
         lbImg.src = src;
         lbImg.alt = alt || '';
-        lbCap.textContent = caption || '';
+        lbTitle.textContent = title || '';
+        lbDesc.textContent = description || '';
+        lbCap.style.display = (title || description) ? '' : 'none';
+        lbCap.classList.remove('expanded');
         lb.classList.add('open');
       }
+
+      // Click the caption chip to expand/collapse the description
+      lbCap.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lbCap.classList.toggle('expanded');
+      });
 
       window.closeGalleryLightbox = function() {
         lb.classList.remove('open');
@@ -5951,11 +6040,11 @@
         img.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          // Find the caption in the same tile for the lightbox subtitle
           const tile = img.closest('.gallery-tile');
           const capEl = tile ? tile.querySelector('.gallery-caption-text') : null;
-          const caption = capEl ? capEl.textContent.trim() : '';
-          openLightbox(img.src, img.alt, caption);
+          const title = capEl ? capEl.textContent.trim() : '';
+          const description = img.getAttribute('data-description') || '';
+          openLightbox(img.src, img.alt, title, description);
         });
       });
 
