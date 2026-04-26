@@ -1,16 +1,26 @@
 # Netlify config for MediMind pitch deck
-# Serves the HTML deck at the root URL.
+# Root URL serves the gateway (index.html). The deck is gated by:
+#   1. The gateway sets sessionStorage on a successful access-name match.
+#   2. The deck HTML has an auth guard that redirects back here without it.
 
 [build]
   publish = "."
 
-[[redirects]]
-  from = "/"
-  to = "/MediMind-PitchDeck.html"
-  status = 200
-
-# Long cache on screenshot assets (filenames are stable)
+# Long cache on stable assets (logos, screenshots, fonts).
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Never cache the gateway or the deck — guard-script updates must land instantly.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-store, must-revalidate"
+    X-Robots-Tag  = "noindex, nofollow"
+
+[[headers]]
+  for = "/MediMind-PitchDeck.html"
+  [headers.values]
+    Cache-Control = "no-store, must-revalidate"
+    X-Robots-Tag  = "noindex, nofollow"

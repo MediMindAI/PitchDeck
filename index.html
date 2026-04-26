@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MediMind — Private Investor Briefing</title>
+  <meta name="description" content="MediMind investor briefing — by invitation only.">
+  <meta name="theme-color" content="#0a1628">
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Intentionally no OG image / preview text on the gateway: keeps it confidential when shared in chats. -->
+
+  <style>
+    :root {
+      --primary:        #1a365d;
+      --secondary:      #2b6cb0;
+      --accent:         #3182ce;
+      --light-accent:   #bee3f8;
+
+      --bg-deep:        #060d1c;
+      --bg-mid:         #0a1628;
+      --bg-rise:        #0f2040;
+
+      --ink-strong:     #f8fafc;
+      --ink-soft:       #cbd5e1;
+      --ink-faded:      #64748b;
+      --ink-whisper:    #475569;
+
+      --glass:          rgba(255, 255, 255, 0.04);
+      --glass-strong:   rgba(255, 255, 255, 0.07);
+      --glass-border:   rgba(255, 255, 255, 0.08);
+
+      --error:          #f87171;
+      --success:        #4ade80;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Noto Sans Georgian', sans-serif;
+      color: var(--ink-soft);
+      background: var(--bg-mid);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: -0.005em;
+    }
+
+    /* ───────── Background: layered gradients + drifting orbs + lattice ───────── */
+    .bg {
+      position: fixed; inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(1200px 800px at 90% -10%, rgba(49, 130, 206, 0.22), transparent 60%),
+        radial-gradient(1000px 700px at -10% 110%, rgba(43, 108, 176, 0.18), transparent 60%),
+        linear-gradient(180deg, #060d1c 0%, #0a1628 50%, #060d1c 100%);
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      z-index: 1;
+      pointer-events: none;
+      will-change: transform;
+    }
+    .orb-a {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, #3182ce 0%, transparent 70%);
+      top: -180px; left: -120px;
+      animation: drift-a 32s ease-in-out infinite alternate;
+    }
+    .orb-b {
+      width: 620px; height: 620px;
+      background: radial-gradient(circle, #1a365d 0%, transparent 65%);
+      bottom: -240px; right: -180px;
+      animation: drift-b 38s ease-in-out infinite alternate;
+    }
+    .orb-c {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, #2b6cb0 0%, transparent 70%);
+      top: 50%; left: 60%;
+      opacity: 0.28;
+      animation: drift-c 26s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift-a {
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(120px, 80px, 0) scale(1.15); }
+    }
+    @keyframes drift-b {
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(-160px, -100px, 0) scale(1.1); }
+    }
+    @keyframes drift-c {
+      0%   { transform: translate3d(0,0,0) scale(0.9); }
+      100% { transform: translate3d(-80px, 60px, 0) scale(1.2); }
+    }
+
+    /* Faint grid lattice — the "secure environment" cue */
+    .lattice {
+      position: fixed; inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(190, 227, 248, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(190, 227, 248, 0.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 85%);
+    }
+
+    /* ───────── Layout ───────── */
+    .stage {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 28px 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0.92;
+    }
+    .brand img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+
+    .session-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--ink-soft);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .session-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.25); }
+    }
+
+    /* ───────── Card ───────── */
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 0;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      padding: 56px 52px 44px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 1px 0 rgba(255, 255, 255, 0.04) inset;
+      animation: rise 1.05s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    /* Gradient border ring */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 1px;
+      background: linear-gradient(140deg,
+        rgba(190, 227, 248, 0.55) 0%,
+        rgba(49, 130, 206, 0.18) 35%,
+        rgba(255, 255, 255, 0.04) 60%,
+        rgba(43, 108, 176, 0.4) 100%);
+      -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Inner shimmer line */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 12%; right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(190,227,248,0.7), transparent);
+      opacity: 0.6;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    .eyebrow {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 18px;
+    }
+
+    h1.title {
+      margin: 0 0 14px;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.022em;
+      color: var(--ink-strong);
+      line-height: 1.15;
+    }
+
+    p.lede {
+      margin: 0 0 22px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      opacity: 0.78;
+    }
+
+    /* ───────── Round-closing window panel ─────────
+       Communicates: this round closes in 14 days. Investors
+       have a defined decision window, not an open-ended ask. */
+    .round-window {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px 14px 18px;
+      margin: 0 0 28px;
+      background:
+        linear-gradient(135deg, rgba(190,227,248,0.06) 0%, rgba(49,130,206,0.04) 100%);
+      border: 1px solid rgba(190,227,248,0.16);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    /* Left edge accent stripe — subtle "live status" feel */
+    .round-window::before {
+      content: '';
+      position: absolute;
+      top: 14px; bottom: 14px; left: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+      opacity: 0.7;
+    }
+    .round-window-pulse {
+      flex-shrink: 0;
+      width: 8px; height: 8px;
+      margin-top: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+    .round-window-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .round-window-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .round-window-headline {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--ink-strong);
+      letter-spacing: -0.005em;
+      line-height: 1.35;
+    }
+    .round-window-headline strong {
+      color: var(--light-accent);
+      font-weight: 700;
+    }
+    .round-window-note {
+      margin-top: 5px;
+      font-size: 11.5px;
+      letter-spacing: 0.02em;
+      color: var(--ink-faded);
+      line-height: 1.5;
+    }
+
+    /* ───────── Input ───────── */
+    .field {
+      position: relative;
+      margin: 0 0 24px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+      margin: 0 0 12px;
+      transition: color 0.25s ease;
+    }
+
+    .field input {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+      padding: 8px 0 14px;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--ink-strong);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease, padding 0.3s ease;
+      caret-color: var(--accent);
+    }
+    .field input::placeholder {
+      color: var(--ink-whisper);
+      font-weight: 400;
+    }
+    .field input:focus {
+      border-bottom-color: var(--accent);
+    }
+    .field:focus-within .field-label {
+      color: var(--ink-soft);
+    }
+
+    /* Focus glow underline */
+    .field-glow {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+    .field:focus-within .field-glow { transform: scaleX(1); }
+
+    /* ───────── Submit button ───────── */
+    .submit {
+      width: 100%;
+      padding: 16px 22px;
+      border-radius: 12px;
+      border: 1px solid rgba(190,227,248,0.18);
+      background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 60%, #3182ce 100%);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.2s ease;
+      box-shadow:
+        0 12px 30px rgba(49, 130, 206, 0.28),
+        0 1px 0 rgba(255,255,255,0.12) inset;
+    }
+    .submit:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow:
+        0 16px 38px rgba(49, 130, 206, 0.42),
+        0 1px 0 rgba(255,255,255,0.14) inset;
+    }
+    .submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    .submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .submit .arrow {
+      transition: transform 0.25s ease;
+    }
+    .submit:hover:not(:disabled) .arrow {
+      transform: translateX(3px);
+    }
+
+    /* ───────── Helper / error / success ───────── */
+    .helper {
+      min-height: 22px;
+      margin-top: 18px;
+      text-align: center;
+      font-size: 12.5px;
+      letter-spacing: 0.01em;
+      color: var(--ink-faded);
+      transition: color 0.3s ease;
+    }
+    .helper.error  { color: var(--error); }
+    .helper.success { color: var(--success); }
+
+    .shake {
+      animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+    }
+    @keyframes shake {
+      10%, 90%  { transform: translateX(-1px); }
+      20%, 80%  { transform: translateX( 2px); }
+      30%, 50%, 70% { transform: translateX(-6px); }
+      40%, 60%      { transform: translateX( 6px); }
+    }
+
+    /* ───────── Footer ───────── */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--ink-whisper);
+    }
+
+    .footer .lock {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .footer .lock svg {
+      width: 11px; height: 11px;
+      stroke: var(--ink-faded);
+    }
+
+    /* ───────── Success overlay ───────── */
+    .flash {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.55s ease;
+    }
+    .flash.on { opacity: 1; pointer-events: auto; }
+
+    /* ───────── Mobile ───────── */
+    @media (max-width: 560px) {
+      .stage { padding: 20px 18px; }
+      .card  { padding: 44px 28px 32px; border-radius: 20px; }
+      h1.title { font-size: 26px; }
+      .field input { font-size: 19px; }
+      .footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+    }
+
+    /* Reduce motion — respect users with vestibular preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .orb, .session-tag::before { animation: none !important; }
+      .card { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg" aria-hidden="true"></div>
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+  <div class="orb orb-c" aria-hidden="true"></div>
+  <div class="lattice" aria-hidden="true"></div>
+
+  <div class="stage">
+
+    <header class="topbar">
+      <div class="brand">
+        <img src="assets/logo-horizontal-dark.svg" alt="MediMind" />
+      </div>
+      <div class="session-tag">Encrypted Session</div>
+    </header>
+
+    <main class="center">
+      <section class="card" role="dialog" aria-labelledby="cardTitle" aria-describedby="cardLede">
+        <div class="eyebrow">Private Investor Briefing</div>
+        <h1 class="title" id="cardTitle">By invitation only.</h1>
+        <p class="lede" id="cardLede">
+          This briefing is shared with a select group of partners. Please enter your access name to continue.
+        </p>
+
+        <div class="round-window" role="status" aria-label="Round closing window">
+          <span class="round-window-pulse" aria-hidden="true"></span>
+          <div class="round-window-body">
+            <div class="round-window-label">Pre-seed · open round</div>
+            <div class="round-window-headline">Round closes in <strong>14 days</strong> — decision window for invited partners.</div>
+            <div class="round-window-note">$200K target · YC-standard SAFE · briefing access expires after the window.</div>
+          </div>
+        </div>
+
+        <form id="gateForm" autocomplete="off" novalidate>
+          <div class="field">
+            <label class="field-label" for="access">Access Name</label>
+            <input
+              type="text"
+              id="access"
+              name="access"
+              placeholder="Your first name"
+              autocomplete="off"
+              autocapitalize="words"
+              spellcheck="false"
+              required
+              aria-describedby="helper"
+            />
+            <span class="field-glow" aria-hidden="true"></span>
+          </div>
+
+          <button type="submit" class="submit" id="submitBtn">
+            <span class="label">Enter Briefing</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+          <div class="helper" id="helper" role="status" aria-live="polite">
+            Single-use, encrypted access. Verified against your invitation.
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+          <path d="M8 11V7a4 4 0 1 1 8 0v4"></path>
+        </svg>
+        <span>Confidential</span>
+      </span>
+      <span>&copy; 2026 MediMind. All rights reserved.</span>
+    </footer>
+
+  </div>
+
+  <div class="flash" id="flash" aria-hidden="true"></div>
+
+  <script>
+    /* ─────────────────────────────────────────────────────────────
+       Access list — SHA-256 hashes of normalized first names.
+       Names are lower-cased + trimmed before hashing.
+       Compute new ones with:  printf 'name' | shasum -a 256
+       ───────────────────────────────────────────────────────────── */
+    const ALLOWED_HASHES = new Set([
+      // Lasha
+      'a7daf860b6349345529cf542c3f77c900cdaa0094b5852d9d4e0809387ca0a36',
+      // Irakli
+      'b22a0bdd086f0f9b8f0cb4563ae38695a559b7df8fafa5628438d119c00b212e',
+      // Add more here — one SHA-256 hash per recipient (lowercased first name)
+    ]);
+
+    const DECK_URL = 'MediMind-PitchDeck.html';
+    const SESSION_KEY = 'mm_briefing_access';
+    const MAX_ATTEMPTS = 3;
+    const LOCK_MS = 20_000;
+
+    const form    = document.getElementById('gateForm');
+    const input   = document.getElementById('access');
+    const submit  = document.getElementById('submitBtn');
+    const helper  = document.getElementById('helper');
+    const card    = document.querySelector('.card');
+    const flash   = document.getElementById('flash');
+
+    let attempts = 0;
+    let locked   = false;
+
+    // Already authenticated this session? Skip straight to deck.
+    if (sessionStorage.getItem(SESSION_KEY)) {
+      window.location.replace(DECK_URL);
+    }
+
+    // Auto-focus, but only on devices where it doesn't pop a keyboard awkwardly.
+    if (!matchMedia('(max-width: 640px)').matches) {
+      window.addEventListener('load', () => input.focus());
+    }
+
+    async function sha256(str) {
+      const enc = new TextEncoder().encode(str);
+      const buf = await crypto.subtle.digest('SHA-256', enc);
+      return Array.from(new Uint8Array(buf))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    function setHelper(msg, kind) {
+      helper.textContent = msg;
+      helper.classList.remove('error', 'success');
+      if (kind) helper.classList.add(kind);
+    }
+
+    function shakeCard() {
+      card.classList.remove('shake');
+      // force reflow so the animation restarts
+      void card.offsetWidth;
+      card.classList.add('shake');
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      if (locked) return;
+
+      const raw = input.value.trim().toLowerCase();
+      if (!raw) {
+        setHelper('Please enter your access name to continue.', 'error');
+        shakeCard();
+        return;
+      }
+
+      submit.disabled = true;
+      const original = submit.querySelector('.label').textContent;
+      submit.querySelector('.label').textContent = 'Verifying';
+
+      // Tiny delay — makes verification feel intentional, not instant.
+      await new Promise(r => setTimeout(r, 480));
+
+      const hash = await sha256(raw);
+
+      if (ALLOWED_HASHES.has(hash)) {
+        setHelper('Access granted. Opening briefing…', 'success');
+        sessionStorage.setItem(SESSION_KEY, hash);
+        // Smooth fade transition into the deck
+        await new Promise(r => setTimeout(r, 380));
+        flash.classList.add('on');
+        setTimeout(() => { window.location.href = DECK_URL; }, 520);
+        return;
+      }
+
+      attempts += 1;
+      submit.querySelector('.label').textContent = original;
+      submit.disabled = false;
+
+      if (attempts >= MAX_ATTEMPTS) {
+        locked = true;
+        submit.disabled = true;
+        input.disabled  = true;
+        let secs = Math.ceil(LOCK_MS / 1000);
+        setHelper(`Too many attempts. Please wait ${secs}s before trying again.`, 'error');
+        shakeCard();
+        const tick = setInterval(() => {
+          secs -= 1;
+          if (secs > 0) {
+            setHelper(`Too many attempts. Please wait ${secs}s before trying again.`, 'error');
+          } else {
+            clearInterval(tick);
+            locked = false;
+            attempts = 0;
+            submit.disabled = false;
+            input.disabled  = false;
+            input.value     = '';
+            setHelper('You may try again. Verify the spelling with your contact at MediMind.', null);
+            input.focus();
+          }
+        }, 1000);
+        return;
+      }
+
+      setHelper("We don't recognize that name. Please verify the spelling with your contact at MediMind.", 'error');
+      shakeCard();
+      input.select();
+    }
+
+    form.addEventListener('submit', handleSubmit);
+
+    // Subtle: clear error styling as the user starts typing again
+    input.addEventListener('input', () => {
+      if (helper.classList.contains('error') && !locked) {
+        setHelper('Single-use, encrypted access. Verified against your invitation.', null);
+      }
+    });
+  </script>
+</body>
+</html>
