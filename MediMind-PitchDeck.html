@@ -4,6 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <script>
+    // Access guard — gateway sets sessionStorage["mm_briefing_access"] on success.
+    // Local file:// previews (offline PDF export, etc.) and ?print-pdf are exempted.
+    (function () {
+      try {
+        if (location.protocol === 'file:') return;
+        if (location.search.indexOf('print-pdf') !== -1) return;
+        if (sessionStorage.getItem('mm_briefing_access')) return;
+        location.replace('index.html');
+      } catch (e) { location.replace('index.html'); }
+    })();
+  </script>
+
   <title>MediMind — The AI-Native Hospital OS · Investor Pitch</title>
   <meta name="description" content="MediMind — the AI-native operating system for the modern hospital. $200K pre-seed round.">
   <meta name="author" content="Lasha Khoshtaria">
@@ -137,6 +150,19 @@
       margin-top: 24px;
       max-width: 85%;
     }
+    /* Unified one-line clarifier under .headline-big — matches the Team-slide rhythm. */
+    .headline-sub {
+      margin: 12px 0 36px;
+      max-width: 780px;
+      font-size: 1em;
+      line-height: 1.5;
+      color: var(--emr-text-body);
+    }
+    .headline-sub em {
+      color: var(--emr-secondary);
+      font-style: italic;
+      font-weight: 500;
+    }
 
     /* ─── SLIDE 1: COVER (premium redesign) ──────────── */
     .cover {
@@ -233,7 +259,8 @@
       .cover-logo { animation: none; }
     }
 
-    /* Tagline — gradient-filled, bigger, confident */
+    /* Tagline — gradient-filled, bigger, confident.
+       Each line is its own animated <span> so the entrance staggers cleanly. */
     .cover .tagline {
       font-size: 2em;
       font-weight: 300;
@@ -241,12 +268,21 @@
       letter-spacing: -0.01em;
       max-width: 820px;
       margin: 0 auto;
+    }
+    .cover .tagline-line {
+      display: block;
       background: linear-gradient(135deg, #ffffff 0%, #bee3f8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       color: transparent;
-      animation: fadeInUp 1s 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+      will-change: transform, opacity;
+    }
+    .cover .tagline-line-1 {
+      animation: fadeInUp 0.9s 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    }
+    .cover .tagline-line-2 {
+      animation: fadeInUp 0.9s 1.0s cubic-bezier(0.2, 0.9, 0.2, 1) both;
     }
     .cover .tagline em {
       font-style: normal;
@@ -259,7 +295,7 @@
       100% { opacity: 1; transform: translateY(0); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .cover .tagline { animation: none; }
+      .cover .tagline-line { animation: none; }
     }
 
     /* Badge — glass with pinging indicator */
@@ -313,7 +349,7 @@
       font-weight: 500;
       text-transform: uppercase;
       z-index: 2;
-      animation: fadeInUp 1s 1s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+      animation: fadeInUp 1s 1.3s cubic-bezier(0.2, 0.9, 0.2, 1) both;
     }
     .cover .footer-row::before {
       content: '';
@@ -520,13 +556,15 @@
       .hook-emphasis { animation: none; }
     }
 
-    /* Staggered entrance — replays on slide activation */
+    /* Staggered entrance — replays on slide activation.
+       NOTE: do NOT use :nth-of-type here — the parent has a .slide-label div as
+       the first child, so :nth-of-type(N) miscounts. Modifier classes are explicit. */
     .hook-slide.present .hook-statement {
       animation: hookStatementIn 0.9s cubic-bezier(0.2, 0.9, 0.2, 1) both;
     }
-    .hook-slide.present .hook-statement:nth-of-type(1) { animation-delay: 0.15s; }
-    .hook-slide.present .hook-divider              { animation: hookDividerIn 0.7s 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
-    .hook-slide.present .hook-statement:nth-of-type(2) { animation-delay: 0.65s; }
+    .hook-slide.present .hook-statement-1 { animation-delay: 0.15s; }
+    .hook-slide.present .hook-divider     { animation: hookDividerIn 0.7s 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+    .hook-slide.present .hook-statement-2 { animation-delay: 0.65s; }
 
     @keyframes hookStatementIn {
       0%   { opacity: 0; transform: translateY(18px); }
@@ -1141,9 +1179,9 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       SLIDE 02·5 — CATEGORY · "What we are · Who we aren't"
+       SLIDES 03 & 04 — CATEGORY (solo) and COMPETITION
+       Both use the standardized .slide-inner padding for consistency.
        ════════════════════════════════════════════════════════ */
-    .cat-slide .slide-inner { padding: 56px 70px 36px; }
     .cat-split {
       display: grid;
       grid-template-columns: 42% 58%;
@@ -1443,6 +1481,375 @@
       color: var(--emr-text-muted);
       margin-top: 2px;
     }
+    .cat-footer-sub em {
+      color: var(--emr-secondary);
+      font-style: italic;
+      font-weight: 700;
+    }
+    /* Parenthetical clarifier inside the gradient megaline (e.g. "(Legacy EMR)"). */
+    .cat-footer-aside {
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      -webkit-text-fill-color: initial;
+      background: none;
+      color: var(--emr-text-light);
+      font-weight: 500;
+      font-size: 0.7em;
+      letter-spacing: 0.04em;
+      margin-left: 4px;
+    }
+
+    /* Solo Category slide (slide 03) — single-column qualifiers, larger text. */
+    .cat-slide.is-solo .cat-qualifiers-solo {
+      max-width: 880px;
+      margin-top: 8px;
+    }
+    .cat-slide.is-solo .cat-qualifiers-solo .cat-qualifier {
+      font-size: 1em;
+      padding: 16px 0;
+      gap: 22px;
+    }
+    .cat-slide.is-solo .cat-qualifiers-solo .cat-qualifier-num {
+      font-size: 1em;
+      min-width: 36px;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SLIDE 03 — CATEGORY (premium redesign, .cat-solo-v2)
+       4-pillar grid + equation footer. Scoped class so it does
+       not affect slide 04 which shares .cat-slide markup.
+       ════════════════════════════════════════════════════════ */
+    .cat-solo-v2 {
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-solo-v2::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(49,130,206,0.10) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cat-solo-v2::after {
+      content: '';
+      position: absolute;
+      bottom: -180px; left: -100px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(190,227,248,0.18) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cat-solo-v2 .slide-inner {
+      position: relative;
+      z-index: 1;
+      /* Widen content area on this slide so each of the 4 cards has
+         room for a 2-line title. */
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+    .cat-solo-v2 .slide-label { left: 60px; }
+
+    /* Restore standard headline em gradient (template uses italic accent;
+       on this slide we want gradient like other category-tier slides). */
+    .cat-solo-v2 .headline-big em {
+      font-style: normal;
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Trim the default 36px bottom margin under the sub so the 4-card grid
+       has room to breathe without disturbing template title size/placement. */
+    .cat-solo-v2 .headline-sub {
+      margin: 12px 0 22px;
+    }
+
+    /* 4-pillar grid */
+    .cs2-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    /* Each card is itself a vertical grid with FIXED rows so that
+       across all 4 cards the icon, title, and description start
+       (and end) at exactly the same Y coordinate — visual parity. */
+    .cs2-card {
+      position: relative;
+      padding: 18px 16px 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid var(--emr-border);
+      border-radius: 14px;
+      box-shadow: 0 1px 2px rgba(15,32,58,0.04), 0 8px 24px rgba(15,32,58,0.05);
+      display: grid;
+      /* Fixed-height title row sized for a 2-line title at 0.82em
+         (line-height 1.22 → ≈ 30px/line × 2 = 60px, +4px buffer = 64px).
+         This guarantees the description in every card starts at the same Y
+         AND the title block is tight (no excess gap between title and desc). */
+      grid-template-rows: 40px 64px auto;  /* icon · title (2 lines) · desc */
+      row-gap: 12px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .cs2-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--emr-gradient-primary);
+      opacity: 0.85;
+    }
+    .cat-slide.present .cs2-card { opacity: 1; transform: translateY(0); }
+    .cat-slide.present .cs2-card:nth-child(1) { transition-delay: 0.45s; }
+    .cat-slide.present .cs2-card:nth-child(2) { transition-delay: 0.55s; }
+    .cat-slide.present .cs2-card:nth-child(3) { transition-delay: 0.65s; }
+    .cat-slide.present .cs2-card:nth-child(4) { transition-delay: 0.75s; }
+
+    .cs2-num {
+      position: absolute;
+      top: 12px; right: 14px;
+      font-size: 0.68em;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      background: var(--emr-gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-feature-settings: 'tnum';
+      opacity: 0.9;
+    }
+    .cs2-icon {
+      width: 40px; height: 40px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, rgba(26,54,93,0.06) 0%, rgba(49,130,206,0.10) 100%);
+      border: 1px solid rgba(49,130,206,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--emr-secondary);
+      align-self: start;
+    }
+    .cs2-icon svg { width: 20px; height: 20px; }
+    .cs2-title {
+      font-size: 0.82em;
+      font-weight: 800;
+      line-height: 1.22;
+      color: var(--emr-text-primary);
+      letter-spacing: -0.01em;
+      margin: 0;
+      /* Title row is fixed at 2.6em via grid-template-rows.
+         Anchor titles to the TOP of the row so 1-line and 2-line
+         titles all begin at the same Y. */
+      align-self: start;
+    }
+    .cs2-desc {
+      font-size: 0.62em;
+      line-height: 1.5;
+      color: var(--emr-text-body);
+      margin: 0;
+      font-weight: 500;
+      align-self: start;
+    }
+    .cs2-desc em {
+      font-style: normal;
+      color: var(--emr-secondary);
+      font-weight: 600;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       Competition slide (slide 04) — premium card design.
+       Each competitor category is a soft white card with a brand-tinted
+       icon tile, label, and chip-style competitor names. Closing line
+       is a gradient hero card that visually answers the headline.
+       ───────────────────────────────────────────────────────────── */
+
+    .cat-slide:not(.is-solo) .headline-big {
+      font-size: 2.05em;
+      max-width: 95%;
+    }
+    .cat-slide:not(.is-solo) .headline-sub {
+      margin: 10px 0 16px;
+      max-width: 880px;
+      font-size: 0.95em;
+    }
+
+    /* Stack of category cards */
+    .cat-terrain-wide {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 0;
+      max-width: 100%;
+    }
+    .cat-terrain-wide .cat-row {
+      display: grid;
+      grid-template-columns: 44px 220px 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 11px 18px;
+      background: #ffffff;
+      border: 1px solid var(--emr-border);
+      border-radius: 14px;
+      box-shadow:
+        0 1px 2px rgba(26, 54, 93, 0.04),
+        0 4px 14px rgba(26, 54, 93, 0.05);
+    }
+    .cat-terrain-wide .cat-row:first-child,
+    .cat-terrain-wide .cat-row:last-child {
+      border-top: 1px solid var(--emr-border);
+      border-bottom: 1px solid var(--emr-border);
+    }
+
+    /* Icon tile — soft brand gradient */
+    .cat-row-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(190, 227, 248, 0.55) 0%, rgba(190, 227, 248, 0.18) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--emr-secondary);
+      flex-shrink: 0;
+    }
+    .cat-row-icon svg { width: 18px; height: 18px; }
+
+    /* Category label & sub-tagline */
+    .cat-terrain-wide .cat-row-label {
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: var(--emr-text-primary);
+      line-height: 1.25;
+    }
+    .cat-terrain-wide .cat-row-label em {
+      display: block;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--emr-text-light);
+      letter-spacing: 0;
+      text-transform: none;
+      font-size: 0.78em;
+      margin-top: 3px;
+    }
+
+    /* Competitor names — chip pills */
+    .cat-terrain-wide .cat-row-names {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+    .cat-name {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: var(--emr-bg-tint);
+      border: 1px solid rgba(190, 227, 248, 0.85);
+      font-size: 0.62em;
+      font-weight: 600;
+      color: var(--emr-text-primary);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    /* Refined gap divider */
+    .cat-slide:not(.is-solo) .cat-gap {
+      padding: 8px 0 6px;
+    }
+    .cat-slide:not(.is-solo) .cat-gap-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      font-size: 0.55em;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--emr-accent);
+      background: #ffffff;
+      border: 1.5px solid var(--emr-accent);
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(49, 130, 206, 0.15);
+    }
+    .cat-slide:not(.is-solo) .cat-gap-chip svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    /* Gradient hero footer — the "we replace Both" answer card */
+    .cat-footer-hero {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 6px;
+      padding: 16px 22px;
+      background: var(--emr-gradient-primary);
+      border-top: 0;
+      border-radius: 16px;
+      box-shadow:
+        0 18px 40px rgba(26, 54, 93, 0.32),
+        0 1px 0 rgba(255, 255, 255, 0.10) inset;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-footer-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 18px 18px;
+      pointer-events: none;
+    }
+    .cat-footer-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--emr-light-accent);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .cat-footer-icon svg { width: 20px; height: 20px; }
+    .cat-footer-text {
+      position: relative;
+      z-index: 1;
+    }
+    /* Override gradient-text on hero footer — needs to be white now */
+    .cat-footer-hero .cat-footer-line {
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      -webkit-text-fill-color: initial;
+      color: #ffffff;
+      font-size: 1.2em;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+    }
+    .cat-footer-hero .cat-footer-aside {
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 500;
+    }
+    .cat-footer-hero .cat-footer-sub {
+      font-size: 0.82em;
+      color: rgba(255, 255, 255, 0.78);
+      margin-top: 2px;
+      letter-spacing: 0.005em;
+    }
+    .cat-footer-hero .cat-footer-sub em {
+      font-style: italic;
+      color: var(--emr-light-accent);
+      font-weight: 800;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .cat-kicker, .cat-display, .cat-qualifier, .cat-row,
@@ -1455,10 +1862,12 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       SLIDE 03 — THE GEORGIA WINDOW (replacement)
+       SLIDE 05 — THE GEORGIA WINDOW
+       Uses .headline-big + .headline-sub. Vertical padding tightened
+       to fit timeline + 3 cards + stats; horizontal padding stays at
+       90px so the eyebrow/headline align exactly with the Team slide.
        ════════════════════════════════════════════════════════ */
-    .gw-slide .slide-inner { padding: 48px 70px 28px; gap: 0; }
-    .gw-hero { margin-bottom: 2px; }
+    .gw-slide .slide-inner { padding: 56px 90px 40px; }
     .gw-kicker {
       font-size: 0.54em;
       font-weight: 800;
@@ -1821,10 +2230,11 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       SLIDE 05 — BUSINESS MODEL · three-tier pricing
+       SLIDE 06 — BUSINESS MODEL · three-tier pricing
+       Same exception as the Georgia Window slide: vertical padding tightened
+       to fit 3 pricing cards + stats; horizontal stays at 90px for alignment.
        ════════════════════════════════════════════════════════ */
-    .bm-slide .slide-inner { padding: 48px 70px 30px; gap: 0; }
-    .bm-hero { margin-bottom: 2px; }
+    .bm-slide .slide-inner { padding: 56px 90px 40px; }
     .bm-kicker {
       font-size: 0.54em;
       font-weight: 800;
@@ -1942,12 +2352,16 @@
     }
     .bm-tier--featured .bm-tier-label-star { color: var(--emr-light-accent); }
     .bm-tier-regions {
-      font-size: 0.62em;
+      font-size: 0.52em;
       font-weight: 500;
       color: var(--emr-text-muted);
-      letter-spacing: 0.01em;
+      letter-spacing: 0;
       line-height: 1.4;
       margin-bottom: 16px;
+      min-height: calc(0.52em * 1.4);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .bm-tier--featured .bm-tier-regions { color: rgba(255,255,255,0.82); }
     .bm-tier--premium .bm-tier-regions { color: rgba(255,255,255,0.72); }
@@ -2056,11 +2470,12 @@
 
     /* Y4 ARR — one stat, three columns, zero noise */
     .bm-arr {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 36px;
-      padding: 20px 40px;
+      justify-content: center;
+      gap: 6px;
+      padding: 22px 40px 24px;
       background: var(--emr-gradient-primary);
       border-radius: 14px;
       box-shadow: 0 16px 36px rgba(26,54,93,0.30);
@@ -2070,6 +2485,7 @@
       transform: translateY(10px);
       transition: opacity 0.5s ease, transform 0.5s ease;
       transition-delay: 1.10s;
+      text-align: center;
     }
     .bm-slide.present .bm-arr { opacity: 1; transform: translateY(0); }
     .bm-arr::before {
@@ -2081,29 +2497,24 @@
       pointer-events: none;
     }
     .bm-arr > * { position: relative; z-index: 1; }
-    .bm-arr-left,
-    .bm-arr-right {
-      font-size: 0.54em;
+    .bm-arr-label {
+      font-size: 0.6em;
       font-weight: 800;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--emr-light-accent);
-      line-height: 1.3;
+      line-height: 1.2;
     }
-    .bm-arr-left { text-align: left; }
-    .bm-arr-right { text-align: right; }
-    .bm-arr-left span,
-    .bm-arr-right span {
-      display: block;
-      color: rgba(255,255,255,0.72);
+    .bm-arr-sub {
+      color: rgba(255,255,255,0.78);
       font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: none;
-      font-size: 0.85em;
-      margin-top: 4px;
+      font-size: 0.7em;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+      margin-top: 2px;
     }
     .bm-arr-num {
-      font-size: 2.8em;
+      font-size: 3.2em;
       font-weight: 900;
       color: #ffffff;
       letter-spacing: -0.04em;
@@ -2128,7 +2539,199 @@
       .bm-tier--featured { transform: scale(1.02) !important; }
     }
 
-    /* ─── SLIDE 6: PROGRESS — TWO-YEAR SPLIT + FOOTER STATS ─ */
+    /* ════════════════════════════════════════════════════════
+       SLIDE 09 — PROGRESS MADE
+       Two horizontal phase tracks stacked vertically. Each track
+       has 4 milestone tiles connected by a soft rail. The Apr 2026
+       contract is the climactic hero tile (brand gradient, larger
+       icon, heavier drop shadow — sits flush with siblings).
+       ════════════════════════════════════════════════════════ */
+    .prog-slide .slide-inner { padding: 56px 90px 40px; }
+
+    .prog-phase { margin-top: 18px; }
+    .prog-phase:first-of-type { margin-top: 8px; }
+
+    .prog-phase-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .prog-phase-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      border-radius: 7px;
+      background: var(--emr-bg-tint);
+      border: 1px solid var(--emr-light-accent);
+      font-size: 0.78em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+    .prog-phase-tag--accent {
+      background: var(--emr-gradient-primary);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(26, 54, 93, 0.28);
+    }
+    .prog-phase-name {
+      font-size: 0.62em;
+      font-weight: 800;
+      color: var(--emr-text-muted);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .prog-phase-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--emr-border) 0%, transparent 100%);
+    }
+
+    /* Horizontal track of 4 milestone tiles */
+    .prog-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      position: relative;
+    }
+    /* Soft horizontal rail behind the tiles, aligned to the icon centers */
+    .prog-track-rail {
+      position: absolute;
+      top: 38px;
+      left: 9%;
+      right: 9%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        var(--emr-accent) 0%,
+        var(--emr-light-accent) 50%,
+        var(--emr-accent) 100%);
+      opacity: 0.32;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    /* A single milestone tile */
+    .prog-tile {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      padding: 12px 12px 14px;
+      background: #ffffff;
+      border: 1px solid var(--emr-border);
+      border-radius: 14px;
+      box-shadow:
+        0 1px 2px rgba(26, 54, 93, 0.04),
+        0 6px 16px rgba(26, 54, 93, 0.06);
+    }
+    .prog-tile-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(190, 227, 248, 0.55) 0%, rgba(190, 227, 248, 0.18) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--emr-secondary);
+      margin-bottom: 4px;
+    }
+    .prog-tile-icon svg { width: 22px; height: 22px; }
+    .prog-tile-month {
+      font-size: 0.62em;
+      font-weight: 800;
+      color: var(--emr-accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .prog-tile-title {
+      font-size: 0.84em;
+      font-weight: 800;
+      color: var(--emr-primary);
+      line-height: 1.2;
+      letter-spacing: -0.005em;
+    }
+    .prog-tile-meta {
+      font-size: 0.64em;
+      color: var(--emr-text-muted);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .prog-tile-meta strong { color: var(--emr-primary); font-weight: 700; }
+    .prog-tile-meta em { color: var(--emr-text-light); font-style: italic; }
+
+    /* Accent tile — Feb 2026 (Innovative Startup award) */
+    .prog-tile--accent {
+      border-color: rgba(49, 130, 206, 0.4);
+      background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+    }
+    .prog-tile--accent .prog-tile-icon {
+      background: var(--emr-accent);
+      color: #ffffff;
+    }
+    .prog-tile--accent .prog-tile-month { color: var(--emr-primary); }
+
+    /* Hero tile — Apr 2026 (Contract SIGNED).
+       Sits flush with siblings (no translateY lift) so all 4 tiles in
+       the row share the same baseline. Visual prominence comes from the
+       brand gradient + larger icon + heavy drop shadow. */
+    .prog-tile--hero {
+      background: var(--emr-gradient-primary);
+      color: #ffffff;
+      border: 0;
+      box-shadow:
+        0 22px 40px rgba(26, 54, 93, 0.42),
+        0 1px 0 rgba(255, 255, 255, 0.12) inset;
+      overflow: hidden;
+    }
+    .prog-tile--hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 18px 18px;
+      pointer-events: none;
+    }
+    .prog-tile--hero .prog-tile-icon {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: var(--emr-light-accent);
+      width: 48px;
+      height: 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .prog-tile--hero .prog-tile-icon svg { width: 22px; height: 22px; }
+    .prog-tile--hero .prog-tile-month {
+      color: var(--emr-light-accent);
+      position: relative;
+      z-index: 1;
+    }
+    .prog-tile--hero .prog-tile-title {
+      color: #ffffff;
+      font-weight: 900;
+      position: relative;
+      z-index: 1;
+    }
+    .prog-tile--hero .prog-tile-meta {
+      color: rgba(255, 255, 255, 0.85);
+      position: relative;
+      z-index: 1;
+    }
+    .prog-tile--hero .prog-tile-meta strong {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .prog-tile { transition: none !important; animation: none !important; }
+    }
+
+    /* Legacy classes retained — used elsewhere in the deck still */
     .progress-years {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -3787,6 +4390,41 @@
       color: var(--emr-primary);
       font-weight: 700;
     }
+    /* Row that contains the "$200K = 14-month runway" pill on the left
+       and the segmented funds-bar filling the remaining width. */
+    .funds-row {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      height: 34px;
+    }
+    .funds-runway-inline {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      background: linear-gradient(90deg, rgba(190,227,248,0.22) 0%, rgba(49,130,206,0.12) 100%);
+      border: 1px solid rgba(49,130,206,0.28);
+      border-radius: 10px;
+      font-size: 0.62em;
+      color: var(--emr-text-body);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .funds-runway-inline strong {
+      color: var(--emr-primary);
+      font-weight: 800;
+    }
+    .funds-runway-icon {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--emr-secondary);
+    }
+    .funds-runway-icon svg { width: 16px; height: 16px; }
+    /* Inside .funds-row, the funds-bar must flex to fill the remaining width. */
+    .funds-row .funds-bar { flex: 1 1 auto; }
     .funds-bar {
       display: flex;
       height: 34px;
@@ -3824,11 +4462,29 @@
       border-radius: 0 10px 10px 0;
       line-height: 1.55;
       letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 14px;
     }
     .funds-outcome strong {
       color: var(--emr-primary);
       font-weight: 700;
     }
+    .funds-outcome-label {
+      flex-shrink: 0;
+      padding: 4px 12px;
+      background: var(--emr-gradient-primary);
+      color: #ffffff;
+      font-size: 0.82em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      box-shadow: 0 4px 10px rgba(26,54,93,0.25);
+      white-space: nowrap;
+    }
+    .funds-outcome-text { flex: 1 1 auto; min-width: 0; }
 
     /* ─── SLIDE 11: CONVERTIBLE NOTE TERMS ────────────── */
     .terms-layout {
@@ -3969,6 +4625,48 @@
       color: var(--emr-light-accent);
       text-align: right;
       letter-spacing: -0.005em;
+    }
+
+    /* "Your stake" highlight — the headline equity outcome */
+    .terms-stake {
+      margin-top: 14px;
+      padding: 10px 14px 12px;
+      background: linear-gradient(135deg, rgba(190,227,248,0.10) 0%, rgba(49,130,206,0.18) 100%);
+      border: 1px solid rgba(190,227,248,0.28);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(8,18,40,0.35);
+    }
+    .terms-stake-label {
+      font-size: 0.5em;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(190,227,248,0.80);
+      margin-bottom: 3px;
+    }
+    .terms-stake-value {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 1.35em;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .terms-stake-value span {
+      font-size: 0.5em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(190,227,248,0.85);
+    }
+    .terms-stake-note {
+      margin-top: 5px;
+      font-size: 0.52em;
+      color: rgba(190,227,248,0.70);
+      letter-spacing: 0.02em;
+      font-weight: 500;
     }
 
     /* Footer badge: "Y Combinator SAFE · industry standard" */
@@ -4744,6 +5442,312 @@
     @media (prefers-reduced-motion: reduce) {
       .divider-arrow { animation: none; }
     }
+
+    /* ═════════════════════════════════════════════════════════════
+       MOBILE NATIVE — portrait reflow for phones (≤ 768px)
+       Strategy: Reveal manages slides with a 380×760 mobile canvas
+       and scales to fit. CSS reflows content within that canvas:
+       multi-column grids stack, typography rescales with clamp(),
+       decorative absolute-positioned background art hidden.
+       ═════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      html, body { font-size: 16px; }
+      .reveal .controls { display: none !important; }
+      .reveal .progress { z-index: 50; height: 4px; bottom: 0; }
+
+      /* Slide inner — drop the giant desktop padding */
+      .slide-inner {
+        padding: 18px 14px 26px !important;
+        box-sizing: border-box;
+        max-width: 100%;
+      }
+
+      /* Brand footer — hide on mobile, too cluttering with limited screen.
+         Note: .reveal .brand-footer (line 373) sets display:flex !important,
+         so we need matching/higher specificity to override. */
+      .reveal .brand-footer { display: none !important; }
+
+      /* Cover decorative art — hide pseudo-element glows + corner marks */
+      .cover::before,
+      .cover::after { display: none !important; }
+      .cover-corner { display: none !important; }
+      .cover { padding-top: 0 !important; }
+
+      /* Aside notes (presenter) — keep hidden */
+      aside.notes { display: none !important; }
+
+      /* Slide labels (the 06 BUSINESS MODEL · PRICING etc.) — normal flow,
+         not position:absolute, so they don't overlap headlines on mobile. */
+      .slide-label {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        font-size: 0.62rem !important;
+        letter-spacing: 0.18em !important;
+        margin: 0 0 14px 0 !important;
+        display: block !important;
+        text-align: left !important;
+      }
+      .cat-solo-v2 .slide-label { left: auto !important; }
+
+      /* Headlines — fluid sizing, never cramped, never giant */
+      .headline-big,
+      h2.headline-big {
+        font-size: clamp(1.5rem, 6.4vw, 2.1rem) !important;
+        line-height: 1.18 !important;
+        letter-spacing: -0.01em !important;
+      }
+      .headline-sub {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem) !important;
+        line-height: 1.45 !important;
+      }
+
+      /* Universal grid collapse — every multi-column grid stacks */
+      .bm-tiers,
+      .gw-stops,
+      .gw-cards,
+      .founders-grid,
+      .advisors-grid,
+      .ambition-cards,
+      .cs2-grid,
+      .cat-terrain,
+      .cat-row-names,
+      .stages-grid,
+      .timeline-row,
+      .investing-grid,
+      .ask-grid,
+      .stations-grid,
+      .prog-track,
+      .ask-journey,
+      .terms-layout,
+      .terms-grid,
+      .flow-steps,
+      .gallery-grid,
+      .arch-wrapper {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+      }
+      /* Architecture scene — let SVG fill width */
+      .arch-scene { width: 100% !important; height: auto !important; }
+      /* Decorative horizontal rails — hide on mobile (no horizontal axis) */
+      .prog-track-rail,
+      .progress-year-2025::after { display: none !important; }
+
+      /* SVG / image auto-scale */
+      svg { max-width: 100%; height: auto; }
+      img { max-width: 100%; height: auto; }
+
+      /* Buttons / tap targets */
+      a, button { min-height: 36px; }
+
+      /* ─── Per-slide tweaks ─── */
+
+      /* Cover slide — center vertically, cap logo */
+      .cover .slide-inner {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .cover img,
+      .cover .cover-logo,
+      .cover svg { max-width: min(280px, 70vw) !important; }
+
+      /* Cover slide — footer row stacks vertically, no squeeze */
+      .cover .footer-row {
+        flex-direction: column !important;
+        gap: 4px !important;
+        align-items: center !important;
+        text-align: center !important;
+        font-size: 0.65em !important;
+      }
+      .cover .footer-row::before { display: none !important; }
+      .cover .badge-accent {
+        font-size: 0.6em !important;
+        padding: 6px 14px !important;
+      }
+      .cover .tagline { font-size: 1.4em !important; max-width: 100% !important; }
+      .cover .tagline-line { line-height: 1.2 !important; }
+
+      /* Hook (problem) slide — keep statements stacked & readable */
+      .hook-slide .hook-statement {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .hook-slide .hook-headline,
+      .hook-slide h2.hook-headline {
+        font-size: clamp(1.05rem, 4.4vw, 1.35rem) !important;
+        line-height: 1.25 !important;
+      }
+      .hook-slide .hook-numeral {
+        font-size: 2.2rem !important;
+        opacity: 0.12 !important;
+      }
+      .hook-slide .hook-divider { margin: 18px 0 !important; }
+
+      /* Founder & advisor cards on Team slide — stack photo over text */
+      .founder-card,
+      .advisor-card {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 10px !important;
+      }
+      .founder-card > *,
+      .advisor-card > * { width: 100% !important; }
+      .founder-photo,
+      .advisor-photo,
+      .cat-team-photo {
+        width: 140px !important;
+        height: 140px !important;
+        max-width: 140px !important;
+        aspect-ratio: 1 / 1 !important;
+        margin: 0 auto !important;
+        flex: 0 0 auto !important;
+      }
+
+      /* Progress / Timeline — make sure rows stack vertically, no horizontal scroll */
+      .prog-slide [class*="-row"],
+      .prog-slide [class*="-grid"],
+      .prog-slide .progress-cards,
+      .prog-slide .progress-timeline {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        overflow: visible !important;
+      }
+      .prog-slide .progress-card,
+      .prog-slide .timeline-card {
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      /* Ambition headline — clear breathing room from the slide-label above */
+      .ambition-headline { margin-top: 18px !important; }
+
+      /* Category & competition rows */
+      .cat-row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+        padding: 12px 14px !important;
+      }
+      .cat-row-icon { width: 32px !important; height: 32px !important; }
+
+      /* Georgia Window timeline → vertical */
+      .gw-stops {
+        gap: 18px !important;
+        align-items: flex-start !important;
+        padding: 0 !important;
+      }
+      .gw-stops::before,
+      .gw-stops::after { display: none !important; }
+      .gw-stop { width: 100% !important; align-items: flex-start !important; }
+      .gw-card {
+        padding: 16px !important;
+        border-radius: 12px !important;
+      }
+
+      /* Business Model — pricing cards stack */
+      .bm-tiers { margin: 16px 0 18px !important; }
+      .bm-tier {
+        padding: 18px 18px !important;
+        border-radius: 14px !important;
+      }
+      .bm-tier-regions {
+        font-size: 0.78em !important;
+        white-space: normal !important;
+        min-height: 0 !important;
+        text-overflow: clip !important;
+        overflow: visible !important;
+      }
+      .bm-tier-price-num { font-size: 2.6em !important; }
+      .bm-tier-foot { font-size: 0.7em !important; }
+
+      /* Ambition — stage cards stack, Y4 ARR strip stays prominent */
+      .ambition-headline {
+        font-size: clamp(1.5rem, 7vw, 2.1rem) !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px !important;
+      }
+      .ambition-card {
+        padding: 16px 18px !important;
+      }
+      .bm-arr {
+        padding: 18px 16px !important;
+        gap: 4px !important;
+      }
+      .bm-arr-num { font-size: 2.6em !important; }
+      .bm-arr-label { font-size: 0.7em !important; }
+      .bm-arr-sub { font-size: 0.7em !important; }
+
+      /* Team slide */
+      .team-section { margin-top: 14px !important; }
+      .team-section-label {
+        font-size: 0.7rem !important;
+        letter-spacing: 0.2em !important;
+      }
+      .founder-card,
+      .advisor-card {
+        padding: 14px !important;
+      }
+      .cat-team-photo,
+      .founder-photo,
+      .advisor-photo {
+        aspect-ratio: 1 / 1 !important;
+        width: 100% !important;
+        max-width: 240px !important;
+      }
+
+      /* Progress / Timeline slide */
+      .timeline-item,
+      .timeline-step {
+        padding: 12px 14px !important;
+      }
+
+      /* Ask slide */
+      .station-card,
+      .invest-card {
+        padding: 16px !important;
+      }
+
+      /* Gallery (appendix) — single image per row */
+      .gallery-img {
+        max-width: 100% !important;
+        max-height: 60vh !important;
+      }
+      .gallery-caption-title { font-size: 1rem !important; }
+      .gallery-caption-desc { font-size: 0.85rem !important; }
+
+      /* Hide presenter notes on mobile (just in case they aren't already) */
+      aside.notes { display: none !important; }
+    }
+
+    /* Tighter still for small phones (≤ 480px) */
+    @media (max-width: 480px) {
+      .slide-inner { padding: 18px 12px 22px !important; }
+      .headline-big,
+      h2.headline-big {
+        font-size: clamp(1.3rem, 6.2vw, 1.8rem) !important;
+      }
+      .headline-sub {
+        font-size: clamp(0.88rem, 3.6vw, 1.05rem) !important;
+      }
+      .bm-tier,
+      .ambition-card,
+      .gw-card,
+      .founder-card,
+      .advisor-card { padding: 14px !important; }
+      .bm-tier-price-num { font-size: 2.3em !important; }
+      .bm-arr-num { font-size: 2.2em !important; }
+      .ambition-headline { font-size: clamp(1.3rem, 6vw, 1.8rem) !important; }
+      .cover img,
+      .cover .cover-logo,
+      .cover svg { max-width: min(220px, 65vw) !important; }
+    }
   </style>
 </head>
 <body>
@@ -4761,7 +5765,10 @@
         <div class="slide-inner center">
           <div class="badge-accent">The AI-Native Hospital OS</div>
           <img src="assets/logo-horizontal-dark.svg" class="cover-logo" alt="MediMind — The AI-Native Hospital OS">
-          <div class="tagline">The <em>AI-native</em> operating system<br>for the modern hospital.</div>
+          <div class="tagline">
+      <span class="tagline-line tagline-line-1">The <em>AI-native</em> operating system</span>
+      <span class="tagline-line tagline-line-2">for the modern hospital.</span>
+    </div>
           <div class="footer-row">
             <div><strong>Lasha Khoshtaria</strong> &nbsp;·&nbsp; team@medimind.md</div>
             <div>Investor Pitch &nbsp;·&nbsp; April 2026</div>
@@ -4780,14 +5787,14 @@
         <div class="slide-inner center">
           <div class="slide-label"><span class="label-num">01</span>THE PROBLEM</div>
 
-          <div class="hook-statement">
+          <div class="hook-statement hook-statement-1">
             <span class="hook-numeral" aria-hidden="true">01</span>
             <h2 class="hook-headline">In <span class="hook-emphasis">four years</span>, practicing medicine without an AI will be considered <span class="hook-emphasis">malpractice</span>.</h2>
           </div>
 
           <div class="hook-divider" aria-hidden="true"></div>
 
-          <div class="hook-statement">
+          <div class="hook-statement hook-statement-2">
             <span class="hook-numeral" aria-hidden="true">02</span>
             <h2 class="hook-headline">When a patient with ChatGPT knows more than their doctor, it's not a tech gap — <span class="hook-emphasis">it's a crisis.</span></h2>
           </div>
@@ -4979,112 +5986,173 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════
-           SLIDE 02·5: CATEGORY — What we are · Who we aren't
+           SLIDE 03: CATEGORY — What we are
            ═══════════════════════════════════════════════ -->
-      <section class="cat-slide">
+      <section class="cat-slide is-solo cat-solo-v2">
         <div class="slide-inner">
           <div class="slide-label"><span class="label-num">03</span>CATEGORY</div>
 
-          <div class="cat-split">
-            <!-- Left: What we are (tight hero) -->
-            <div class="cat-left">
-              <div class="cat-kicker">One of the first</div>
-              <h2 class="cat-display">Hospital operating systems built <em>ground-up on FHIR R4</em>.</h2>
+          <h2 class="headline-big">One of the first hospital operating systems built <em>ground-up on FHIR&nbsp;R4</em>.</h2>
+          <p class="headline-sub">Four conditions. <em>All four required at once</em> — or it isn't the category.</p>
 
-              <div class="cat-qualifiers">
-                <div class="cat-qualifier">
-                  <span class="cat-qualifier-num">01</span>
-                  <span>AI as a native architectural primitive</span>
-                </div>
-                <div class="cat-qualifier">
-                  <span class="cat-qualifier-num">02</span>
-                  <span>Full hospital breadth · one codebase</span>
-                </div>
-                <div class="cat-qualifier">
-                  <span class="cat-qualifier-num">03</span>
-                  <span>Not acquisition-stitched, not an overlay</span>
-                </div>
-                <div class="cat-qualifier">
-                  <span class="cat-qualifier-num">04</span>
-                  <span>Priced for underserved markets</span>
-                </div>
+          <div class="cs2-grid">
+            <article class="cs2-card">
+              <span class="cs2-num">01</span>
+              <div class="cs2-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 6.5a3.5 3.5 0 0 0-3.5 3.5v1.2A3.3 3.3 0 0 0 7 14.5a3.3 3.3 0 0 0 2.5 3.2V19a3.5 3.5 0 0 0 3.5 3.5h1.5V6.5z"/>
+                  <path d="M19 6.5A3.5 3.5 0 0 1 22.5 10v1.2A3.3 3.3 0 0 1 25 14.5a3.3 3.3 0 0 1-2.5 3.2V19a3.5 3.5 0 0 1-3.5 3.5h-1.5V6.5z"/>
+                  <path d="M16 22.5v4M13 26.5h6"/>
+                  <circle cx="11.5" cy="11" r="0.9" fill="currentColor"/>
+                  <circle cx="20.5" cy="11" r="0.9" fill="currentColor"/>
+                  <circle cx="11.5" cy="17.5" r="0.9" fill="currentColor"/>
+                  <circle cx="20.5" cy="17.5" r="0.9" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3 class="cs2-title">AI as architectural primitive</h3>
+              <p class="cs2-desc">Model lives in the <em>write path</em> — not bolted on as a copilot.</p>
+            </article>
+
+            <article class="cs2-card">
+              <span class="cs2-num">02</span>
+              <div class="cs2-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="11" width="22" height="15.5" rx="1.4"/>
+                  <path d="M11 26.5v-5h4v5"/>
+                  <path d="M16 5.5v4M14 7.5h4"/>
+                  <path d="M9 14.5h2.5M9 17.5h2.5M20.5 14.5H23M20.5 17.5H23"/>
+                  <path d="M5 11l11-5 11 5"/>
+                </svg>
+              </div>
+              <h3 class="cs2-title">Full hospital breadth</h3>
+              <p class="cs2-desc">One codebase replaces <em>30+ stitched vendors</em> — Epic, Cerner, athena, Nuance.</p>
+            </article>
+
+            <article class="cs2-card">
+              <span class="cs2-num">03</span>
+              <div class="cs2-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4l11 5.5v13L16 28 5 22.5v-13z"/>
+                  <path d="M5 9.5l11 5.5 11-5.5M16 15v13"/>
+                </svg>
+              </div>
+              <h3 class="cs2-title">Not stitched, not an overlay</h3>
+              <p class="cs2-desc">One product, <em>one schema, one team</em> — FHIR R4 as the storage primitive.</p>
+            </article>
+
+            <article class="cs2-card">
+              <span class="cs2-num">04</span>
+              <div class="cs2-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="16" cy="16" r="11"/>
+                  <path d="M5 16h22"/>
+                  <path d="M16 5c3.5 3.5 3.5 18 0 22"/>
+                  <path d="M16 5c-3.5 3.5-3.5 18 0 22"/>
+                </svg>
+              </div>
+              <h3 class="cs2-title">Priced for emerging markets</h3>
+              <p class="cs2-desc">Markets US incumbents <em>won't enter</em> — global standards, regional pricing.</p>
+            </article>
+          </div>
+
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          The category claim. One of the first hospital operating systems built ground-up on FHIR R4 — meaning FHIR is the storage primitive, not an export format. Four things have to be true together. AI as a native architectural primitive — the model is in the write path, not bolted on. Full hospital breadth — one codebase covers what today takes thirty stitched-together vendors. Not acquisition-stitched, not an overlay — single product, one schema, one team. Priced for underserved markets — the markets American incumbents won't enter.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 04: COMPETITION — Who we aren't
+           ═══════════════════════════════════════════════ -->
+      <section class="cat-slide">
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">04</span>COMPETITION</div>
+          <h2 class="headline-big">Today's healthcare AI is an app. We are <em>the operating system</em>.</h2>
+          <p class="headline-sub">Three crowded categories all sit on top of the hospital. None of them <em>is</em> the operating system the hospital runs on.</p>
+
+          <div class="cat-terrain cat-terrain-wide">
+            <div class="cat-row">
+              <div class="cat-row-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="3" width="6" height="11" rx="3"></rect>
+                  <path d="M5 11a7 7 0 0 0 14 0"></path>
+                  <line x1="12" y1="18" x2="12" y2="22"></line>
+                  <line x1="8" y1="22" x2="16" y2="22"></line>
+                </svg>
+              </div>
+              <div class="cat-row-label">
+                Ambient Scribes
+                <em>write notes on top</em>
+              </div>
+              <div class="cat-row-names">
+                <span class="cat-name">Abridge</span>
+                <span class="cat-name">Dragon Copilot</span>
+                <span class="cat-name">Suki</span>
               </div>
             </div>
 
-            <!-- Right: Competitive terrain — three quiet rows + the MediMind hero card -->
-            <div class="cat-right">
-              <div class="cat-terrain">
-                <div class="cat-row">
-                  <div class="cat-row-label">
-                    Ambient Scribes
-                    <em>write notes on top of Epic</em>
-                  </div>
-                  <div class="cat-row-names">
-                    <span>Abridge</span><span class="cat-dot">·</span>
-                    <span>Dragon Copilot</span><span class="cat-dot">·</span>
-                    <span>Suki</span>
-                    <span class="cat-more">+ 4 more</span>
-                  </div>
-                </div>
-
-                <div class="cat-row">
-                  <div class="cat-row-label">
-                    Proactive AI Overlays
-                    <em>reason on top of Epic</em>
-                  </div>
-                  <div class="cat-row-names">
-                    <span>Palantir AIP</span><span class="cat-dot">·</span>
-                    <span>Bayesian Health</span><span class="cat-dot">·</span>
-                    <span>Regard</span>
-                    <span class="cat-more">+ 5 more</span>
-                  </div>
-                </div>
-
-                <div class="cat-row">
-                  <div class="cat-row-label">
-                    Legacy Hospital EHR
-                    <em>own data, not AI</em>
-                  </div>
-                  <div class="cat-row-names">
-                    <span>Epic</span><span class="cat-dot">·</span>
-                    <span>Cerner</span><span class="cat-dot">·</span>
-                    <span>Oracle</span>
-                    <span class="cat-more">+ 2 more</span>
-                  </div>
-                </div>
+            <div class="cat-row">
+              <div class="cat-row-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3l1.8 4.4L18.4 9l-4.6 1.6L12 15l-1.8-4.4L5.6 9l4.6-1.6z"/>
+                  <path d="M19 15.5l.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9z"/>
+                </svg>
               </div>
-
-              <div class="cat-gap">
-                <div class="cat-gap-line"></div>
-                <div class="cat-gap-chip">none of the above can reach</div>
-                <div class="cat-gap-line"></div>
+              <div class="cat-row-label">
+                Proactive AI Overlays
+                <em>reason on top</em>
               </div>
+              <div class="cat-row-names">
+                <span class="cat-name">Palantir AIP</span>
+                <span class="cat-name">Bayesian Health</span>
+                <span class="cat-name">Regard</span>
+              </div>
+            </div>
 
-              <div class="cat-hero">
-                <div class="cat-hero-label">
-                  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15 9 22 9 16 14 18 21 12 17 6 21 8 14 2 9 9 9"/></svg>
-                  AI-native · Full Hospital · Ground-up on FHIR R4
-                </div>
-                <div class="cat-hero-title">
-                  <span class="cat-hero-name">MediMind</span>
-                  <span class="cat-hero-sub">All three layers · <strong>one FHIR-native codebase</strong> · AI in the write path</span>
-                </div>
-                <div class="cat-hero-footnote">
-                  <strong>Nearest attempt:</strong> SuperOS (Bengaluru) — 1 hospital, internal-only, not FHIR-native
-                </div>
+            <div class="cat-row">
+              <div class="cat-row-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse cx="12" cy="5" rx="8" ry="2.6"/>
+                  <path d="M4 5v6c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6V5"/>
+                  <path d="M4 11v6c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6v-6"/>
+                </svg>
+              </div>
+              <div class="cat-row-label">
+                Legacy Hospital Records
+                <em>own the data, no native AI</em>
+              </div>
+              <div class="cat-row-names">
+                <span class="cat-name">Epic</span>
+                <span class="cat-name">Cerner</span>
+                <span class="cat-name">Oracle</span>
               </div>
             </div>
           </div>
 
-          <!-- Footer megaline -->
-          <div class="cat-footer">
-            <div class="cat-footer-line">Palantir reads Epic. We replace Epic.</div>
-            <div class="cat-footer-sub">Palantir is Snowflake for hospitals. We are Linux for hospitals.</div>
+          <div class="cat-gap">
+            <div class="cat-gap-line"></div>
+            <div class="cat-gap-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg>
+              <span>None of the above is the OS</span>
+            </div>
+            <div class="cat-gap-line"></div>
+          </div>
+
+          <!-- Position statement — branded gradient hero card. -->
+          <div class="cat-footer cat-footer-hero">
+            <div class="cat-footer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16 14 18 21 12 17 6 21 8 14 2 9 9 9"/></svg>
+            </div>
+            <div class="cat-footer-text">
+              <div class="cat-footer-line">Palantir reads Epic <span class="cat-footer-aside">(Legacy EMR)</span>.</div>
+              <div class="cat-footer-sub">We replace <em>Both</em>.</div>
+            </div>
           </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          This slide defines the category so the regulatory slide that follows makes sense. Three things the market conflates right now. Ambient scribes — Abridge, Dragon, Suki — write notes on top of Epic. Proactive clinical AI — Palantir, Bayesian, Regard, Navina, Aidoc, Epic's own CoMET — flag risks and surface diagnoses on top of Epic. Full-breadth hospital EHRs — Epic, Cerner, Oracle, Meditech — are the system of record but legacy, not AI-native, and priced out of emerging markets. The only square with a real candidate is the bottom one: AI-native plus full breadth plus FHIR-primitive plus single codebase. SuperOS in Bengaluru claims that square but they're one hospital, internally built, and make no FHIR-native claim. The six-way intersection — commercial, FHIR as storage primitive, AI as architectural primitive, full hospital breadth, single codebase, underserved-market pricing — is the defensible position. No named competitor clears all six.
+          The market today has three crowded categories — all of them ride on top of the hospital. Ambient scribes write notes on top. Proactive AI overlays reason on top. Legacy EHRs own the data but have no native AI in the write path. None of them is the operating system the hospital runs on. That is the position MediMind owns. They are apps. We are the OS.
         </aside>
       </section>
 
@@ -5093,13 +6161,10 @@
            ═══════════════════════════════════════════════ -->
       <section class="gw-slide">
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">04</span>THE GEORGIA WINDOW</div>
+          <div class="slide-label"><span class="label-num">05</span>THE GEORGIA WINDOW · REGULATORY RUNWAY</div>
 
-          <div class="gw-hero">
-            <div class="gw-kicker">Regulatory runway</div>
-            <h2 class="gw-headline"><em>12–28 months</em> of head start.</h2>
-            <p class="gw-sub">While US and EU competitors queue for FDA clearance and EU AI Act conformity, we ship full-stack agentic AI in live Georgian hospitals today.</p>
-          </div>
+          <h2 class="headline-big"><em>12–28 months</em> of head start.</h2>
+          <p class="headline-sub">While US and EU competitors queue for FDA clearance and EU AI Act conformity, we ship full-stack agentic AI in live Georgian hospitals today.</p>
 
           <!-- Timeline — 3 stops + head-start chip -->
           <div class="gw-timeline">
@@ -5193,54 +6258,40 @@
            ═══════════════════════════════════════════════ -->
       <section class="bm-slide">
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">05</span>BUSINESS MODEL</div>
-
-          <div class="bm-hero">
-            <div class="bm-kicker">Pricing</div>
-            <h2 class="bm-headline">Priced where <em>hospitals are</em>.</h2>
-            <p class="bm-sub">Same product. Three market tiers. Flex on price and SLA — never on features.</p>
-          </div>
+          <div class="slide-label"><span class="label-num">06</span>BUSINESS MODEL · PRICING</div>
+          <h2 class="headline-big">Priced where <em>hospitals are</em>.</h2>
+          <p class="headline-sub">Same product. Three market tiers. Flex on price and SLA — never on features.</p>
 
           <!-- Three-tier pricing cards — single focus per card -->
           <div class="bm-tiers">
             <!-- LAUNCH -->
             <div class="bm-tier">
               <div class="bm-tier-label">Launch</div>
-              <div class="bm-tier-regions">Georgia · Armenia · Azerbaijan</div>
+              <div class="bm-tier-regions">Georgia</div>
 
               <div class="bm-tier-price">
                 <span class="bm-tier-price-dollar">$</span>
-                <span class="bm-tier-price-num">40</span>
+                <span class="bm-tier-price-num">30</span>
               </div>
               <div class="bm-tier-price-unit">per seat · per month</div>
-
-              <div class="bm-tier-acv">
-                <span class="bm-tier-acv-num">~$44K</span>
-                <span class="bm-tier-acv-label">annual ACV</span>
-              </div>
 
               <div class="bm-tier-scope">
                 <div class="bm-tier-scope-title">Full platform</div>
               </div>
 
-              <div class="bm-tier-foot">25 hospitals · live today</div>
+              <div class="bm-tier-foot">Implementing today</div>
             </div>
 
             <!-- REGIONAL (featured) -->
             <div class="bm-tier bm-tier--featured">
               <div class="bm-tier-label">Regional<span class="bm-tier-label-star">★</span></div>
-              <div class="bm-tier-regions">CEE · CIS · Türkiye · MENA · LatAm · SEA</div>
+              <div class="bm-tier-regions">Caucasus · CIS · CEE · Türkiye · MENA · LatAm · SEA</div>
 
               <div class="bm-tier-price">
                 <span class="bm-tier-price-dollar">$</span>
                 <span class="bm-tier-price-num">75</span>
               </div>
               <div class="bm-tier-price-unit">per seat · per month</div>
-
-              <div class="bm-tier-acv">
-                <span class="bm-tier-acv-num">~$81K</span>
-                <span class="bm-tier-acv-label">annual ACV</span>
-              </div>
 
               <div class="bm-tier-scope">
                 <div class="bm-tier-scope-title">Full platform</div>
@@ -5260,11 +6311,6 @@
               </div>
               <div class="bm-tier-price-unit">per seat · per month</div>
 
-              <div class="bm-tier-acv">
-                <span class="bm-tier-acv-num">~$480K</span>
-                <span class="bm-tier-acv-label">annual ACV</span>
-              </div>
-
               <div class="bm-tier-scope">
                 <div class="bm-tier-scope-title">Full platform</div>
               </div>
@@ -5274,24 +6320,77 @@
           </div>
 
           <!-- Y4 ARR — one stat, clean -->
-          <div class="bm-arr">
-            <div class="bm-arr-left">Y4 ARR<span>236 hospitals · 3 tiers</span></div>
-            <div class="bm-arr-num">~$28<span class="bm-arr-unit">M</span></div>
-            <div class="bm-arr-right">2.8×<span>our flat-price model · same execution plan</span></div>
-          </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          The business model. Monthly subscription, per seat, three tiers — priced where hospitals actually are, not where we are. Launch tier is Georgia and the South Caucasus: forty dollars per seat per month, roughly forty-four thousand in annual contract value per hospital. That's the ten-thousand lari flat we're already billing today, expressed in per-seat math. Regional is Turkey, CIS, Central and Eastern Europe, MENA outside the Gulf, Latin America, Southeast Asia — seventy-five dollars per seat, roughly eighty-one thousand ACV, forty to sixty percent below Commure while actually replacing the EHR beneath them. Premium is the US, UK, EU, and Gulf — two hundred dollars per seat, roughly four hundred eighty thousand ACV for a typical two-hundred-seat hospital, sixty to seventy percent below Epic and Oracle Health, unlocks after FDA and EU AI Act conformity in year five. Same product across all three tiers. Same codebase. We never gate features by tier — what flexes is price and SLA. And the punch line: with the existing two hundred thirty-six hospital target across nine countries, tiered pricing gets us to roughly twenty-eight million ARR at Year Four, not ten. Two point eight times the flat-price model, same execution plan. That's the pricing story.
+          The business model. Monthly subscription, per seat, three tiers — priced where hospitals actually are, not where we are. Launch tier is Georgia: thirty dollars per seat per month — the model we're already implementing today. Regional covers Armenia and Azerbaijan plus Turkey, CIS, Central and Eastern Europe, MENA outside the Gulf, Latin America, Southeast Asia — seventy-five dollars per seat, forty to sixty percent below Commure while actually replacing the EHR beneath them. Premium is the US, UK, EU, and Gulf — two hundred dollars per seat, sixty to seventy percent below Epic and Oracle Health, unlocks after FDA and EU AI Act conformity in year five. Same product across all three tiers. Same codebase. We never gate features by tier — what flexes is price and SLA. Revenue projection lives on the next slide.
         </aside>
       </section>
 
       <!-- ═══════════════════════════════════════════════
-           SLIDE 6: TEAM — Doctors building for doctors
+           SLIDE 7: AMBITION (combined Market + Where we're going)
+           ═══════════════════════════════════════════════ -->
+      <section>
+        <div class="slide-inner">
+          <div class="slide-label"><span class="label-num">07</span>AMBITION</div>
+          <h2 class="ambition-headline" style="font-size: 2.8em;"><span class="h-home">Georgia</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-region">Region</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-global">Global</span></h2>
+
+          <div class="ambition-cards" style="margin-top: 32px;">
+            <div class="ambition-card ambition-card-1">
+              <div class="stage-label">Stage 1 · Home</div>
+              <div class="stage-title">Georgia</div>
+              <div class="stage-subtitle">Year 1 – 2 · Dominate home market</div>
+              <div class="stage-stat">
+                <span class="stage-stat-value">0 → 40+</span>
+                <span class="stage-stat-label">hospitals by Y4</span>
+              </div>
+            </div>
+
+            <div class="ambition-card ambition-card-2">
+              <div class="stage-label">Stage 2 · Expansion</div>
+              <div class="stage-title">Region</div>
+              <div class="stage-subtitle">Year 2 – 4 · Replicate the playbook</div>
+              <div class="stage-stat">
+                <span class="stage-stat-value">9 countries</span>
+                <span class="stage-stat-label">· 236 hospitals</span>
+              </div>
+            </div>
+
+            <div class="ambition-card ambition-card-3">
+              <div class="stage-label">Stage 3 · Global</div>
+              <div class="stage-title">U.S. + E.U.</div>
+              <div class="stage-subtitle">Year 4+ · Arrive battle-tested</div>
+              <div class="stage-stat">
+                <span class="stage-stat-value">$45B TAM</span>
+                <span class="stage-stat-label">· FHIR-native from day 1</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bm-arr" style="margin-top: 28px; opacity: 1; transform: none; transition: none;">
+            <div class="bm-arr-label">Year 4 ARR</div>
+            <div class="bm-arr-num">~$28<span class="bm-arr-unit">M</span></div>
+            <div class="bm-arr-sub">236 hospitals · 9 countries · 3 tiers</div>
+          </div>
+
+          <div class="ambition-thesis">
+            <span class="thesis-rule" aria-hidden="true"></span>
+            <p class="thesis-line">One playbook. Three stages. <strong>Built globally-compliant from day 1</strong> — scaling regionally while the West sorts out AI regulation.</p>
+            <span class="thesis-rule" aria-hidden="true"></span>
+          </div>
+        </div>
+        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
+        <aside class="notes">
+          Our ambition, tied to our market plan. Three stages. Stage 1 — Georgia: we elevate outdated local systems to world-leading standards. Three hospitals Year 1, twenty-two by Y4. Category leadership at home within a year. Stage 2 — region: we expand across post-Soviet and CEE markets. Nine countries, 236 hospitals. Stage 3 — U.S. and E.U.: the key point. We built MediMind from day 1 on FHIR R4, SMART-on-FHIR, OAuth 2.0 — the exact standards U.S. and E.U. hospitals demand. We aren't a regional product we'll someday try to export. We're a globally-compliant product we're growing regionally while the West sorts out AI regulation. When those markets open, we arrive with the most tested AI-medical product in the category. The punch line: tiered pricing across 236 hospitals in 9 countries gets us to roughly twenty-eight million dollars in annual recurring revenue by Year 4. That's the plan.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════
+           SLIDE 8: TEAM — Doctors building for doctors
            ═══════════════════════════════════════════════ -->
       <section class="team-slide">
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">06</span>TEAM</div>
+          <div class="slide-label"><span class="label-num">08</span>TEAM</div>
           <h2 class="headline-big">We are <em>doctors</em> building for doctors.</h2>
 
           <div class="team-section">
@@ -5345,7 +6444,7 @@
                   <span class="chip chip-pilot">Healthycore · Pilot</span>
                 </div>
               </div>
-              <div class="advisor-card">
+              <div class="advisor-card is-pilot">
                 <img class="advisor-photo" src="assets/team/levan.png?v=2" alt="Dr. Levan G.">
                 <h5>Dr. Levan G., MD</h5>
                 <p class="role-small">Head of Surgery · Liver Transplant &amp; HPB</p>
@@ -5386,115 +6485,106 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════
-           SLIDE 5: AMBITION (combined Market + Where we're going)
+           SLIDE 9: PROGRESS / TIMELINE
            ═══════════════════════════════════════════════ -->
-      <section>
+      <section class="prog-slide">
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">07</span>AMBITION</div>
-          <h2 class="ambition-headline" style="font-size: 2.8em;"><span class="h-home">Georgia</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-region">Region</span><span class="h-arrow" aria-hidden="true">→</span><span class="h-global">Global</span></h2>
+          <div class="slide-label"><span class="label-num">09</span>PROGRESS MADE</div>
+          <h2 class="headline-big">13 months. From idea to <em>25-hospital contract</em>.</h2>
+          <p class="headline-sub">Built. Validated. Funded. Signed. Live.</p>
 
-          <div class="ambition-cards" style="margin-top: 32px;">
-            <div class="ambition-card ambition-card-1">
-              <div class="stage-label">Stage 1 · Home</div>
-              <div class="stage-title">Georgia</div>
-              <div class="stage-subtitle">Year 1 – 2 · Dominate home market</div>
-              <div class="stage-stat">
-                <span class="stage-stat-value">0 → 40+</span>
-                <span class="stage-stat-label">hospitals by Y4</span>
-              </div>
+          <!-- 2025 · FOUNDATION track -->
+          <div class="prog-phase">
+            <div class="prog-phase-header">
+              <span class="prog-phase-tag">2025</span>
+              <span class="prog-phase-name">Foundation</span>
+              <span class="prog-phase-line"></span>
             </div>
+            <div class="prog-track">
+              <div class="prog-track-rail" aria-hidden="true"></div>
 
-            <div class="ambition-card ambition-card-2">
-              <div class="stage-label">Stage 2 · Expansion</div>
-              <div class="stage-title">Region</div>
-              <div class="stage-subtitle">Year 2 – 4 · Replicate the playbook</div>
-              <div class="stage-stat">
-                <span class="stage-stat-value">9 countries</span>
-                <span class="stage-stat-label">· 236 hosp · <strong style="color: var(--emr-accent);">$10.2M ARR</strong></span>
+              <div class="prog-tile">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c0 1.3 1 2.3 2 2.3h4c1 0 2-1 2-2.3A7 7 0 0 0 12 2z"/></svg>
+                </div>
+                <div class="prog-tile-month">Mar</div>
+                <div class="prog-tile-title">Idea born</div>
+                <div class="prog-tile-meta">MediMind concept</div>
               </div>
-            </div>
 
-            <div class="ambition-card ambition-card-3">
-              <div class="stage-label">Stage 3 · Global</div>
-              <div class="stage-title">U.S. + E.U.</div>
-              <div class="stage-subtitle">Year 4+ · Arrive battle-tested</div>
-              <div class="stage-stat">
-                <span class="stage-stat-value">$45B TAM</span>
-                <span class="stage-stat-label">· FHIR-native from day 1</span>
+              <div class="prog-tile">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h4l2-4 4 8 2-4h6"/><path d="M20 8a4 4 0 0 0-7-2.65A4 4 0 0 0 4 8c0 1.5 1 3.4 3 5.5"/></svg>
+                </div>
+                <div class="prog-tile-month">May</div>
+                <div class="prog-tile-title">Cardiology pilot</div>
+                <div class="prog-tile-meta"><strong>50 doctors</strong></div>
+              </div>
+
+              <div class="prog-tile">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>
+                </div>
+                <div class="prog-tile-month">Sept</div>
+                <div class="prog-tile-title">GITA grant</div>
+                <div class="prog-tile-meta"><strong>₾150K</strong> · validation</div>
+              </div>
+
+              <div class="prog-tile">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><polyline points="21 3 21 8 16 8"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><polyline points="3 21 3 16 8 16"/></svg>
+                </div>
+                <div class="prog-tile-month">Oct</div>
+                <div class="prog-tile-title">AI-native pivot</div>
+                <div class="prog-tile-meta">+ FHIR standards</div>
               </div>
             </div>
           </div>
 
-          <div class="ambition-thesis">
-            <span class="thesis-rule" aria-hidden="true"></span>
-            <p class="thesis-line">One playbook. Three stages. <strong>Built globally-compliant from day 1</strong> — scaling regionally while the West sorts out AI regulation.</p>
-            <span class="thesis-rule" aria-hidden="true"></span>
-          </div>
-        </div>
-        <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
-        <aside class="notes">
-          Our ambition, tied to our market plan. Three stages. Stage 1 — Georgia: we elevate outdated local systems to world-leading standards. Three hospitals Year 1, twenty-two by Y4. Category leadership at home within a year. Stage 2 — region: we expand across post-Soviet and CEE markets. Nine countries total, 236 hospitals, $10.2M annual recurring revenue by Year 4. Stage 3 — U.S. and E.U.: the key point. We built MediMind from day 1 on FHIR R4, SMART-on-FHIR, OAuth 2.0 — the exact standards U.S. and E.U. hospitals demand. We aren't a regional product we'll someday try to export. We're a globally-compliant product we're growing regionally while the West sorts out AI regulation. When those markets open, we arrive with the most tested AI-medical product in the category. That's the plan.
-        </aside>
-      </section>
-
-      <!-- ═══════════════════════════════════════════════
-           SLIDE 8: PROGRESS / TIMELINE
-           ═══════════════════════════════════════════════ -->
-      <section>
-        <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">08</span>PROGRESS MADE</div>
-          <h2 class="headline-big" style="font-size: 2em; line-height: 1.1;"><em>13 months.</em> From idea to <em>25-hospital contract.</em></h2>
-
-          <div class="progress-years">
-            <div class="progress-year progress-year-2025">
-              <div class="py-header">
-                <span class="py-step">STEP 01</span>
-                <span class="py-year">2025</span>
-                <span class="py-label">Foundation</span>
-              </div>
-              <div class="py-items">
-                <div class="py-item">
-                  <span class="py-month">Mar</span>
-                  <span class="py-desc">Idea born. MediMind concept.</span>
-                </div>
-                <div class="py-item">
-                  <span class="py-month">May</span>
-                  <span class="py-desc">Cardiology pilot · <strong>50 doctors</strong>.</span>
-                </div>
-                <div class="py-item">
-                  <span class="py-month">Sept</span>
-                  <span class="py-desc"><strong>₾150K Gita grant</strong> · clinical validation.</span>
-                </div>
-                <div class="py-item">
-                  <span class="py-month">Oct</span>
-                  <span class="py-desc">Pivot to full AI-native + FHIR standards.</span>
-                </div>
-              </div>
+          <!-- 2026 · SCALE track -->
+          <div class="prog-phase">
+            <div class="prog-phase-header">
+              <span class="prog-phase-tag prog-phase-tag--accent">2026</span>
+              <span class="prog-phase-name">Scale</span>
+              <span class="prog-phase-line"></span>
             </div>
+            <div class="prog-track">
+              <div class="prog-track-rail" aria-hidden="true"></div>
 
-            <div class="progress-year progress-year-2026">
-              <div class="py-header">
-                <span class="py-step">STEP 02</span>
-                <span class="py-year">2026</span>
-                <span class="py-label">Scale</span>
+              <div class="prog-tile">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="prog-tile-month">Jan</div>
+                <div class="prog-tile-title">LOI signed</div>
+                <div class="prog-tile-meta"><strong>25-hospital</strong> chain</div>
               </div>
-              <div class="py-items">
-                <div class="py-item">
-                  <span class="py-month">Jan</span>
-                  <span class="py-desc">LOI signed · <strong>25-hospital chain</strong>.</span>
+
+              <div class="prog-tile prog-tile--accent">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
                 </div>
-                <div class="py-item py-item-award">
-                  <span class="py-month">Feb</span>
-                  <span class="py-desc"><span class="py-star">★</span>Gov. <strong>"Innovative Startup"</strong> award.</span>
+                <div class="prog-tile-month">Feb</div>
+                <div class="prog-tile-title">"Innovative Startup"</div>
+                <div class="prog-tile-meta">Gov. of Georgia</div>
+              </div>
+
+              <div class="prog-tile prog-tile--hero">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16 14 18 21 12 17 6 21 8 14 2 9 9 9"/></svg>
                 </div>
-                <div class="py-item py-item-hero">
-                  <span class="py-month">Apr</span>
-                  <span class="py-desc"><span class="py-star">★</span><strong>Contract SIGNED</strong> · 25 hospitals.</span>
+                <div class="prog-tile-month">Apr</div>
+                <div class="prog-tile-title">Contract SIGNED</div>
+                <div class="prog-tile-meta"><strong>25 hospitals</strong></div>
+              </div>
+
+              <div class="prog-tile">
+                <div class="prog-tile-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
                 </div>
-                <div class="py-item">
-                  <span class="py-month">Aug</span>
-                  <span class="py-desc">Full go-live · 25 hospitals (planned).</span>
-                </div>
+                <div class="prog-tile-month">Aug</div>
+                <div class="prog-tile-title">Full go-live</div>
+                <div class="prog-tile-meta">25 hospitals · <em>planned</em></div>
               </div>
             </div>
           </div>
@@ -5502,7 +6592,7 @@
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          13 months from idea to contract — and we can prove it. Started as an idea last March. Cardiology pilot with 50 doctors in May. ₾150K Gita grant in September, validating clinical readiness. Pivoted to the full AI-native ecosystem in October. Adopted FHIR and international standards in November for global readiness. LOI with a 25-hospital chain in January. February: awarded "Innovative Startup" status by the Government of Georgia — one of the first in the country to get it. Government validation on top of clinical validation. Signed the actual 25-hospital contract in April. Full go-live August. This is what momentum looks like.
+          13 months from idea to contract — and we can prove it. Started as an idea last March. Cardiology pilot with 50 doctors in May. ₾150K Gita grant in September, validating clinical readiness. Pivoted to the full AI-native ecosystem in October. LOI with a 25-hospital chain in January. February: awarded "Innovative Startup" status by the Government of Georgia. Signed the actual 25-hospital contract in April — the largest cardiology network in Georgia. Full go-live August. This is what momentum looks like.
         </aside>
       </section>
 
@@ -5511,14 +6601,14 @@
            ═══════════════════════════════════════════════ -->
       <section>
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">09</span>THE ASK</div>
+          <div class="slide-label"><span class="label-num">10</span>THE ASK</div>
           <h2 class="headline-big" style="font-size: 2.2em;"><em>$200K</em> pre-seed. Cover Georgia. Start regional.</h2>
 
           <div class="ask-journey">
             <!-- Station 1: Now -->
             <div class="journey-station now">
               <div class="station-phase">Today</div>
-              <div class="station-headline">Live &amp; growing</div>
+              <div class="station-headline">Implementing &amp; growing</div>
               <ul class="station-bullets">
                 <li><strong>25-hospital</strong> contract signed</li>
                 <li><strong>Healthycore</strong> pilot live</li>
@@ -5535,8 +6625,8 @@
               <div class="station-hero-sub">pre-seed · SAFE · $5M cap</div>
               <div class="station-divider"></div>
               <div class="station-sub-label">Milestone · 12–18 mo</div>
-              <div class="station-sub-value">30 Georgian contracts</div>
-              <div class="station-sub-desc">Full market + regional launch</div>
+              <div class="station-sub-value">Going live + first revenue</div>
+              <div class="station-sub-desc">30 Georgian contracts · regional launch</div>
             </div>
 
             <div class="journey-arrow">→</div>
@@ -5554,25 +6644,29 @@
           </div>
 
           <div class="ask-funds">
-            <div class="funds-header">
-              <span class="funds-label">What $200K builds</span>
-              <span class="funds-total">$200K · mapped to outcomes</span>
-            </div>
-            <div class="funds-bar">
-              <div class="funds-segment team" style="width: 45%;">MediMind OS · $90K</div>
-              <div class="funds-segment gtm" style="width: 25%;">GTM · $50K</div>
-              <div class="funds-segment rd" style="width: 15%;">AI depth · $30K</div>
-              <div class="funds-segment legal" style="width: 10%;">Markets · $20K</div>
-              <div class="funds-segment buffer" style="width: 5%;">$10K</div>
+            <div class="funds-row">
+              <div class="funds-runway-inline">
+                <span class="funds-runway-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </span>
+                <span class="funds-runway-text"><strong>14-month runway</strong></span>
+              </div>
+              <div class="funds-bar">
+                <div class="funds-segment team" style="width: 38%;">MediMind OS · $90K</div>
+                <div class="funds-segment gtm" style="width: 24%;">GTM · $50K</div>
+                <div class="funds-segment rd" style="width: 16%;">AI depth · $30K</div>
+                <div class="funds-segment legal" style="width: 22%;">Regional entry · $30K</div>
+              </div>
             </div>
             <div class="funds-outcome">
-              → <strong>Polished, battle-tested AI-native hospital OS</strong> · <strong>Full Georgian market dominance</strong> · <strong>First regional steps</strong>
+              <span class="funds-outcome-label">What we get</span>
+              <span class="funds-outcome-text"><strong>Polished, battle-tested AI-native hospital OS</strong> · <strong>Full Georgian market dominance</strong> · <strong>First regional steps</strong></span>
             </div>
           </div>
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          The ask. $200K pre-seed. SAFE with a $5M valuation cap. What $200K builds, three things: a polished, battle-tested AI-native hospital OS, full Georgian market dominance, and our first regional steps. Budget split: MediMind OS $90K, GTM $50K, AI depth $30K, Markets entry $20K, Buffer $10K. That makes us the category leader at home, launches post-Soviet regional expansion, and gets us to metrics-proven Seed-ready status. Next slide shows what this means for you as an investor in plain English.
+          The ask. $200K pre-seed. SAFE with a $5M valuation cap. Today we are implementing and growing — 25-hospital contract signed, Healthycore pilot live, government recognition plus a ₾150K grant. With $200K we go live and start generating revenue: thirty Georgian contracts and the first regional launch. Budget split: MediMind OS $90K, GTM $50K, AI depth $30K, Regional entry $30K (market expansion plus operating reserve). That makes us the category leader at home, launches post-Soviet regional expansion, and gets us to metrics-proven Seed-ready status. Next slide shows what this means for you as an investor in plain English.
         </aside>
       </section>
 
@@ -5581,7 +6675,7 @@
            ═══════════════════════════════════════════════ -->
       <section>
         <div class="slide-inner">
-          <div class="slide-label"><span class="label-num">10</span>WHAT YOU'RE INVESTING IN</div>
+          <div class="slide-label"><span class="label-num">11</span>WHAT YOU'RE INVESTING IN</div>
           <h2 class="headline-big" style="font-size: 1.9em; line-height: 1.15;">How your $200K <em>becomes equity</em>.</h2>
 
           <div class="terms-layout">
@@ -5610,8 +6704,15 @@
                 <div class="term-item">
                   <div class="term-dot"></div>
                   <div class="term-content">
-                    <div class="term-label">Conversion</div>
-                    <div class="term-text">Cap + discount</div>
+                    <div class="term-label">Valuation cap</div>
+                    <div class="term-text">$5M post-money</div>
+                  </div>
+                </div>
+                <div class="term-item">
+                  <div class="term-dot"></div>
+                  <div class="term-content">
+                    <div class="term-label">Discount</div>
+                    <div class="term-text">20% off next round</div>
                   </div>
                 </div>
                 <div class="term-item">
@@ -5624,13 +6725,17 @@
                 <div class="term-item">
                   <div class="term-dot"></div>
                   <div class="term-content">
-                    <div class="term-label">Horizon</div>
+                    <div class="term-label">Seed</div>
                     <div class="term-text">12–18 months</div>
                   </div>
                 </div>
               </div>
 
-              <div class="terms-footer-badge">Y Combinator SAFE · Industry Standard</div>
+              <div class="terms-stake">
+                <div class="terms-stake-label">Your terms</div>
+                <div class="terms-stake-value">$5M cap<span>20% discount</span></div>
+                <div class="terms-stake-note">Standard YC SAFE · 30-day close · investor updates monthly</div>
+              </div>
             </div>
 
             <div>
@@ -5653,7 +6758,7 @@
                   <div class="flow-num">3</div>
                   <div>
                     <div class="flow-label">Your SAFE converts to equity</div>
-                    <div class="flow-sub">Automatic conversion at the next priced round — cap and discount applied.</div>
+                    <div class="flow-sub">$5M cap or 20% discount — whichever favors you. ≈ 4% ownership at conversion.</div>
                   </div>
                 </div>
               </div>
@@ -5688,7 +6793,7 @@
         </div>
         <a class="brand-footer" href="https://medimind.md" target="_blank" rel="noopener noreferrer"><img src="assets/logo-icon-dark.svg" alt=""><span>medimind.md</span></a>
         <aside class="notes">
-          This slide walks through the instrument. A Y Combinator SAFE — Simple Agreement for Future Equity, the industry standard for pre-seed. Three steps. One: you invest $200K today, SAFE signed — no valuation negotiated, which is the whole point of this instrument. Two: in 12 to 18 months we raise our priced round, Seed or Series A, where a lead investor does full diligence and sets the price. Three: your SAFE converts to equity automatically, adjusted by your cap and discount. The built-in protections are standard: a valuation cap which is a ceiling on your conversion price, a discount recognizing early-stage entry, plus pro-rata to preserve your ownership % and MFN so your terms auto-match any better later SAFE. Specific cap and discount get finalized with our lead investor during the round. Happy to walk through any of it.
+          This slide walks through the instrument. A Y Combinator SAFE — Simple Agreement for Future Equity, the industry standard for pre-seed. Three steps. One: you invest $200K today, SAFE signed — no valuation negotiated, which is the whole point of this instrument. Two: in 12 to 18 months we raise our Seed round, where a lead investor does full diligence and sets the price. Three: your SAFE converts to equity automatically — at a $5M post-money cap or a 20% discount, whichever favors you. For a $200K check at the cap, that's roughly 4% ownership at conversion before further dilution from the Seed round itself. Built-in protections: cap, discount, pro-rata to preserve your % in future rounds, and MFN so your terms auto-match any better later SAFE. Happy to walk through any of it.
         </aside>
       </section>
 
@@ -5988,21 +7093,24 @@
 
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
   <script>
+    const __isMobileDeck = window.matchMedia('(max-width: 768px)').matches;
+    if (__isMobileDeck) document.documentElement.classList.add('is-mobile-deck');
     Reveal.initialize({
       hash: true,
-      width: 1280,
-      height: 720,
-      margin: 0,
-      controls: true,
+      controls: !__isMobileDeck,
       progress: true,
       slideNumber: false,
       transition: 'slide',
       transitionSpeed: 'default',
       backgroundTransition: 'fade',
       keyboard: true,
-      overview: true,
+      overview: !__isMobileDeck,
       touch: true,
-      center: false
+      center: false,
+      ...(__isMobileDeck
+        ? { width: 380, height: 760, margin: 0, minScale: 0.5, maxScale: 1.5 }
+        : { width: 1280, height: 720, margin: 0, minScale: 0.2, maxScale: 2.0 }
+      )
     });
 
     // Brand footer is now inlined directly in each section's HTML — see <a class="brand-footer"> tags.
