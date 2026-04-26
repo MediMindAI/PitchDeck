@@ -5451,15 +5451,81 @@
        decorative absolute-positioned background art hidden.
        ═════════════════════════════════════════════════════════════ */
     @media (max-width: 768px) {
-      html, body { font-size: 16px; }
+      html, body { font-size: 16px; overflow: hidden; }
       .reveal .controls { display: none !important; }
       .reveal .progress { z-index: 50; height: 4px; bottom: 0; }
 
-      /* Slide inner — drop the giant desktop padding */
+      /* Bypass Reveal's transform-scale layout entirely on mobile.
+         Each slide becomes a 100vh full-bleed scrollable container.
+         Reveal still drives left/right navigation; vertical scrolling
+         is native browser scroll within the active slide. */
+      .reveal {
+        width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        position: fixed;
+        top: 0; left: 0;
+        overflow: hidden;
+      }
+      .reveal .slides {
+        width: 100% !important;
+        height: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        zoom: 1 !important;
+        perspective: none !important;
+        overflow: visible !important;
+      }
+      .reveal .slides > section,
+      .reveal .slides > section.stack {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        transform: translate3d(0, 0, 0) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        font-size: inherit !important;
+      }
+      .reveal .slides > section.past {
+        transform: translate3d(-100%, 0, 0) !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+      }
+      .reveal .slides > section.future {
+        transform: translate3d(100%, 0, 0) !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+      }
+      .reveal .slides > section.present {
+        transform: translate3d(0, 0, 0) !important;
+        z-index: 2;
+      }
+
+      /* Slide inner — proper padding, allow content to flow naturally */
       .slide-inner {
-        padding: 18px 14px 26px !important;
-        box-sizing: border-box;
-        max-width: 100%;
+        padding: 22px 16px 32px !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100% !important;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
       }
 
       /* Brand footer — hide on mobile, too cluttering with limited screen.
@@ -5525,7 +5591,8 @@
       .terms-grid,
       .flow-steps,
       .gallery-grid,
-      .arch-wrapper {
+      .arch-wrapper,
+      .perks-grid {
         display: grid !important;
         grid-template-columns: 1fr !important;
         gap: 14px !important;
@@ -7136,17 +7203,18 @@
       controls: !__isMobileDeck,
       progress: true,
       slideNumber: false,
-      transition: 'slide',
-      transitionSpeed: 'default',
-      backgroundTransition: 'fade',
+      transition: __isMobileDeck ? 'none' : 'slide',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'none',
       keyboard: true,
       overview: !__isMobileDeck,
       touch: true,
       center: false,
-      ...(__isMobileDeck
-        ? { width: 380, height: 760, margin: 0, minScale: 0.5, maxScale: 1.5 }
-        : { width: 1280, height: 720, margin: 0, minScale: 0.2, maxScale: 2.0 }
-      )
+      width: 1280,
+      height: 720,
+      margin: 0,
+      minScale: 0.2,
+      maxScale: 2.0
     });
 
     // Brand footer is now inlined directly in each section's HTML — see <a class="brand-footer"> tags.
