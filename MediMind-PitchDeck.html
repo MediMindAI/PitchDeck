@@ -5502,7 +5502,10 @@
         line-height: 1.45 !important;
       }
 
-      /* Universal grid collapse — every multi-column grid stacks */
+      /* Universal grid collapse — every multi-column grid stacks.
+         NOTE: .cat-row-names is INTENTIONALLY excluded — it's a wrapping
+         flex of pill-chips (Abridge, Suki, etc.) that should stay
+         horizontal even on mobile. */
       .bm-tiers,
       .gw-stops,
       .gw-cards,
@@ -5511,7 +5514,6 @@
       .ambition-cards,
       .cs2-grid,
       .cat-terrain,
-      .cat-row-names,
       .stages-grid,
       .timeline-row,
       .investing-grid,
@@ -5530,11 +5532,35 @@
         width: 100% !important;
         padding-left: 0 !important;
       }
+      /* Vendor name pills — keep them as wrapping horizontal chips */
+      .cat-row-names {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px 10px !important;
+        justify-content: flex-start !important;
+      }
+      .cat-row-names .cat-name {
+        flex: 0 0 auto !important;
+        width: auto !important;
+      }
       /* Architecture scene — let SVG fill width */
       .arch-scene { width: 100% !important; height: auto !important; }
       /* Decorative horizontal rails — hide on mobile (no horizontal axis) */
       .prog-track-rail,
-      .progress-year-2025::after { display: none !important; }
+      .prog-phase-line,
+      .progress-year-2025::after,
+      .gw-span-line,
+      .cat-gap-line { display: none !important; }
+      /* Span chip on Georgia Window — allow wrapping if needed */
+      .gw-span-chip {
+        white-space: normal !important;
+        text-align: center !important;
+        font-size: 0.55em !important;
+        padding: 8px 14px !important;
+        line-height: 1.3 !important;
+      }
+      .gw-span { padding: 8px 0 !important; }
 
       /* SVG / image auto-scale */
       svg { max-width: 100%; height: auto; }
@@ -5571,21 +5597,31 @@
       .cover .tagline { font-size: 1.4em !important; max-width: 100% !important; }
       .cover .tagline-line { line-height: 1.2 !important; }
 
-      /* Hook (problem) slide — keep statements stacked & readable */
+      /* Hook (problem) slide — proper padding so the border bar isn't
+         flush at viewport edge, headline shrinks to fit viewport. */
+      .hook-slide .slide-inner {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        padding: 28px 18px !important;
+      }
       .hook-slide .hook-statement {
-        padding: 0 !important;
+        padding: 0 0 0 14px !important;
         margin: 0 !important;
+        max-width: 100% !important;
       }
       .hook-slide .hook-headline,
       .hook-slide h2.hook-headline {
         font-size: clamp(1.05rem, 4.4vw, 1.35rem) !important;
-        line-height: 1.25 !important;
+        line-height: 1.3 !important;
+        margin: 0 !important;
       }
       .hook-slide .hook-numeral {
-        font-size: 2.2rem !important;
-        opacity: 0.12 !important;
+        font-size: 1.6rem !important;
+        opacity: 0.1 !important;
+        right: 0 !important;
       }
-      .hook-slide .hook-divider { margin: 18px 0 !important; }
+      .hook-slide .hook-divider { margin: 16px 0 !important; }
 
       /* Founder & advisor cards on Team slide — stack photo over text */
       .founder-card,
